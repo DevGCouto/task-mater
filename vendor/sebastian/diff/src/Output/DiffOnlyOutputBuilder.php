@@ -12,6 +12,10 @@ namespace SebastianBergmann\Diff\Output;
 use function fclose;
 use function fopen;
 use function fwrite;
+<<<<<<< HEAD
+=======
+use function str_ends_with;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function stream_get_contents;
 use function substr;
 use SebastianBergmann\Diff\Differ;
@@ -22,10 +26,14 @@ use SebastianBergmann\Diff\Differ;
  */
 final class DiffOnlyOutputBuilder implements DiffOutputBuilderInterface
 {
+<<<<<<< HEAD
     /**
      * @var string
      */
     private $header;
+=======
+    private string $header;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(string $header = "--- Original\n+++ New\n")
     {
@@ -39,7 +47,11 @@ final class DiffOnlyOutputBuilder implements DiffOutputBuilderInterface
         if ('' !== $this->header) {
             fwrite($buffer, $this->header);
 
+<<<<<<< HEAD
             if ("\n" !== substr($this->header, -1, 1)) {
+=======
+            if (!str_ends_with($this->header, "\n")) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 fwrite($buffer, "\n");
             }
         }
@@ -54,7 +66,11 @@ final class DiffOnlyOutputBuilder implements DiffOutputBuilderInterface
 
                 continue; // Warnings should not be tested for line break, it will always be there
             } else { /* Not changed (old) 0 */
+<<<<<<< HEAD
                 continue; // we didn't write the non changs line, so do not add a line break either
+=======
+                continue; // we didn't write the not-changed line, so do not add a line break either
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             }
 
             $lc = substr($diffEntry[0], -1);

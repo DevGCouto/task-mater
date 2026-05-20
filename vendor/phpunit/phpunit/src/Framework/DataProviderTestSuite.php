@@ -9,11 +9,23 @@
  */
 namespace PHPUnit\Framework;
 
+<<<<<<< HEAD
 use function explode;
 use PHPUnit\Util\Test as TestUtil;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
+=======
+use function assert;
+use function class_exists;
+use function explode;
+use PHPUnit\Framework\TestSize\TestSize;
+use PHPUnit\Metadata\Api\Groups;
+
+/**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ *
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
 final class DataProviderTestSuite extends TestSuite
@@ -21,7 +33,16 @@ final class DataProviderTestSuite extends TestSuite
     /**
      * @var list<ExecutionOrderDependency>
      */
+<<<<<<< HEAD
     private $dependencies = [];
+=======
+    private array $dependencies = [];
+
+    /**
+     * @var ?non-empty-list<ExecutionOrderDependency>
+     */
+    private ?array $providedTests = null;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     /**
      * @param list<ExecutionOrderDependency> $dependencies
@@ -30,23 +51,39 @@ final class DataProviderTestSuite extends TestSuite
     {
         $this->dependencies = $dependencies;
 
+<<<<<<< HEAD
         foreach ($this->tests as $test) {
             if (!$test instanceof TestCase) {
                 // @codeCoverageIgnoreStart
                 continue;
                 // @codeCoverageIgnoreStart
             }
+=======
+        foreach ($this->tests() as $test) {
+            if (!$test instanceof TestCase) {
+                continue;
+            }
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             $test->setDependencies($dependencies);
         }
     }
 
     /**
+<<<<<<< HEAD
      * @return list<ExecutionOrderDependency>
+=======
+     * @return non-empty-list<ExecutionOrderDependency>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function provides(): array
     {
         if ($this->providedTests === null) {
+<<<<<<< HEAD
             $this->providedTests = [new ExecutionOrderDependency($this->getName())];
+=======
+            $this->providedTests = [new ExecutionOrderDependency($this->name())];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         return $this->providedTests;
@@ -63,6 +100,7 @@ final class DataProviderTestSuite extends TestSuite
     }
 
     /**
+<<<<<<< HEAD
      * Returns the size of the each test created using the data provider(s).
      *
      * @throws InvalidArgumentException
@@ -72,5 +110,17 @@ final class DataProviderTestSuite extends TestSuite
         [$className, $methodName] = explode('::', $this->getName());
 
         return TestUtil::getSize($className, $methodName);
+=======
+     * Returns the size of each test created using the data provider(s).
+     */
+    public function size(): TestSize
+    {
+        [$className, $methodName] = explode('::', $this->name());
+
+        assert(class_exists($className));
+        assert($methodName !== '');
+
+        return (new Groups)->size($className, $methodName);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

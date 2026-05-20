@@ -17,7 +17,11 @@ use SplFixedArray;
 final class TimeEfficientLongestCommonSubsequenceCalculator implements LongestCommonSubsequenceCalculator
 {
     /**
+<<<<<<< HEAD
      * {@inheritdoc}
+=======
+     * @inheritDoc
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function calculate(array $from, array $to): array
     {
@@ -27,6 +31,7 @@ final class TimeEfficientLongestCommonSubsequenceCalculator implements LongestCo
         $width      = $fromLength + 1;
         $matrix     = new SplFixedArray($width * ($toLength + 1));
 
+<<<<<<< HEAD
         for ($i = 0; $i <= $fromLength; ++$i) {
             $matrix[$i] = 0;
         }
@@ -37,6 +42,18 @@ final class TimeEfficientLongestCommonSubsequenceCalculator implements LongestCo
 
         for ($i = 1; $i <= $fromLength; ++$i) {
             for ($j = 1; $j <= $toLength; ++$j) {
+=======
+        for ($i = 0; $i <= $fromLength; $i++) {
+            $matrix[$i] = 0;
+        }
+
+        for ($j = 0; $j <= $toLength; $j++) {
+            $matrix[$j * $width] = 0;
+        }
+
+        for ($i = 1; $i <= $fromLength; $i++) {
+            for ($j = 1; $j <= $toLength; $j++) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $o = ($j * $width) + $i;
 
                 // don't use max() to avoid function call overhead
@@ -64,15 +81,26 @@ final class TimeEfficientLongestCommonSubsequenceCalculator implements LongestCo
         while ($i > 0 && $j > 0) {
             if ($from[$i - 1] === $to[$j - 1]) {
                 $common[] = $from[$i - 1];
+<<<<<<< HEAD
                 --$i;
                 --$j;
+=======
+                $i--;
+                $j--;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             } else {
                 $o = ($j * $width) + $i;
 
                 if ($matrix[$o - $width] > $matrix[$o - 1]) {
+<<<<<<< HEAD
                     --$j;
                 } else {
                     --$i;
+=======
+                    $j--;
+                } else {
+                    $i--;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 }
             }
         }

@@ -18,8 +18,15 @@ use function floor;
 use function json_encode;
 use function sprintf;
 use function str_replace;
+<<<<<<< HEAD
 use SebastianBergmann\CodeCoverage\Node\AbstractNode;
 use SebastianBergmann\CodeCoverage\Node\Directory as DirectoryNode;
+=======
+use SebastianBergmann\CodeCoverage\FileCouldNotBeWrittenException;
+use SebastianBergmann\CodeCoverage\Node\AbstractNode;
+use SebastianBergmann\CodeCoverage\Node\Directory as DirectoryNode;
+use SebastianBergmann\Template\Exception;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use SebastianBergmann\Template\Template;
 
 /**
@@ -34,7 +41,11 @@ final class Dashboard extends Renderer
         $template     = new Template(
             $templateName,
             '{{',
+<<<<<<< HEAD
             '}}'
+=======
+            '}}',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $this->setCommonTemplateVariables($template, $node);
@@ -55,10 +66,25 @@ final class Dashboard extends Renderer
                 'complexity_method'             => $complexity['method'],
                 'class_coverage_distribution'   => $coverageDistribution['class'],
                 'method_coverage_distribution'  => $coverageDistribution['method'],
+<<<<<<< HEAD
             ]
         );
 
         $template->renderTo($file);
+=======
+            ],
+        );
+
+        try {
+            $template->renderTo($file);
+        } catch (Exception $e) {
+            throw new FileCouldNotBeWrittenException(
+                $e->getMessage(),
+                $e->getCode(),
+                $e,
+            );
+        }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     protected function activeBreadcrumb(AbstractNode $node): string
@@ -66,7 +92,11 @@ final class Dashboard extends Renderer
         return sprintf(
             '         <li class="breadcrumb-item"><a href="index.html">%s</a></li>' . "\n" .
             '         <li class="breadcrumb-item active">(Dashboard)</li>' . "\n",
+<<<<<<< HEAD
             $node->name()
+=======
+            $node->name(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -89,7 +119,11 @@ final class Dashboard extends Renderer
                     sprintf(
                         '<a href="%s">%s</a>',
                         str_replace($baseLink, '', $method['link']),
+<<<<<<< HEAD
                         $methodName
+=======
+                        $methodName,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     ),
                 ];
             }
@@ -100,7 +134,11 @@ final class Dashboard extends Renderer
                 sprintf(
                     '<a href="%s">%s</a>',
                     str_replace($baseLink, '', $class['link']),
+<<<<<<< HEAD
                     $className
+=======
+                    $className,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 ),
             ];
         }
@@ -188,7 +226,11 @@ final class Dashboard extends Renderer
 
         foreach ($classes as $className => $class) {
             foreach ($class['methods'] as $methodName => $method) {
+<<<<<<< HEAD
                 if ($method['coverage'] < $this->highLowerBound) {
+=======
+                if ($method['coverage'] < $this->thresholds->highLowerBound()) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     $key = $methodName;
 
                     if ($className !== '*') {
@@ -199,7 +241,11 @@ final class Dashboard extends Renderer
                 }
             }
 
+<<<<<<< HEAD
             if ($class['coverage'] < $this->highLowerBound) {
+=======
+            if ($class['coverage'] < $this->thresholds->highLowerBound()) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $leastTestedClasses[$className] = $class['coverage'];
             }
         }
@@ -212,7 +258,11 @@ final class Dashboard extends Renderer
                 '       <tr><td><a href="%s">%s</a></td><td class="text-right">%d%%</td></tr>' . "\n",
                 str_replace($baseLink, '', $classes[$className]['link']),
                 $className,
+<<<<<<< HEAD
                 $coverage
+=======
+                $coverage,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -224,7 +274,11 @@ final class Dashboard extends Renderer
                 str_replace($baseLink, '', $classes[$class]['methods'][$method]['link']),
                 $methodName,
                 $method,
+<<<<<<< HEAD
                 $coverage
+=======
+                $coverage,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -242,7 +296,11 @@ final class Dashboard extends Renderer
 
         foreach ($classes as $className => $class) {
             foreach ($class['methods'] as $methodName => $method) {
+<<<<<<< HEAD
                 if ($method['coverage'] < $this->highLowerBound && $method['ccn'] > 1) {
+=======
+                if ($method['coverage'] < $this->thresholds->highLowerBound() && $method['ccn'] > 1) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     $key = $methodName;
 
                     if ($className !== '*') {
@@ -253,7 +311,11 @@ final class Dashboard extends Renderer
                 }
             }
 
+<<<<<<< HEAD
             if ($class['coverage'] < $this->highLowerBound &&
+=======
+            if ($class['coverage'] < $this->thresholds->highLowerBound() &&
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $class['ccn'] > count($class['methods'])) {
                 $classRisks[$className] = $class['crap'];
             }
@@ -267,7 +329,11 @@ final class Dashboard extends Renderer
                 '       <tr><td><a href="%s">%s</a></td><td class="text-right">%d</td></tr>' . "\n",
                 str_replace($baseLink, '', $classes[$className]['link']),
                 $className,
+<<<<<<< HEAD
                 $crap
+=======
+                $crap,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -279,7 +345,11 @@ final class Dashboard extends Renderer
                 str_replace($baseLink, '', $classes[$class]['methods'][$method]['link']),
                 $methodName,
                 $method,
+<<<<<<< HEAD
                 $crap
+=======
+                $crap,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 

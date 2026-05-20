@@ -11,21 +11,32 @@ namespace PHPUnit\Framework\Constraint;
 
 use function json_decode;
 use function sprintf;
+<<<<<<< HEAD
 use PHPUnit\Framework\Exception;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Util\Json;
 use SebastianBergmann\Comparator\ComparisonFailure;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
+=======
+use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Util\InvalidJsonException;
+use PHPUnit\Util\Json;
+use SebastianBergmann\Comparator\ComparisonFailure;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
 final class JsonMatches extends Constraint
 {
+<<<<<<< HEAD
     /**
      * @var string
      */
     private $value;
+=======
+    private readonly string $value;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(string $value)
     {
@@ -48,10 +59,15 @@ final class JsonMatches extends Constraint
      * constraint is met, false otherwise.
      *
      * This method can be overridden to implement the evaluation algorithm.
+<<<<<<< HEAD
      *
      * @param mixed $other value or object to evaluate
      */
     protected function matches($other): bool
+=======
+     */
+    protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         [$error, $recodedOther] = Json::canonicalize($other);
 
@@ -71,6 +87,7 @@ final class JsonMatches extends Constraint
     /**
      * Throws an exception for the given compared value and test description.
      *
+<<<<<<< HEAD
      * @param mixed  $other       evaluated value or object
      * @param string $description Additional information about the test
      *
@@ -81,6 +98,12 @@ final class JsonMatches extends Constraint
      * @psalm-return never-return
      */
     protected function fail($other, $description, ?ComparisonFailure $comparisonFailure = null): void
+=======
+     * @throws ExpectationFailedException
+     * @throws InvalidJsonException
+     */
+    protected function fail(mixed $other, string $description, ?ComparisonFailure $comparisonFailure = null): never
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if ($comparisonFailure === null) {
             [$error, $recodedOther] = Json::canonicalize($other);
@@ -100,7 +123,10 @@ final class JsonMatches extends Constraint
                 json_decode($other),
                 Json::prettify($recodedValue),
                 Json::prettify($recodedOther),
+<<<<<<< HEAD
                 false,
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 'Failed asserting that two json values are equal.',
             );
         }

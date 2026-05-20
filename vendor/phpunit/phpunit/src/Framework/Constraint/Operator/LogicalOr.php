@@ -14,6 +14,14 @@ namespace PHPUnit\Framework\Constraint;
  */
 final class LogicalOr extends BinaryOperator
 {
+<<<<<<< HEAD
+=======
+    public static function fromConstraints(mixed ...$constraints): self
+    {
+        return new self(...$constraints);
+    }
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     /**
      * Returns the name of this operator.
      */
@@ -35,10 +43,15 @@ final class LogicalOr extends BinaryOperator
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+<<<<<<< HEAD
      *
      * @param mixed $other value or object to evaluate
      */
     public function matches($other): bool
+=======
+     */
+    public function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         foreach ($this->constraints() as $constraint) {
             if ($constraint->evaluate($other, '', true)) {

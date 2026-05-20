@@ -17,6 +17,10 @@ use function substr_count;
 use SebastianBergmann\CodeCoverage\Node\AbstractNode;
 use SebastianBergmann\CodeCoverage\Node\Directory as DirectoryNode;
 use SebastianBergmann\CodeCoverage\Node\File as FileNode;
+<<<<<<< HEAD
+=======
+use SebastianBergmann\CodeCoverage\Report\Thresholds;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use SebastianBergmann\CodeCoverage\Version;
 use SebastianBergmann\Environment\Runtime;
 use SebastianBergmann\Template\Template;
@@ -26,6 +30,7 @@ use SebastianBergmann\Template\Template;
  */
 abstract class Renderer
 {
+<<<<<<< HEAD
     /**
      * @var string
      */
@@ -62,12 +67,26 @@ abstract class Renderer
     protected $version;
 
     public function __construct(string $templatePath, string $generator, string $date, int $lowUpperBound, int $highLowerBound, bool $hasBranchCoverage)
+=======
+    protected string $templatePath;
+    protected string $generator;
+    protected string $date;
+    protected Thresholds $thresholds;
+    protected bool $hasBranchCoverage;
+    protected string $version;
+
+    public function __construct(string $templatePath, string $generator, string $date, Thresholds $thresholds, bool $hasBranchCoverage)
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $this->templatePath      = $templatePath;
         $this->generator         = $generator;
         $this->date              = $date;
+<<<<<<< HEAD
         $this->lowUpperBound     = $lowUpperBound;
         $this->highLowerBound    = $highLowerBound;
+=======
+        $this->thresholds        = $thresholds;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $this->version           = Version::id();
         $this->hasBranchCoverage = $hasBranchCoverage;
     }
@@ -83,7 +102,11 @@ abstract class Renderer
                 $data['numClasses'];
 
             $classesBar = $this->coverageBar(
+<<<<<<< HEAD
                 $data['testedClassesPercent']
+=======
+                $data['testedClassesPercent'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         } else {
             $classesLevel                         = '';
@@ -99,7 +122,11 @@ abstract class Renderer
                 $data['numMethods'];
 
             $methodsBar = $this->coverageBar(
+<<<<<<< HEAD
                 $data['testedMethodsPercent']
+=======
+                $data['testedMethodsPercent'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         } else {
             $methodsLevel                         = '';
@@ -115,7 +142,11 @@ abstract class Renderer
                 $data['numExecutableLines'];
 
             $linesBar = $this->coverageBar(
+<<<<<<< HEAD
                 $data['linesExecutedPercent']
+=======
+                $data['linesExecutedPercent'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         } else {
             $linesLevel                           = '';
@@ -131,7 +162,11 @@ abstract class Renderer
                 $data['numExecutablePaths'];
 
             $pathsBar = $this->coverageBar(
+<<<<<<< HEAD
                 $data['pathsExecutedPercent']
+=======
+                $data['pathsExecutedPercent'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         } else {
             $pathsLevel                           = '';
@@ -147,7 +182,11 @@ abstract class Renderer
                 $data['numExecutableBranches'];
 
             $branchesBar = $this->coverageBar(
+<<<<<<< HEAD
                 $data['branchesExecutedPercent']
+=======
+                $data['branchesExecutedPercent'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         } else {
             $branchesLevel                           = '';
@@ -181,7 +220,11 @@ abstract class Renderer
                 'classes_tested_percent'    => $data['testedClassesPercentAsString'] ?? '',
                 'classes_level'             => $classesLevel,
                 'classes_number'            => $classesNumber,
+<<<<<<< HEAD
             ]
+=======
+            ],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return $template->render();
@@ -199,9 +242,15 @@ abstract class Renderer
                 'version'          => $this->version,
                 'runtime'          => $this->runtimeString(),
                 'generator'        => $this->generator,
+<<<<<<< HEAD
                 'low_upper_bound'  => $this->lowUpperBound,
                 'high_lower_bound' => $this->highLowerBound,
             ]
+=======
+                'low_upper_bound'  => $this->thresholds->lowUpperBound(),
+                'high_lower_bound' => $this->thresholds->highLowerBound(),
+            ],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -224,7 +273,11 @@ abstract class Renderer
             if ($step !== $node) {
                 $breadcrumbs .= $this->inactiveBreadcrumb(
                     $step,
+<<<<<<< HEAD
                     array_pop($pathToRoot)
+=======
+                    array_pop($pathToRoot),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             } else {
                 $breadcrumbs .= $this->activeBreadcrumb($step);
@@ -238,7 +291,11 @@ abstract class Renderer
     {
         $buffer = sprintf(
             '         <li class="breadcrumb-item active">%s</li>' . "\n",
+<<<<<<< HEAD
             $node->name()
+=======
+            $node->name(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         if ($node instanceof DirectoryNode) {
@@ -253,7 +310,11 @@ abstract class Renderer
         return sprintf(
             '         <li class="breadcrumb-item"><a href="%sindex.html">%s</a></li>' . "\n",
             $pathToRoot,
+<<<<<<< HEAD
             $node->name()
+=======
+            $node->name(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -278,7 +339,11 @@ abstract class Renderer
         $template     = new Template(
             $templateName,
             '{{',
+<<<<<<< HEAD
             '}}'
+=======
+            '}}',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $template->setVar(['level' => $level, 'percent' => sprintf('%.2F', $percent)]);
@@ -288,12 +353,21 @@ abstract class Renderer
 
     protected function colorLevel(float $percent): string
     {
+<<<<<<< HEAD
         if ($percent <= $this->lowUpperBound) {
             return 'danger';
         }
 
         if ($percent > $this->lowUpperBound &&
             $percent < $this->highLowerBound) {
+=======
+        if ($percent <= $this->thresholds->lowUpperBound()) {
+            return 'danger';
+        }
+
+        if ($percent > $this->thresholds->lowUpperBound() &&
+            $percent < $this->thresholds->highLowerBound()) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             return 'warning';
         }
 
@@ -308,7 +382,11 @@ abstract class Renderer
             '<a href="%s" target="_top">%s %s</a>',
             $runtime->getVendorUrl(),
             $runtime->getName(),
+<<<<<<< HEAD
             $runtime->getVersion()
+=======
+            $runtime->getVersion(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 }

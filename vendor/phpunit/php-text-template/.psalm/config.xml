@@ -4,8 +4,14 @@
     xmlns="https://getpsalm.org/schema/config"
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
     resolveFromConfigFile="false"
+<<<<<<< HEAD
     totallyTyped="false"
     errorBaseline=".psalm/baseline.xml"
+=======
+    errorBaseline=".psalm/baseline.xml"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="false"
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 >
     <projectFiles>
         <directory name="src" />

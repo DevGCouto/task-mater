@@ -11,6 +11,7 @@ namespace SebastianBergmann\Comparator;
 
 use function gettype;
 use function sprintf;
+<<<<<<< HEAD
 
 /**
  * Compares values for type equality.
@@ -26,11 +27,19 @@ class TypeComparator extends Comparator
      * @return bool
      */
     public function accepts($expected, $actual)
+=======
+use SebastianBergmann\Exporter\Exporter;
+
+final class TypeComparator extends Comparator
+{
+    public function accepts(mixed $expected, mixed $actual): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return true;
     }
 
     /**
+<<<<<<< HEAD
      * Asserts that two values are equal.
      *
      * @param mixed $expected     First value to compare
@@ -42,6 +51,11 @@ class TypeComparator extends Comparator
      * @throws ComparisonFailure
      */
     public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = false, $ignoreCase = false)/*: void*/
+=======
+     * @throws ComparisonFailure
+     */
+    public function assertEquals(mixed $expected, mixed $actual, float $delta = 0.0, bool $canonicalize = false, bool $ignoreCase = false): void
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (gettype($expected) != gettype($actual)) {
             throw new ComparisonFailure(
@@ -50,12 +64,20 @@ class TypeComparator extends Comparator
                 // we don't need a diff
                 '',
                 '',
+<<<<<<< HEAD
                 false,
                 sprintf(
                     '%s does not match expected type "%s".',
                     $this->exporter->shortenedExport($actual),
                     gettype($expected)
                 )
+=======
+                sprintf(
+                    '%s does not match expected type "%s".',
+                    (new Exporter)->shortenedExport($actual),
+                    gettype($expected),
+                ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
     }

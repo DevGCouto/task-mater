@@ -17,15 +17,25 @@ use function dirname;
 use function explode;
 use function implode;
 use function is_file;
+<<<<<<< HEAD
 use function str_replace;
 use function strpos;
 use function substr;
 use SebastianBergmann\CodeCoverage\CodeCoverage;
 use SebastianBergmann\CodeCoverage\ProcessedCodeCoverageData;
+=======
+use function str_ends_with;
+use function str_replace;
+use function str_starts_with;
+use function substr;
+use SebastianBergmann\CodeCoverage\CodeCoverage;
+use SebastianBergmann\CodeCoverage\Data\ProcessedCodeCoverageData;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use SebastianBergmann\CodeCoverage\StaticAnalysis\FileAnalyser;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
+<<<<<<< HEAD
  */
 final class Builder
 {
@@ -33,6 +43,14 @@ final class Builder
      * @var FileAnalyser
      */
     private $analyser;
+=======
+ *
+ * @phpstan-import-type TestType from \SebastianBergmann\CodeCoverage\CodeCoverage
+ */
+final class Builder
+{
+    private readonly FileAnalyser $analyser;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(FileAnalyser $analyser)
     {
@@ -45,24 +63,42 @@ final class Builder
         $commonPath = $this->reducePaths($data);
         $root       = new Directory(
             $commonPath,
+<<<<<<< HEAD
             null
+=======
+            null,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $this->addItems(
             $root,
             $this->buildDirectoryStructure($data),
+<<<<<<< HEAD
             $coverage->getTests()
+=======
+            $coverage->getTests(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return $root;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @param array<string, TestType> $tests
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function addItems(Directory $root, array $items, array $tests): void
     {
         foreach ($items as $key => $value) {
             $key = (string) $key;
 
+<<<<<<< HEAD
             if (substr($key, -2) === '/f') {
+=======
+            if (str_ends_with($key, '/f')) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $key      = substr($key, 0, -2);
                 $filename = $root->pathAsString() . DIRECTORY_SEPARATOR . $key;
 
@@ -77,8 +113,13 @@ final class Builder
                             $this->analyser->classesIn($filename),
                             $this->analyser->traitsIn($filename),
                             $this->analyser->functionsIn($filename),
+<<<<<<< HEAD
                             $this->analyser->linesOfCodeFor($filename)
                         )
+=======
+                            $this->analyser->linesOfCodeFor($filename),
+                        ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     );
                 }
             } else {
@@ -128,6 +169,11 @@ final class Builder
      *         )
      * )
      * </code>
+<<<<<<< HEAD
+=======
+     *
+     * @return array<string, array<string, array{lineCoverage: array<int, int>, functionCoverage: array<string, array<int, int>>}>>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function buildDirectoryStructure(ProcessedCodeCoverageData $data): array
     {
@@ -214,7 +260,11 @@ final class Builder
 
         for ($i = 0; $i < $max; $i++) {
             // strip phar:// prefixes
+<<<<<<< HEAD
             if (strpos($paths[$i], 'phar://') === 0) {
+=======
+            if (str_starts_with($paths[$i], 'phar://')) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $paths[$i] = substr($paths[$i], 7);
                 $paths[$i] = str_replace('/', DIRECTORY_SEPARATOR, $paths[$i]);
             }

@@ -1,1 +1,5 @@
+<<<<<<< HEAD
     <tr class="{{class}} d-flex"><td {{popover}} class="col-1 text-right"><a id="{{lineNumber}}" href="#{{lineNumber}}">{{lineNumber}}</a></td><td class="col-11 codeLine">{{lineContent}}</td></tr>
+=======
+    <tr class="{{class}} d-flex"><td {{popover}} class="col-1 text-end"><a id="{{lineNumber}}" href="#{{lineNumber}}">{{lineNumber}}</a></td><td class="col-11 codeLine">{{lineContent}}</td></tr>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123

@@ -16,8 +16,12 @@ use Countable;
  */
 interface Test extends Countable
 {
+<<<<<<< HEAD
     /**
      * Runs a test and collects its result in a TestResult instance.
      */
     public function run(?TestResult $result = null): TestResult;
+=======
+    public function run(): void;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

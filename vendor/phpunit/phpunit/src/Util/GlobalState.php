@@ -14,6 +14,10 @@ use const PHP_MINOR_VERSION;
 use function array_keys;
 use function array_reverse;
 use function array_shift;
+<<<<<<< HEAD
+=======
+use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function defined;
 use function get_defined_constants;
 use function get_included_files;
@@ -25,19 +29,36 @@ use function is_scalar;
 use function preg_match;
 use function serialize;
 use function sprintf;
+<<<<<<< HEAD
 use function strpos;
 use function strtr;
 use function substr;
+=======
+use function str_ends_with;
+use function str_starts_with;
+use function strtr;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function var_export;
 use Closure;
 
 /**
+<<<<<<< HEAD
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
 final class GlobalState
 {
     /**
      * @var string[]
+=======
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ *
+ * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ */
+final readonly class GlobalState
+{
+    /**
+     * @var list<string>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private const SUPER_GLOBAL_ARRAYS = [
         '_ENV',
@@ -50,7 +71,11 @@ final class GlobalState
     ];
 
     /**
+<<<<<<< HEAD
      * @psalm-var array<string, array<string, true>>
+=======
+     * @var array<string, array<string, true>>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private const DEPRECATED_INI_SETTINGS = [
         '7.3' => [
@@ -167,7 +192,11 @@ final class GlobalState
     }
 
     /**
+<<<<<<< HEAD
      * @param string[] $files
+=======
+     * @param list<string> $files
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      *
      * @throws Exception
      */
@@ -178,15 +207,28 @@ final class GlobalState
         $result      = '';
 
         if (defined('__PHPUNIT_PHAR__')) {
+<<<<<<< HEAD
             $prefix = 'phar://' . __PHPUNIT_PHAR__ . '/';
+=======
+            // @codeCoverageIgnoreStart
+            $prefix = 'phar://' . __PHPUNIT_PHAR__ . '/';
+            // @codeCoverageIgnoreEnd
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         // Do not process bootstrap script
         array_shift($files);
 
         // If bootstrap script was a Composer bin proxy, skip the second entry as well
+<<<<<<< HEAD
         if (substr(strtr($files[0], '\\', '/'), -24) === '/phpunit/phpunit/phpunit') {
             array_shift($files);
+=======
+        if (str_ends_with(strtr($files[0], '\\', '/'), '/phpunit/phpunit/phpunit')) {
+            // @codeCoverageIgnoreStart
+            array_shift($files);
+            // @codeCoverageIgnoreEnd
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         foreach (array_reverse($files) as $file) {
@@ -195,7 +237,11 @@ final class GlobalState
                 continue;
             }
 
+<<<<<<< HEAD
             if ($prefix !== false && strpos($file, $prefix) === 0) {
+=======
+            if ($prefix !== false && str_starts_with($file, $prefix)) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 continue;
             }
 
@@ -216,7 +262,15 @@ final class GlobalState
     {
         $result = '';
 
+<<<<<<< HEAD
         foreach (ini_get_all(null, false) as $key => $value) {
+=======
+        $iniSettings = ini_get_all(null, false);
+
+        assert($iniSettings !== false);
+
+        foreach ($iniSettings as $key => $value) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             if (self::isIniSettingDeprecated($key)) {
                 continue;
             }
@@ -287,7 +341,11 @@ final class GlobalState
         return $result;
     }
 
+<<<<<<< HEAD
     private static function exportVariable($variable): string
+=======
+    private static function exportVariable(mixed $variable): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (is_scalar($variable) || $variable === null ||
             (is_array($variable) && self::arrayOnlyContainsScalars($variable))) {
@@ -297,6 +355,12 @@ final class GlobalState
         return 'unserialize(' . var_export(serialize($variable), true) . ')';
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @param array<mixed> $array
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private static function arrayOnlyContainsScalars(array $array): bool
     {
         $result = true;

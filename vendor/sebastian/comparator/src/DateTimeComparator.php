@@ -10,10 +10,15 @@
 namespace SebastianBergmann\Comparator;
 
 use function abs;
+<<<<<<< HEAD
+=======
+use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function floor;
 use function sprintf;
 use DateInterval;
 use DateTime;
+<<<<<<< HEAD
 use DateTimeInterface;
 use DateTimeZone;
 use Exception;
@@ -54,6 +59,29 @@ class DateTimeComparator extends ObjectComparator
     {
         /** @var DateTimeInterface $expected */
         /** @var DateTimeInterface $actual */
+=======
+use DateTimeImmutable;
+use DateTimeZone;
+
+final class DateTimeComparator extends ObjectComparator
+{
+    public function accepts(mixed $expected, mixed $actual): bool
+    {
+        return ($expected instanceof DateTime || $expected instanceof DateTimeImmutable) &&
+               ($actual instanceof DateTime || $actual instanceof DateTimeImmutable);
+    }
+
+    /**
+     * @param array<mixed> $processed
+     *
+     * @throws ComparisonFailure
+     */
+    public function assertEquals(mixed $expected, mixed $actual, float $delta = 0.0, bool $canonicalize = false, bool $ignoreCase = false, array &$processed = []): void
+    {
+        assert($expected instanceof DateTime || $expected instanceof DateTimeImmutable);
+        assert($actual instanceof DateTime || $actual instanceof DateTimeImmutable);
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $absDelta = abs($delta);
         $delta    = new DateInterval(sprintf('PT%dS', $absDelta));
         $delta->f = $absDelta - floor($absDelta);
@@ -73,6 +101,7 @@ class DateTimeComparator extends ObjectComparator
             throw new ComparisonFailure(
                 $expected,
                 $actual,
+<<<<<<< HEAD
                 $this->dateTimeToString($expected),
                 $this->dateTimeToString($actual),
                 false,
@@ -92,4 +121,12 @@ class DateTimeComparator extends ObjectComparator
 
         return $string ?: 'Invalid DateTimeInterface object';
     }
+=======
+                $expected->format('Y-m-d\TH:i:s.uO'),
+                $actual->format('Y-m-d\TH:i:s.uO'),
+                'Failed asserting that two DateTime objects are equal.',
+            );
+        }
+    }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

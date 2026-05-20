@@ -10,16 +10,26 @@
 namespace SebastianBergmann\CodeCoverage\Node;
 
 use function array_merge;
+<<<<<<< HEAD
+=======
+use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function count;
 use IteratorAggregate;
 use RecursiveIteratorIterator;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
+<<<<<<< HEAD
+=======
+ *
+ * @phpstan-import-type LinesOfCodeType from \SebastianBergmann\CodeCoverage\StaticAnalysis\FileAnalyser
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  */
 final class Directory extends AbstractNode implements IteratorAggregate
 {
     /**
+<<<<<<< HEAD
      * @var AbstractNode[]
      */
     private $children = [];
@@ -128,6 +138,44 @@ final class Directory extends AbstractNode implements IteratorAggregate
      * @var int
      */
     private $numTestedFunctions = -1;
+=======
+     * @var list<Directory|File>
+     */
+    private array $children = [];
+
+    /**
+     * @var list<Directory>
+     */
+    private array $directories = [];
+
+    /**
+     * @var list<File>
+     */
+    private array $files      = [];
+    private ?array $classes   = null;
+    private ?array $traits    = null;
+    private ?array $functions = null;
+
+    /**
+     * @var null|LinesOfCodeType
+     */
+    private ?array $linesOfCode        = null;
+    private int $numFiles              = -1;
+    private int $numExecutableLines    = -1;
+    private int $numExecutedLines      = -1;
+    private int $numExecutableBranches = -1;
+    private int $numExecutedBranches   = -1;
+    private int $numExecutablePaths    = -1;
+    private int $numExecutedPaths      = -1;
+    private int $numClasses            = -1;
+    private int $numTestedClasses      = -1;
+    private int $numTraits             = -1;
+    private int $numTestedTraits       = -1;
+    private int $numMethods            = -1;
+    private int $numTestedMethods      = -1;
+    private int $numFunctions          = -1;
+    private int $numTestedFunctions    = -1;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function count(): int
     {
@@ -146,7 +194,11 @@ final class Directory extends AbstractNode implements IteratorAggregate
     {
         return new RecursiveIteratorIterator(
             new Iterator($this),
+<<<<<<< HEAD
             RecursiveIteratorIterator::SELF_FIRST
+=======
+            RecursiveIteratorIterator::SELF_FIRST,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -154,6 +206,11 @@ final class Directory extends AbstractNode implements IteratorAggregate
     {
         $directory = new self($name, $this);
 
+<<<<<<< HEAD
+=======
+        assert($directory instanceof self);
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $this->children[]    = $directory;
         $this->directories[] = &$this->children[count($this->children) - 1];
 
@@ -192,7 +249,11 @@ final class Directory extends AbstractNode implements IteratorAggregate
             foreach ($this->children as $child) {
                 $this->classes = array_merge(
                     $this->classes,
+<<<<<<< HEAD
                     $child->classes()
+=======
+                    $child->classes(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }
@@ -208,7 +269,11 @@ final class Directory extends AbstractNode implements IteratorAggregate
             foreach ($this->children as $child) {
                 $this->traits = array_merge(
                     $this->traits,
+<<<<<<< HEAD
                     $child->traits()
+=======
+                    $child->traits(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }
@@ -224,7 +289,11 @@ final class Directory extends AbstractNode implements IteratorAggregate
             foreach ($this->children as $child) {
                 $this->functions = array_merge(
                     $this->functions,
+<<<<<<< HEAD
                     $child->functions()
+=======
+                    $child->functions(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }
@@ -233,7 +302,11 @@ final class Directory extends AbstractNode implements IteratorAggregate
     }
 
     /**
+<<<<<<< HEAD
      * @psalm-return array{linesOfCode: int, commentLinesOfCode: int, nonCommentLinesOfCode: int}
+=======
+     * @return LinesOfCodeType
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function linesOfCode(): array
     {
@@ -247,8 +320,13 @@ final class Directory extends AbstractNode implements IteratorAggregate
             foreach ($this->children as $child) {
                 $childLinesOfCode = $child->linesOfCode();
 
+<<<<<<< HEAD
                 $this->linesOfCode['linesOfCode'] += $childLinesOfCode['linesOfCode'];
                 $this->linesOfCode['commentLinesOfCode'] += $childLinesOfCode['commentLinesOfCode'];
+=======
+                $this->linesOfCode['linesOfCode']           += $childLinesOfCode['linesOfCode'];
+                $this->linesOfCode['commentLinesOfCode']    += $childLinesOfCode['commentLinesOfCode'];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->linesOfCode['nonCommentLinesOfCode'] += $childLinesOfCode['nonCommentLinesOfCode'];
             }
         }

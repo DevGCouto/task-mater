@@ -9,10 +9,15 @@
  */
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+<<<<<<< HEAD
+=======
+use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use DOMElement;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
+<<<<<<< HEAD
  */
 final class Tests
 {
@@ -27,17 +32,32 @@ final class Tests
         5  => 'RISKY',      // PHPUnit_Runner_BaseTestRunner::STATUS_RISKY
         6  => 'WARNING',     // PHPUnit_Runner_BaseTestRunner::STATUS_WARNING
     ];
+=======
+ *
+ * @phpstan-import-type TestType from \SebastianBergmann\CodeCoverage\CodeCoverage
+ */
+final class Tests
+{
+    private readonly DOMElement $contextNode;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(DOMElement $context)
     {
         $this->contextNode = $context;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @param TestType $result
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function addTest(string $test, array $result): void
     {
         $node = $this->contextNode->appendChild(
             $this->contextNode->ownerDocument->createElementNS(
                 'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
                 'test'
             )
         );
@@ -46,5 +66,16 @@ final class Tests
         $node->setAttribute('size', $result['size']);
         $node->setAttribute('result', (string) $result['status']);
         $node->setAttribute('status', $this->codeMap[(int) $result['status']]);
+=======
+                'test',
+            ),
+        );
+
+        assert($node instanceof DOMElement);
+
+        $node->setAttribute('name', $test);
+        $node->setAttribute('size', $result['size']);
+        $node->setAttribute('status', $result['status']);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

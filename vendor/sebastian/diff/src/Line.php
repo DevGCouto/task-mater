@@ -12,6 +12,7 @@ namespace SebastianBergmann\Diff;
 final class Line
 {
     public const ADDED     = 1;
+<<<<<<< HEAD
 
     public const REMOVED   = 2;
 
@@ -26,6 +27,12 @@ final class Line
      * @var string
      */
     private $content;
+=======
+    public const REMOVED   = 2;
+    public const UNCHANGED = 3;
+    private int $type;
+    private string $content;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(int $type = self::UNCHANGED, string $content = '')
     {
@@ -33,13 +40,39 @@ final class Line
         $this->content = $content;
     }
 
+<<<<<<< HEAD
     public function getContent(): string
+=======
+    public function content(): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->content;
     }
 
+<<<<<<< HEAD
     public function getType(): int
     {
         return $this->type;
     }
+=======
+    public function type(): int
+    {
+        return $this->type;
+    }
+
+    public function isAdded(): bool
+    {
+        return $this->type === self::ADDED;
+    }
+
+    public function isRemoved(): bool
+    {
+        return $this->type === self::REMOVED;
+    }
+
+    public function isUnchanged(): bool
+    {
+        return $this->type === self::UNCHANGED;
+    }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

@@ -38,11 +38,19 @@ use const T_ENDFOREACH;
 use const T_ENDIF;
 use const T_ENDSWITCH;
 use const T_ENDWHILE;
+<<<<<<< HEAD
+=======
+use const T_ENUM;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use const T_EVAL;
 use const T_EXIT;
 use const T_EXTENDS;
 use const T_FINAL;
 use const T_FINALLY;
+<<<<<<< HEAD
+=======
+use const T_FN;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use const T_FOR;
 use const T_FOREACH;
 use const T_FUNCTION;
@@ -59,12 +67,20 @@ use const T_INSTEADOF;
 use const T_INTERFACE;
 use const T_ISSET;
 use const T_LIST;
+<<<<<<< HEAD
+=======
+use const T_MATCH;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use const T_NAMESPACE;
 use const T_NEW;
 use const T_PRINT;
 use const T_PRIVATE;
 use const T_PROTECTED;
 use const T_PUBLIC;
+<<<<<<< HEAD
+=======
+use const T_READONLY;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use const T_REQUIRE;
 use const T_REQUIRE_ONCE;
 use const T_RETURN;
@@ -79,14 +95,22 @@ use const T_VAR;
 use const T_WHILE;
 use const T_YIELD;
 use const T_YIELD_FROM;
+<<<<<<< HEAD
+=======
+use const TOKEN_PARSE;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function array_key_exists;
 use function array_keys;
 use function array_merge;
 use function array_pop;
 use function array_unique;
+<<<<<<< HEAD
 use function constant;
 use function count;
 use function defined;
+=======
+use function count;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function explode;
 use function file_get_contents;
 use function htmlspecialchars;
@@ -95,6 +119,7 @@ use function ksort;
 use function range;
 use function sort;
 use function sprintf;
+<<<<<<< HEAD
 use function str_replace;
 use function substr;
 use function token_get_all;
@@ -102,6 +127,16 @@ use function trim;
 use PHPUnit\Runner\BaseTestRunner;
 use SebastianBergmann\CodeCoverage\Node\File as FileNode;
 use SebastianBergmann\CodeCoverage\Util\Percentage;
+=======
+use function str_ends_with;
+use function str_replace;
+use function token_get_all;
+use function trim;
+use SebastianBergmann\CodeCoverage\FileCouldNotBeWrittenException;
+use SebastianBergmann\CodeCoverage\Node\File as FileNode;
+use SebastianBergmann\CodeCoverage\Util\Percentage;
+use SebastianBergmann\Template\Exception;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use SebastianBergmann\Template\Template;
 
 /**
@@ -110,6 +145,7 @@ use SebastianBergmann\Template\Template;
 final class File extends Renderer
 {
     /**
+<<<<<<< HEAD
      * @psalm-var array<int,true>
      */
     private static $keywordTokens = [];
@@ -123,6 +159,82 @@ final class File extends Renderer
      * @var int
      */
     private $htmlSpecialCharsFlags = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
+=======
+     * @var array<int,true>
+     */
+    private const KEYWORD_TOKENS = [
+        T_ABSTRACT      => true,
+        T_ARRAY         => true,
+        T_AS            => true,
+        T_BREAK         => true,
+        T_CALLABLE      => true,
+        T_CASE          => true,
+        T_CATCH         => true,
+        T_CLASS         => true,
+        T_CLONE         => true,
+        T_CONST         => true,
+        T_CONTINUE      => true,
+        T_DECLARE       => true,
+        T_DEFAULT       => true,
+        T_DO            => true,
+        T_ECHO          => true,
+        T_ELSE          => true,
+        T_ELSEIF        => true,
+        T_EMPTY         => true,
+        T_ENDDECLARE    => true,
+        T_ENDFOR        => true,
+        T_ENDFOREACH    => true,
+        T_ENDIF         => true,
+        T_ENDSWITCH     => true,
+        T_ENDWHILE      => true,
+        T_ENUM          => true,
+        T_EVAL          => true,
+        T_EXIT          => true,
+        T_EXTENDS       => true,
+        T_FINAL         => true,
+        T_FINALLY       => true,
+        T_FN            => true,
+        T_FOR           => true,
+        T_FOREACH       => true,
+        T_FUNCTION      => true,
+        T_GLOBAL        => true,
+        T_GOTO          => true,
+        T_HALT_COMPILER => true,
+        T_IF            => true,
+        T_IMPLEMENTS    => true,
+        T_INCLUDE       => true,
+        T_INCLUDE_ONCE  => true,
+        T_INSTANCEOF    => true,
+        T_INSTEADOF     => true,
+        T_INTERFACE     => true,
+        T_ISSET         => true,
+        T_LIST          => true,
+        T_MATCH         => true,
+        T_NAMESPACE     => true,
+        T_NEW           => true,
+        T_PRINT         => true,
+        T_PRIVATE       => true,
+        T_PROTECTED     => true,
+        T_PUBLIC        => true,
+        T_READONLY      => true,
+        T_REQUIRE       => true,
+        T_REQUIRE_ONCE  => true,
+        T_RETURN        => true,
+        T_STATIC        => true,
+        T_SWITCH        => true,
+        T_THROW         => true,
+        T_TRAIT         => true,
+        T_TRY           => true,
+        T_UNSET         => true,
+        T_USE           => true,
+        T_VAR           => true,
+        T_WHILE         => true,
+        T_YIELD         => true,
+        T_YIELD_FROM    => true,
+    ];
+    private static array $formattedSourceCache = [];
+    private int $htmlSpecialCharsFlags         = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function render(FileNode $node, string $file): void
     {
@@ -136,10 +248,25 @@ final class File extends Renderer
                 'lines'     => $this->renderSourceWithLineCoverage($node),
                 'legend'    => '<p><span class="legend covered-by-small-tests">Covered by small (and larger) tests</span><span class="legend covered-by-medium-tests">Covered by medium (and large) tests</span><span class="legend covered-by-large-tests">Covered by large tests (and tests of unknown size)</span><span class="legend not-covered">Not covered</span><span class="legend not-coverable">Not coverable</span></p>',
                 'structure' => '',
+<<<<<<< HEAD
             ]
         );
 
         $template->renderTo($file . '.html');
+=======
+            ],
+        );
+
+        try {
+            $template->renderTo($file . '.html');
+        } catch (Exception $e) {
+            throw new FileCouldNotBeWrittenException(
+                $e->getMessage(),
+                $e->getCode(),
+                $e,
+            );
+        }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
         if ($this->hasBranchCoverage) {
             $template->setVar(
@@ -148,10 +275,25 @@ final class File extends Renderer
                     'lines'     => $this->renderSourceWithBranchCoverage($node),
                     'legend'    => '<p><span class="success"><strong>Fully covered</strong></span><span class="warning"><strong>Partially covered</strong></span><span class="danger"><strong>Not covered</strong></span></p>',
                     'structure' => $this->renderBranchStructure($node),
+<<<<<<< HEAD
                 ]
             );
 
             $template->renderTo($file . '_branch.html');
+=======
+                ],
+            );
+
+            try {
+                $template->renderTo($file . '_branch.html');
+            } catch (Exception $e) {
+                throw new FileCouldNotBeWrittenException(
+                    $e->getMessage(),
+                    $e->getCode(),
+                    $e,
+                );
+            }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
             $template->setVar(
                 [
@@ -159,10 +301,25 @@ final class File extends Renderer
                     'lines'     => $this->renderSourceWithPathCoverage($node),
                     'legend'    => '<p><span class="success"><strong>Fully covered</strong></span><span class="warning"><strong>Partially covered</strong></span><span class="danger"><strong>Not covered</strong></span></p>',
                     'structure' => $this->renderPathStructure($node),
+<<<<<<< HEAD
                 ]
             );
 
             $template->renderTo($file . '_path.html');
+=======
+                ],
+            );
+
+            try {
+                $template->renderTo($file . '_path.html');
+            } catch (Exception $e) {
+                throw new FileCouldNotBeWrittenException(
+                    $e->getMessage(),
+                    $e->getCode(),
+                    $e,
+                );
+            }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
     }
 
@@ -175,7 +332,11 @@ final class File extends Renderer
         $methodItemTemplate = new Template(
             $methodTemplateName,
             '{{',
+<<<<<<< HEAD
             '}}'
+=======
+            '}}',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $items = $this->renderItemTemplate(
@@ -203,24 +364,40 @@ final class File extends Renderer
                 'testedClassesPercent'            => $node->percentageOfTestedClassesAndTraits()->asFloat(),
                 'testedClassesPercentAsString'    => $node->percentageOfTestedClassesAndTraits()->asString(),
                 'crap'                            => '<abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr>',
+<<<<<<< HEAD
             ]
+=======
+            ],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $items .= $this->renderFunctionItems(
             $node->functions(),
+<<<<<<< HEAD
             $methodItemTemplate
+=======
+            $methodItemTemplate,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $items .= $this->renderTraitOrClassItems(
             $node->traits(),
             $template,
+<<<<<<< HEAD
             $methodItemTemplate
+=======
+            $methodItemTemplate,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $items .= $this->renderTraitOrClassItems(
             $node->classes(),
             $template,
+<<<<<<< HEAD
             $methodItemTemplate
+=======
+            $methodItemTemplate,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return $items;
@@ -253,6 +430,7 @@ final class File extends Renderer
                 $numTestedClasses             = $numTestedMethods === $numMethods ? 1 : 0;
                 $linesExecutedPercentAsString = Percentage::fromFractionAndTotal(
                     $item['executedLines'],
+<<<<<<< HEAD
                     $item['executableLines']
                 )->asString();
                 $branchesExecutedPercentAsString = Percentage::fromFractionAndTotal(
@@ -262,6 +440,17 @@ final class File extends Renderer
                 $pathsExecutedPercentAsString = Percentage::fromFractionAndTotal(
                     $item['executedPaths'],
                     $item['executablePaths']
+=======
+                    $item['executableLines'],
+                )->asString();
+                $branchesExecutedPercentAsString = Percentage::fromFractionAndTotal(
+                    $item['executedBranches'],
+                    $item['executableBranches'],
+                )->asString();
+                $pathsExecutedPercentAsString = Percentage::fromFractionAndTotal(
+                    $item['executedPaths'],
+                    $item['executablePaths'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 )->asString();
             } else {
                 $numClasses                      = 0;
@@ -273,12 +462,20 @@ final class File extends Renderer
 
             $testedMethodsPercentage = Percentage::fromFractionAndTotal(
                 $numTestedMethods,
+<<<<<<< HEAD
                 $numMethods
+=======
+                $numMethods,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $testedClassesPercentage = Percentage::fromFractionAndTotal(
                 $numTestedMethods === $numMethods ? 1 : 0,
+<<<<<<< HEAD
                 1
+=======
+                1,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $buffer .= $this->renderItemTemplate(
@@ -305,7 +502,11 @@ final class File extends Renderer
                     'numExecutableBranches'           => $item['executableBranches'],
                     'pathsExecutedPercent'            => Percentage::fromFractionAndTotal(
                         $item['executedPaths'],
+<<<<<<< HEAD
                         $item['executablePaths']
+=======
+                        $item['executablePaths'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     )->asFloat(),
                     'pathsExecutedPercentAsString' => $pathsExecutedPercentAsString,
                     'numExecutedPaths'             => $item['executedPaths'],
@@ -315,14 +516,22 @@ final class File extends Renderer
                     'testedClassesPercent'         => $testedClassesPercentage->asFloat(),
                     'testedClassesPercentAsString' => $testedClassesPercentage->asString(),
                     'crap'                         => $item['crap'],
+<<<<<<< HEAD
                 ]
+=======
+                ],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             foreach ($item['methods'] as $method) {
                 $buffer .= $this->renderFunctionOrMethodItem(
                     $methodItemTemplate,
                     $method,
+<<<<<<< HEAD
                     '&nbsp;'
+=======
+                    '&nbsp;',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }
@@ -341,7 +550,11 @@ final class File extends Renderer
         foreach ($functions as $function) {
             $buffer .= $this->renderFunctionOrMethodItem(
                 $template,
+<<<<<<< HEAD
                 $function
+=======
+                $function,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -363,22 +576,38 @@ final class File extends Renderer
 
         $executedLinesPercentage = Percentage::fromFractionAndTotal(
             $item['executedLines'],
+<<<<<<< HEAD
             $item['executableLines']
+=======
+            $item['executableLines'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $executedBranchesPercentage = Percentage::fromFractionAndTotal(
             $item['executedBranches'],
+<<<<<<< HEAD
             $item['executableBranches']
+=======
+            $item['executableBranches'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $executedPathsPercentage = Percentage::fromFractionAndTotal(
             $item['executedPaths'],
+<<<<<<< HEAD
             $item['executablePaths']
+=======
+            $item['executablePaths'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $testedMethodsPercentage = Percentage::fromFractionAndTotal(
             $numTestedMethods,
+<<<<<<< HEAD
             1
+=======
+            1,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return $this->renderItemTemplate(
@@ -389,7 +618,11 @@ final class File extends Renderer
                     $indent,
                     $item['startLine'],
                     htmlspecialchars($item['signature'], $this->htmlSpecialCharsFlags),
+<<<<<<< HEAD
                     $item['functionName'] ?? $item['methodName']
+=======
+                    $item['functionName'] ?? $item['methodName'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 ),
                 'numMethods'                      => $numMethods,
                 'numTestedMethods'                => $numTestedMethods,
@@ -408,7 +641,11 @@ final class File extends Renderer
                 'testedMethodsPercent'            => $testedMethodsPercentage->asFloat(),
                 'testedMethodsPercentAsString'    => $testedMethodsPercentage->asString(),
                 'crap'                            => $item['crap'],
+<<<<<<< HEAD
             ]
+=======
+            ],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -464,9 +701,15 @@ final class File extends Renderer
 
             if (!empty($popoverTitle)) {
                 $popover = sprintf(
+<<<<<<< HEAD
                     ' data-title="%s" data-content="%s" data-placement="top" data-html="true"',
                     $popoverTitle,
                     htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags)
+=======
+                    ' data-bs-title="%s" data-bs-content="%s" data-bs-placement="top" data-bs-html="true"',
+                    $popoverTitle,
+                    htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
 
@@ -551,9 +794,15 @@ final class File extends Renderer
                 $trClass = $lineCss . ' popin';
 
                 $popover = sprintf(
+<<<<<<< HEAD
                     ' data-title="%s" data-content="%s" data-placement="top" data-html="true"',
                     $popoverTitle,
                     htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags)
+=======
+                    ' data-bs-title="%s" data-bs-content="%s" data-bs-placement="top" data-bs-html="true"',
+                    $popoverTitle,
+                    htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
 
@@ -641,9 +890,15 @@ final class File extends Renderer
                 $trClass = $lineCss . ' popin';
 
                 $popover = sprintf(
+<<<<<<< HEAD
                     ' data-title="%s" data-content="%s" data-placement="top" data-html="true"',
                     $popoverTitle,
                     htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags)
+=======
+                    ' data-bs-title="%s" data-bs-content="%s" data-bs-placement="top" data-bs-html="true"',
+                    $popoverTitle,
+                    htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
 
@@ -739,9 +994,15 @@ final class File extends Renderer
 
             if (!empty($popoverTitle)) {
                 $popover = sprintf(
+<<<<<<< HEAD
                     ' data-title="%s" data-content="%s" data-placement="top" data-html="true"',
                     $popoverTitle,
                     htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags)
+=======
+                    ' data-bs-title="%s" data-bs-content="%s" data-bs-placement="top" data-bs-html="true"',
+                    $popoverTitle,
+                    htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
 
@@ -854,9 +1115,15 @@ final class File extends Renderer
 
                 if (!empty($popoverTitle)) {
                     $popover = sprintf(
+<<<<<<< HEAD
                         ' data-title="%s" data-content="%s" data-placement="top" data-html="true"',
                         $popoverTitle,
                         htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags)
+=======
+                        ' data-bs-title="%s" data-bs-content="%s" data-bs-placement="top" data-bs-html="true"',
+                        $popoverTitle,
+                        htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     );
                 }
 
@@ -881,7 +1148,11 @@ final class File extends Renderer
                 'lineContent' => $lineContent,
                 'class'       => $class,
                 'popover'     => $popover,
+<<<<<<< HEAD
             ]
+=======
+            ],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return $template->render();
@@ -894,11 +1165,19 @@ final class File extends Renderer
         }
 
         $buffer              = file_get_contents($file);
+<<<<<<< HEAD
         $tokens              = token_get_all($buffer);
         $result              = [''];
         $i                   = 0;
         $stringFlag          = false;
         $fileEndsWithNewLine = substr($buffer, -1) === "\n";
+=======
+        $tokens              = token_get_all($buffer, TOKEN_PARSE);
+        $result              = [''];
+        $i                   = 0;
+        $stringFlag          = false;
+        $fileEndsWithNewLine = str_ends_with($buffer, "\n");
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
         unset($buffer);
 
@@ -907,14 +1186,22 @@ final class File extends Renderer
                 if ($token === '"' && $tokens[$j - 1] !== '\\') {
                     $result[$i] .= sprintf(
                         '<span class="string">%s</span>',
+<<<<<<< HEAD
                         htmlspecialchars($token, $this->htmlSpecialCharsFlags)
+=======
+                        htmlspecialchars($token, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     );
 
                     $stringFlag = !$stringFlag;
                 } else {
                     $result[$i] .= sprintf(
                         '<span class="keyword">%s</span>',
+<<<<<<< HEAD
                         htmlspecialchars($token, $this->htmlSpecialCharsFlags)
+=======
+                        htmlspecialchars($token, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     );
                 }
 
@@ -926,7 +1213,11 @@ final class File extends Renderer
             $value = str_replace(
                 ["\t", ' '],
                 ['&nbsp;&nbsp;&nbsp;&nbsp;', '&nbsp;'],
+<<<<<<< HEAD
                 htmlspecialchars($value, $this->htmlSpecialCharsFlags)
+=======
+                htmlspecialchars($value, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             if ($value === "\n") {
@@ -955,7 +1246,11 @@ final class File extends Renderer
                         $result[$i] .= sprintf(
                             '<span class="%s">%s</span>',
                             $colour,
+<<<<<<< HEAD
                             $line
+=======
+                            $line,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                         );
                     }
 
@@ -983,7 +1278,11 @@ final class File extends Renderer
             $className = sprintf(
                 '<abbr title="%s">%s</abbr>',
                 $className,
+<<<<<<< HEAD
                 array_pop($tmp)
+=======
+                array_pop($tmp),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -1005,6 +1304,7 @@ final class File extends Renderer
     {
         $testCSS = '';
 
+<<<<<<< HEAD
         if ($testData['fromTestcase']) {
             switch ($testData['status']) {
                 case BaseTestRunner::STATUS_PASSED:
@@ -1041,12 +1341,33 @@ final class File extends Renderer
 
                     break;
             }
+=======
+        switch ($testData['status']) {
+            case 'success':
+                $testCSS = match ($testData['size']) {
+                    'small'  => ' class="covered-by-small-tests"',
+                    'medium' => ' class="covered-by-medium-tests"',
+                    // no break
+                    default => ' class="covered-by-large-tests"',
+                };
+
+                break;
+
+            case 'failure':
+                $testCSS = ' class="danger"';
+
+                break;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         return sprintf(
             '<li%s>%s</li>',
             $testCSS,
+<<<<<<< HEAD
             htmlspecialchars($test, $this->htmlSpecialCharsFlags)
+=======
+            htmlspecialchars($test, $this->htmlSpecialCharsFlags),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -1062,6 +1383,7 @@ final class File extends Renderer
 
     private function isKeyword(int $token): bool
     {
+<<<<<<< HEAD
         return isset(self::keywordTokens()[$token]);
     }
 
@@ -1158,5 +1480,8 @@ final class File extends Renderer
         }
 
         return self::$keywordTokens;
+=======
+        return isset(self::KEYWORD_TOKENS[$token]);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

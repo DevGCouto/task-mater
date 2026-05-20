@@ -9,6 +9,12 @@
  */
 namespace SebastianBergmann\Type;
 
+<<<<<<< HEAD
+=======
+/**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for this library
+ */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 final class UnknownType extends Type
 {
     public function isAssignable(Type $other): bool
@@ -16,11 +22,23 @@ final class UnknownType extends Type
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return 'unknown type'
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function name(): string
     {
         return 'unknown type';
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return ''
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function asString(): string
     {
         return '';
@@ -31,9 +49,12 @@ final class UnknownType extends Type
         return true;
     }
 
+<<<<<<< HEAD
     /**
      * @psalm-assert-if-true UnknownType $this
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function isUnknown(): bool
     {
         return true;

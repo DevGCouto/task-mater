@@ -13,6 +13,7 @@ use RuntimeException;
 use SebastianBergmann\Diff\Differ;
 use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
 
+<<<<<<< HEAD
 /**
  * Thrown when an assertion for string equality failed.
  */
@@ -72,43 +73,78 @@ class ComparisonFailure extends RuntimeException
      */
     public function __construct($expected, $actual, $expectedAsString, $actualAsString, $identical = false, $message = '')
     {
+=======
+final class ComparisonFailure extends RuntimeException
+{
+    private mixed $expected;
+    private mixed $actual;
+    private string $expectedAsString;
+    private string $actualAsString;
+
+    public function __construct(mixed $expected, mixed $actual, string $expectedAsString, string $actualAsString, string $message = '')
+    {
+        parent::__construct($message);
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $this->expected         = $expected;
         $this->actual           = $actual;
         $this->expectedAsString = $expectedAsString;
         $this->actualAsString   = $actualAsString;
+<<<<<<< HEAD
         $this->message          = $message;
     }
 
     public function getActual()
+=======
+    }
+
+    public function getActual(): mixed
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->actual;
     }
 
+<<<<<<< HEAD
     public function getExpected()
+=======
+    public function getExpected(): mixed
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->expected;
     }
 
+<<<<<<< HEAD
     /**
      * @return string
      */
     public function getActualAsString()
+=======
+    public function getActualAsString(): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->actualAsString;
     }
 
+<<<<<<< HEAD
     /**
      * @return string
      */
     public function getExpectedAsString()
+=======
+    public function getExpectedAsString(): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->expectedAsString;
     }
 
+<<<<<<< HEAD
     /**
      * @return string
      */
     public function getDiff()
+=======
+    public function getDiff(): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (!$this->actualAsString && !$this->expectedAsString) {
             return '';
@@ -119,11 +155,17 @@ class ComparisonFailure extends RuntimeException
         return $differ->diff($this->expectedAsString, $this->actualAsString);
     }
 
+<<<<<<< HEAD
     /**
      * @return string
      */
     public function toString()
     {
         return $this->message . $this->getDiff();
+=======
+    public function toString(): string
+    {
+        return $this->getMessage() . $this->getDiff();
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

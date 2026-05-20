@@ -19,7 +19,11 @@ final class CacheWarmer
             $cacheDirectory,
             new ParsingFileAnalyser(
                 $useAnnotationsForIgnoringCode,
+<<<<<<< HEAD
                 $ignoreDeprecatedCode
+=======
+                $ignoreDeprecatedCode,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             ),
             $useAnnotationsForIgnoringCode,
             $ignoreDeprecatedCode,

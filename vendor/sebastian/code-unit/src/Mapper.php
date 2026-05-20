@@ -21,8 +21,12 @@ use function ksort;
 use function method_exists;
 use function sort;
 use function sprintf;
+<<<<<<< HEAD
 use function str_replace;
 use function strpos;
+=======
+use function str_contains;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function trait_exists;
 use ReflectionClass;
 use ReflectionFunction;
@@ -31,7 +35,11 @@ use ReflectionMethod;
 final class Mapper
 {
     /**
+<<<<<<< HEAD
      * @psalm-return array<string,list<int>>
+=======
+     * @return array<string,list<int>>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function codeUnitsToSourceLines(CodeUnitCollection $codeUnits): array
     {
@@ -64,6 +72,7 @@ final class Mapper
      */
     public function stringToCodeUnits(string $unit): CodeUnitCollection
     {
+<<<<<<< HEAD
         if (strpos($unit, '::') !== false) {
             [$firstPart, $secondPart] = explode('::', $unit);
 
@@ -99,6 +108,17 @@ final class Mapper
                 if ($this->isUserDefinedMethod($firstPart, $secondPart)) {
                     return CodeUnitCollection::fromList(CodeUnit::forClassMethod($firstPart, $secondPart));
                 }
+=======
+        if (str_contains($unit, '::')) {
+            [$firstPart, $secondPart] = explode('::', $unit);
+
+            if ($this->isUserDefinedMethod($firstPart, $secondPart)) {
+                return CodeUnitCollection::fromList(CodeUnit::forClassMethod($firstPart, $secondPart));
+            }
+
+            if ($this->isUserDefinedFunction($secondPart)) {
+                return CodeUnitCollection::fromList(CodeUnit::forFunction($secondPart));
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             }
 
             if ($this->isUserDefinedInterface($firstPart)) {
@@ -110,6 +130,7 @@ final class Mapper
             }
         } else {
             if ($this->isUserDefinedClass($unit)) {
+<<<<<<< HEAD
                 $units = [CodeUnit::forClass($unit)];
 
                 foreach ($this->reflectorForClass($unit)->getTraits() as $trait) {
@@ -123,6 +144,14 @@ final class Mapper
                 }
 
                 return CodeUnitCollection::fromArray($units);
+=======
+                return CodeUnitCollection::fromList(
+                    ...array_merge(
+                        [CodeUnit::forClass($unit)],
+                        $this->traits(new ReflectionClass($unit)),
+                    ),
+                );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             }
 
             if ($this->isUserDefinedInterface($unit)) {
@@ -136,23 +165,32 @@ final class Mapper
             if ($this->isUserDefinedFunction($unit)) {
                 return CodeUnitCollection::fromList(CodeUnit::forFunction($unit));
             }
+<<<<<<< HEAD
 
             $unit = str_replace('<extended>', '', $unit);
 
             if ($this->isUserDefinedClass($unit)) {
                 return $this->classAndParentClassesAndTraits($unit);
             }
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         throw new InvalidCodeUnitException(
             sprintf(
                 '"%s" is not a valid code unit',
+<<<<<<< HEAD
                 $unit
             )
+=======
+                $unit,
+            ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
     /**
+<<<<<<< HEAD
      * @psalm-param class-string $className
      *
      * @throws ReflectionException
@@ -296,6 +334,9 @@ final class Mapper
 
     /**
      * @throws ReflectionException
+=======
+     * @phpstan-assert-if-true callable-string $functionName
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function isUserDefinedFunction(string $functionName): bool
     {
@@ -303,6 +344,7 @@ final class Mapper
             return false;
         }
 
+<<<<<<< HEAD
         try {
             return (new ReflectionFunction($functionName))->isUserDefined();
             // @codeCoverageIgnoreStart
@@ -318,6 +360,13 @@ final class Mapper
 
     /**
      * @throws ReflectionException
+=======
+        return (new ReflectionFunction($functionName))->isUserDefined();
+    }
+
+    /**
+     * @phpstan-assert-if-true class-string $className
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function isUserDefinedClass(string $className): bool
     {
@@ -325,6 +374,7 @@ final class Mapper
             return false;
         }
 
+<<<<<<< HEAD
         try {
             return (new ReflectionClass($className))->isUserDefined();
             // @codeCoverageIgnoreStart
@@ -340,6 +390,13 @@ final class Mapper
 
     /**
      * @throws ReflectionException
+=======
+        return (new ReflectionClass($className))->isUserDefined();
+    }
+
+    /**
+     * @phpstan-assert-if-true interface-string $interfaceName
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function isUserDefinedInterface(string $interfaceName): bool
     {
@@ -347,6 +404,7 @@ final class Mapper
             return false;
         }
 
+<<<<<<< HEAD
         try {
             return (new ReflectionClass($interfaceName))->isUserDefined();
             // @codeCoverageIgnoreStart
@@ -362,6 +420,13 @@ final class Mapper
 
     /**
      * @throws ReflectionException
+=======
+        return (new ReflectionClass($interfaceName))->isUserDefined();
+    }
+
+    /**
+     * @phpstan-assert-if-true trait-string $traitName
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function isUserDefinedTrait(string $traitName): bool
     {
@@ -369,6 +434,7 @@ final class Mapper
             return false;
         }
 
+<<<<<<< HEAD
         try {
             return (new ReflectionClass($traitName))->isUserDefined();
             // @codeCoverageIgnoreStart
@@ -384,10 +450,18 @@ final class Mapper
 
     /**
      * @throws ReflectionException
+=======
+        return (new ReflectionClass($traitName))->isUserDefined();
+    }
+
+    /**
+     * @phpstan-assert-if-true class-string $className
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function isUserDefinedMethod(string $className, string $methodName): bool
     {
         if (!class_exists($className)) {
+<<<<<<< HEAD
             // @codeCoverageIgnoreStart
             return false;
             // @codeCoverageIgnoreEnd
@@ -410,5 +484,39 @@ final class Mapper
             );
         }
         // @codeCoverageIgnoreEnd
+=======
+            return false;
+        }
+
+        if (!method_exists($className, $methodName)) {
+            return false;
+        }
+
+        return (new ReflectionMethod($className, $methodName))->isUserDefined();
+    }
+
+    /**
+     * @param ReflectionClass<object> $class
+     *
+     * @return list<TraitUnit>
+     */
+    private function traits(ReflectionClass $class): array
+    {
+        $result = [];
+
+        foreach ($class->getTraits() as $trait) {
+            if (!$trait->isUserDefined()) {
+                // @codeCoverageIgnoreStart
+                continue;
+                // @codeCoverageIgnoreEnd
+            }
+
+            $result[] = CodeUnit::forTrait($trait->getName());
+
+            $result = array_merge($result, $this->traits($trait));
+        }
+
+        return $result;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

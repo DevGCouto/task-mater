@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 # sebastian/comparator
 
 [![CI Status](https://github.com/sebastianbergmann/comparator/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/comparator/actions)
 [![Type Coverage](https://shepherd.dev/github/sebastianbergmann/comparator/coverage.svg)](https://shepherd.dev/github/sebastianbergmann/comparator)
+=======
+[![Latest Stable Version](https://poser.pugx.org/sebastian/comparator/v)](https://packagist.org/packages/sebastian/comparator)
+[![CI Status](https://github.com/sebastianbergmann/comparator/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/comparator/actions)
+[![codecov](https://codecov.io/gh/sebastianbergmann/comparator/branch/main/graph/badge.svg)](https://codecov.io/gh/sebastianbergmann/comparator)
+
+# sebastian/comparator
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 This component provides the functionality to compare PHP values for equality.
 

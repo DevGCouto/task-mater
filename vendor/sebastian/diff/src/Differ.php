@@ -18,24 +18,34 @@ use function array_values;
 use function count;
 use function current;
 use function end;
+<<<<<<< HEAD
 use function get_class;
 use function gettype;
 use function is_array;
 use function is_object;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function is_string;
 use function key;
 use function min;
 use function preg_split;
 use function prev;
 use function reset;
+<<<<<<< HEAD
 use function sprintf;
 use function substr;
 use SebastianBergmann\Diff\Output\DiffOutputBuilderInterface;
 use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+=======
+use function str_ends_with;
+use function substr;
+use SebastianBergmann\Diff\Output\DiffOutputBuilderInterface;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 final class Differ
 {
     public const OLD                     = 0;
+<<<<<<< HEAD
 
     public const ADDED                   = 1;
 
@@ -89,11 +99,32 @@ final class Differ
             $this->normalizeDiffInput($to),
             $lcs
         );
+=======
+    public const ADDED                   = 1;
+    public const REMOVED                 = 2;
+    public const DIFF_LINE_END_WARNING   = 3;
+    public const NO_LINE_END_EOF_WARNING = 4;
+    private DiffOutputBuilderInterface $outputBuilder;
+
+    public function __construct(DiffOutputBuilderInterface $outputBuilder)
+    {
+        $this->outputBuilder = $outputBuilder;
+    }
+
+    /**
+     * @param list<string>|string $from
+     * @param list<string>|string $to
+     */
+    public function diff(array|string $from, array|string $to, ?LongestCommonSubsequenceCalculator $lcs = null): string
+    {
+        $diff = $this->diffToArray($from, $to, $lcs);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
         return $this->outputBuilder->getDiff($diff);
     }
 
     /**
+<<<<<<< HEAD
      * Returns the diff between two arrays or strings as array.
      *
      * Each array element contains two elements:
@@ -114,12 +145,24 @@ final class Differ
             $from = $this->splitStringByLines($from);
         } elseif (!is_array($from)) {
             throw new InvalidArgumentException('"from" must be an array or string.');
+=======
+     * @param list<string>|string $from
+     * @param list<string>|string $to
+     */
+    public function diffToArray(array|string $from, array|string $to, ?LongestCommonSubsequenceCalculator $lcs = null): array
+    {
+        if (is_string($from)) {
+            $from = $this->splitStringByLines($from);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         if (is_string($to)) {
             $to = $this->splitStringByLines($to);
+<<<<<<< HEAD
         } elseif (!is_array($to)) {
             throw new InvalidArgumentException('"to" must be an array or string.');
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         [$from, $to, $start, $end] = self::getArrayDiffParted($from, $to);
@@ -172,6 +215,7 @@ final class Differ
         return $diff;
     }
 
+<<<<<<< HEAD
     /**
      * Casts variable to string if it is not a string or array.
      *
@@ -189,6 +233,8 @@ final class Differ
     /**
      * Checks if input is string, if so it will split it line-by-line.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function splitStringByLines(string $input): array
     {
         return preg_split('/(.*\R)/', $input, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
@@ -209,21 +255,28 @@ final class Differ
         return new TimeEfficientLongestCommonSubsequenceCalculator;
     }
 
+<<<<<<< HEAD
     /**
      * Calculates the estimated memory footprint for the DP-based method.
      *
      * @return float|int
      */
     private function calculateEstimatedFootprint(array $from, array $to)
+=======
+    private function calculateEstimatedFootprint(array $from, array $to): float|int
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $itemSize = PHP_INT_SIZE === 4 ? 76 : 144;
 
         return $itemSize * min(count($from), count($to)) ** 2;
     }
 
+<<<<<<< HEAD
     /**
      * Returns true if line ends don't match in a diff.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function detectUnmatchedLineEndings(array $diff): bool
     {
         $newLineBreaks = ['' => true];
@@ -246,7 +299,11 @@ final class Differ
             return false;
         }
 
+<<<<<<< HEAD
         // two way compare
+=======
+        // two-way compare
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         foreach ($newLineBreaks as $break => $set) {
             if (!isset($oldLineBreaks[$break])) {
                 return true;
@@ -278,7 +335,11 @@ final class Differ
             return '';
         }
 
+<<<<<<< HEAD
         if ("\r\n" === substr($line, -2)) {
+=======
+        if (str_ends_with($line, "\r\n")) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             return "\r\n";
         }
 

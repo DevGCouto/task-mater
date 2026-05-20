@@ -13,6 +13,7 @@ use function floor;
 use function sprintf;
 
 /**
+<<<<<<< HEAD
  * @psalm-immutable
  */
 final class Duration
@@ -41,6 +42,17 @@ final class Duration
      * @var int
      */
     private $milliseconds;
+=======
+ * @immutable
+ */
+final readonly class Duration
+{
+    private float $nanoseconds;
+    private int $hours;
+    private int $minutes;
+    private int $seconds;
+    private int $milliseconds;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public static function fromMicroseconds(float $microseconds): self
     {

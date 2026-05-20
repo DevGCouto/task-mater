@@ -9,12 +9,21 @@
  */
 namespace SebastianBergmann\Type;
 
+<<<<<<< HEAD
 final class GenericObjectType extends Type
 {
     /**
      * @var bool
      */
     private $allowsNull;
+=======
+/**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for this library
+ */
+final class GenericObjectType extends Type
+{
+    private bool $allowsNull;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(bool $nullable)
     {
@@ -34,6 +43,12 @@ final class GenericObjectType extends Type
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return 'object'
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function name(): string
     {
         return 'object';
@@ -44,9 +59,12 @@ final class GenericObjectType extends Type
         return $this->allowsNull;
     }
 
+<<<<<<< HEAD
     /**
      * @psalm-assert-if-true GenericObjectType $this
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function isGenericObject(): bool
     {
         return true;

@@ -9,6 +9,7 @@
  */
 namespace PHPUnit\Util;
 
+<<<<<<< HEAD
 use const PHP_OS;
 use const PHP_VERSION;
 use function addcslashes;
@@ -574,6 +575,36 @@ final class Test
         }
 
         return self::$hookMethods[$className];
+=======
+use const DEBUG_BACKTRACE_IGNORE_ARGS;
+use const DEBUG_BACKTRACE_PROVIDE_OBJECT;
+use function debug_backtrace;
+use function str_starts_with;
+use PHPUnit\Event\Code\NoTestCaseObjectOnCallStackException;
+use PHPUnit\Framework\TestCase;
+use PHPUnit\Metadata\Parser\Registry;
+use ReflectionMethod;
+
+/**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ *
+ * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ */
+final readonly class Test
+{
+    /**
+     * @throws NoTestCaseObjectOnCallStackException
+     */
+    public static function currentTestCase(): TestCase
+    {
+        foreach (debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT | DEBUG_BACKTRACE_IGNORE_ARGS) as $frame) {
+            if (isset($frame['object']) && $frame['object'] instanceof TestCase) {
+                return $frame['object'];
+            }
+        }
+
+        throw new NoTestCaseObjectOnCallStackException;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     public static function isTestMethod(ReflectionMethod $method): bool
@@ -582,6 +613,7 @@ final class Test
             return false;
         }
 
+<<<<<<< HEAD
         if (strpos($method->getName(), 'test') === 0) {
             return true;
         }
@@ -780,5 +812,17 @@ final class Test
     private static function canonicalizeName(string $name): string
     {
         return strtolower(trim($name, '\\'));
+=======
+        if (str_starts_with($method->getName(), 'test')) {
+            return true;
+        }
+
+        $metadata = Registry::parser()->forMethod(
+            $method->getDeclaringClass()->getName(),
+            $method->getName(),
+        );
+
+        return $metadata->isTest()->isNotEmpty();
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

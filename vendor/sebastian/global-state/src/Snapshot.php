@@ -9,11 +9,18 @@
  */
 namespace SebastianBergmann\GlobalState;
 
+<<<<<<< HEAD
 use const PHP_VERSION_ID;
 use function array_keys;
 use function array_merge;
 use function array_reverse;
 use function func_get_args;
+=======
+use function array_keys;
+use function array_merge;
+use function array_reverse;
+use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function get_declared_classes;
 use function get_declared_interfaces;
 use function get_declared_traits;
@@ -36,6 +43,7 @@ use Throwable;
 /**
  * A snapshot of global state.
  */
+<<<<<<< HEAD
 class Snapshot
 {
     /**
@@ -102,6 +110,68 @@ class Snapshot
      * Creates a snapshot of the current global state.
      */
     public function __construct(?ExcludeList $excludeList = null, bool $includeGlobalVariables = true, bool $includeStaticAttributes = true, bool $includeConstants = true, bool $includeFunctions = true, bool $includeClasses = true, bool $includeInterfaces = true, bool $includeTraits = true, bool $includeIniSettings = true, bool $includeIncludedFiles = true)
+=======
+final class Snapshot
+{
+    private ExcludeList $excludeList;
+
+    /**
+     * @var array<string, mixed>
+     */
+    private array $globalVariables = [];
+
+    /**
+     * @var list<string>
+     */
+    private array $superGlobalArrays = [];
+
+    /**
+     * @var array<string, array<string, mixed>>
+     */
+    private array $superGlobalVariables = [];
+
+    /**
+     * @var array<string, array<string, mixed>>
+     */
+    private array $staticProperties = [];
+
+    /**
+     * @var array<non-empty-string, array{global_value: string, local_value: string, access: int}>
+     */
+    private array $iniSettings = [];
+
+    /**
+     * @var list<string>
+     */
+    private array $includedFiles = [];
+
+    /**
+     * @var array<string, mixed>
+     */
+    private array $constants = [];
+
+    /**
+     * @var list<callable-string>
+     */
+    private array $functions = [];
+
+    /**
+     * @var list<class-string>
+     */
+    private array $interfaces = [];
+
+    /**
+     * @var list<class-string>
+     */
+    private array $classes = [];
+
+    /**
+     * @var list<class-string>
+     */
+    private array $traits = [];
+
+    public function __construct(?ExcludeList $excludeList = null, bool $includeGlobalVariables = true, bool $includeStaticProperties = true, bool $includeConstants = true, bool $includeFunctions = true, bool $includeClasses = true, bool $includeInterfaces = true, bool $includeTraits = true, bool $includeIniSettings = true, bool $includeIncludedFiles = true)
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $this->excludeList = $excludeList ?: new ExcludeList;
 
@@ -113,7 +183,11 @@ class Snapshot
             $this->snapshotFunctions();
         }
 
+<<<<<<< HEAD
         if ($includeClasses || $includeStaticAttributes) {
+=======
+        if ($includeClasses || $includeStaticProperties) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             $this->snapshotClasses();
         }
 
@@ -126,12 +200,25 @@ class Snapshot
             $this->snapshotGlobals();
         }
 
+<<<<<<< HEAD
         if ($includeStaticAttributes) {
             $this->snapshotStaticAttributes();
         }
 
         if ($includeIniSettings) {
             $this->iniSettings = ini_get_all(null, false);
+=======
+        if ($includeStaticProperties) {
+            $this->snapshotStaticProperties();
+        }
+
+        if ($includeIniSettings) {
+            $iniSettings = ini_get_all(null, false);
+
+            assert($iniSettings !== false);
+
+            $this->iniSettings = $iniSettings;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         if ($includeIncludedFiles) {
@@ -148,64 +235,135 @@ class Snapshot
         return $this->excludeList;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return array<string, mixed>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function globalVariables(): array
     {
         return $this->globalVariables;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function superGlobalVariables(): array
     {
         return $this->superGlobalVariables;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return list<string>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function superGlobalArrays(): array
     {
         return $this->superGlobalArrays;
     }
 
+<<<<<<< HEAD
     public function staticAttributes(): array
     {
         return $this->staticAttributes;
     }
 
+=======
+    /**
+     * @return array<string, array<string, mixed>>
+     */
+    public function staticProperties(): array
+    {
+        return $this->staticProperties;
+    }
+
+    /**
+     * @return array<non-empty-string, array{global_value: string, local_value: string, access: int}>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function iniSettings(): array
     {
         return $this->iniSettings;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return list<string>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function includedFiles(): array
     {
         return $this->includedFiles;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return array<string, mixed>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function constants(): array
     {
         return $this->constants;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return list<callable-string>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function functions(): array
     {
         return $this->functions;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return list<class-string>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function interfaces(): array
     {
         return $this->interfaces;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return list<class-string>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function classes(): array
     {
         return $this->classes;
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return list<class-string>
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function traits(): array
     {
         return $this->traits;
     }
 
+<<<<<<< HEAD
     /**
      * Creates a snapshot user-defined constants.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function snapshotConstants(): void
     {
         $constants = get_defined_constants(true);
@@ -215,9 +373,12 @@ class Snapshot
         }
     }
 
+<<<<<<< HEAD
     /**
      * Creates a snapshot user-defined functions.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function snapshotFunctions(): void
     {
         $functions = get_defined_functions();
@@ -225,9 +386,12 @@ class Snapshot
         $this->functions = $functions['user'];
     }
 
+<<<<<<< HEAD
     /**
      * Creates a snapshot user-defined classes.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function snapshotClasses(): void
     {
         foreach (array_reverse(get_declared_classes()) as $className) {
@@ -243,9 +407,12 @@ class Snapshot
         $this->classes = array_reverse($this->classes);
     }
 
+<<<<<<< HEAD
     /**
      * Creates a snapshot user-defined interfaces.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function snapshotInterfaces(): void
     {
         foreach (array_reverse(get_declared_interfaces()) as $interfaceName) {
@@ -261,9 +428,12 @@ class Snapshot
         $this->interfaces = array_reverse($this->interfaces);
     }
 
+<<<<<<< HEAD
     /**
      * Creates a snapshot of all global and super-global variables.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function snapshotGlobals(): void
     {
         $superGlobalArrays = $this->superGlobalArrays();
@@ -283,9 +453,12 @@ class Snapshot
         }
     }
 
+<<<<<<< HEAD
     /**
      * Creates a snapshot a super-global variable array.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function snapshotSuperGlobalArray(string $superGlobalArray): void
     {
         $this->superGlobalVariables[$superGlobalArray] = [];
@@ -298,15 +471,20 @@ class Snapshot
         }
     }
 
+<<<<<<< HEAD
     /**
      * Creates a snapshot of all static attributes in user-defined classes.
      */
     private function snapshotStaticAttributes(): void
+=======
+    private function snapshotStaticProperties(): void
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         foreach ($this->classes as $className) {
             $class    = new ReflectionClass($className);
             $snapshot = [];
 
+<<<<<<< HEAD
             foreach ($class->getProperties() as $attribute) {
                 if ($attribute->isStatic()) {
                     $name = $attribute->getName();
@@ -324,6 +502,21 @@ class Snapshot
                     }
 
                     $value = $attribute->getValue();
+=======
+            foreach ($class->getProperties() as $property) {
+                if ($property->isStatic()) {
+                    $name = $property->getName();
+
+                    if ($this->excludeList->isStaticPropertyExcluded($className, $name)) {
+                        continue;
+                    }
+
+                    if (!$property->isInitialized()) {
+                        continue;
+                    }
+
+                    $value = $property->getValue();
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
                     if ($this->canBeSerialized($value)) {
                         /* @noinspection UnserializeExploitsInspection */
@@ -333,14 +526,21 @@ class Snapshot
             }
 
             if (!empty($snapshot)) {
+<<<<<<< HEAD
                 $this->staticAttributes[$className] = $snapshot;
+=======
+                $this->staticProperties[$className] = $snapshot;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             }
         }
     }
 
+<<<<<<< HEAD
     /**
      * Returns a list of all super-global variable arrays.
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function setupSuperGlobalArrays(): void
     {
         $this->superGlobalArrays = [
@@ -354,7 +554,11 @@ class Snapshot
         ];
     }
 
+<<<<<<< HEAD
     private function canBeSerialized($variable): bool
+=======
+    private function canBeSerialized(mixed $variable): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (is_scalar($variable) || $variable === null) {
             return true;
@@ -387,6 +591,7 @@ class Snapshot
         return true;
     }
 
+<<<<<<< HEAD
     private function enumerateObjectsAndResources($variable): array
     {
         if (isset(func_get_args()[1])) {
@@ -395,6 +600,13 @@ class Snapshot
             $processed = new Context;
         }
 
+=======
+    /**
+     * @return array<mixed>
+     */
+    private function enumerateObjectsAndResources(mixed $variable, Context $processed = new Context): array
+    {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $result = [];
 
         if ($processed->contains($variable)) {
@@ -402,9 +614,18 @@ class Snapshot
         }
 
         $array = $variable;
+<<<<<<< HEAD
         $processed->add($variable);
 
         if (is_array($variable)) {
+=======
+
+        /* @noinspection UnusedFunctionResultInspection */
+        $processed->add($variable);
+
+        if (is_array($variable)) {
+            /** @phpstan-ignore foreach.nonIterable */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             foreach ($array as $element) {
                 if (!is_array($element) && !is_object($element) && !is_resource($element)) {
                     continue;
@@ -414,7 +635,11 @@ class Snapshot
                     /** @noinspection SlowArrayOperationsInLoopInspection */
                     $result = array_merge(
                         $result,
+<<<<<<< HEAD
                         $this->enumerateObjectsAndResources($element, $processed)
+=======
+                        $this->enumerateObjectsAndResources($element, $processed),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     );
                 } else {
                     $result[] = $element;
@@ -423,7 +648,11 @@ class Snapshot
         } else {
             $result[] = $variable;
 
+<<<<<<< HEAD
             foreach ((new ObjectReflector)->getAttributes($variable) as $value) {
+=======
+            foreach ((new ObjectReflector)->getProperties($variable) as $value) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 if (!is_array($value) && !is_object($value) && !is_resource($value)) {
                     continue;
                 }
@@ -432,7 +661,11 @@ class Snapshot
                     /** @noinspection SlowArrayOperationsInLoopInspection */
                     $result = array_merge(
                         $result,
+<<<<<<< HEAD
                         $this->enumerateObjectsAndResources($value, $processed)
+=======
+                        $this->enumerateObjectsAndResources($value, $processed),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     );
                 } else {
                     $result[] = $value;

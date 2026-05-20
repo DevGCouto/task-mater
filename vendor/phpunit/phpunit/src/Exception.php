@@ -12,7 +12,11 @@ namespace PHPUnit;
 use Throwable;
 
 /**
+<<<<<<< HEAD
  * @internal This interface is not covered by the backward compatibility promise for PHPUnit
+=======
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  */
 interface Exception extends Throwable
 {

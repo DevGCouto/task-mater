@@ -2,18 +2,27 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+<<<<<<< HEAD
 ## [4.0.8] - 2025-09-24
+=======
+## [6.3.2] - 2025-09-24
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 ### Changed
 
 * Suppress `unexpected NAN value was coerced to string` warning triggered on PHP 8.5
 
+<<<<<<< HEAD
 ## [4.0.7] - 2025-09-22
+=======
+## [6.3.1] - 2025-09-22
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 ### Changed
 
 * Suppress `not representable as an int, cast occurred` warning triggered on PHP 8.5
 
+<<<<<<< HEAD
 ## [4.0.6] - 2024-03-02
 
 ### Changed
@@ -65,3 +74,18 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 [4.0.2]: https://github.com/sebastianbergmann/exporter/compare/4.0.1...4.0.2
 [4.0.1]: https://github.com/sebastianbergmann/exporter/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/sebastianbergmann/exporter/compare/3.1...4.0.0
+=======
+## [6.3.0] - 2024-12-05
+
+### Added
+
+* Optional constructor argument to control maximum string length
+
+### Deprecated
+
+* Optional argument for `shortenedRecursiveExport()` and `shortenedExport()` to control maximum string length
+
+[6.3.2]: https://github.com/sebastianbergmann/exporter/compare/6.3.1...6.3.2
+[6.3.1]: https://github.com/sebastianbergmann/exporter/compare/6.3.0...6.3.1
+[6.3.0]: https://github.com/sebastianbergmann/exporter/compare/6.2.0...6.3.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123

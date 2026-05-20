@@ -19,6 +19,7 @@ use SebastianBergmann\CodeCoverage\Util\Percentage;
  */
 final class Totals
 {
+<<<<<<< HEAD
     /**
      * @var DOMNode
      */
@@ -48,6 +49,14 @@ final class Totals
      * @var DOMElement
      */
     private $traitsNode;
+=======
+    private readonly DOMNode $container;
+    private readonly DOMElement $linesNode;
+    private readonly DOMElement $methodsNode;
+    private readonly DOMElement $functionsNode;
+    private readonly DOMElement $classesNode;
+    private readonly DOMElement $traitsNode;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(DOMElement $container)
     {
@@ -56,27 +65,47 @@ final class Totals
 
         $this->linesNode = $dom->createElementNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
             'lines'
+=======
+            'lines',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $this->methodsNode = $dom->createElementNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
             'methods'
+=======
+            'methods',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $this->functionsNode = $dom->createElementNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
             'functions'
+=======
+            'functions',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $this->classesNode = $dom->createElementNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
             'classes'
+=======
+            'classes',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $this->traitsNode = $dom->createElementNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
             'traits'
+=======
+            'traits',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $container->appendChild($this->linesNode);
@@ -100,7 +129,11 @@ final class Totals
         $this->linesNode->setAttribute('executed', (string) $executed);
         $this->linesNode->setAttribute(
             'percent',
+<<<<<<< HEAD
             $executable === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($executed, $executable)->asFloat())
+=======
+            $executable === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($executed, $executable)->asFloat()),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -110,7 +143,11 @@ final class Totals
         $this->classesNode->setAttribute('tested', (string) $tested);
         $this->classesNode->setAttribute(
             'percent',
+<<<<<<< HEAD
             $count === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($tested, $count)->asFloat())
+=======
+            $count === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($tested, $count)->asFloat()),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -120,7 +157,11 @@ final class Totals
         $this->traitsNode->setAttribute('tested', (string) $tested);
         $this->traitsNode->setAttribute(
             'percent',
+<<<<<<< HEAD
             $count === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($tested, $count)->asFloat())
+=======
+            $count === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($tested, $count)->asFloat()),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -130,7 +171,11 @@ final class Totals
         $this->methodsNode->setAttribute('tested', (string) $tested);
         $this->methodsNode->setAttribute(
             'percent',
+<<<<<<< HEAD
             $count === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($tested, $count)->asFloat())
+=======
+            $count === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($tested, $count)->asFloat()),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -140,7 +185,11 @@ final class Totals
         $this->functionsNode->setAttribute('tested', (string) $tested);
         $this->functionsNode->setAttribute(
             'percent',
+<<<<<<< HEAD
             $count === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($tested, $count)->asFloat())
+=======
+            $count === 0 ? '0' : sprintf('%01.2F', Percentage::fromFractionAndTotal($tested, $count)->asFloat()),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 }

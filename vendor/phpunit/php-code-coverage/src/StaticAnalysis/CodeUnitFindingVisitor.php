@@ -26,17 +26,58 @@ use PhpParser\Node\Stmt\Function_;
 use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Trait_;
 use PhpParser\Node\UnionType;
+<<<<<<< HEAD
 use PhpParser\NodeAbstract;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
 use SebastianBergmann\Complexity\CyclomaticComplexityCalculatingVisitor;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
+<<<<<<< HEAD
+=======
+ *
+ * @phpstan-type CodeUnitFunctionType = array{
+ *     name: string,
+ *     namespacedName: string,
+ *     namespace: string,
+ *     signature: string,
+ *     startLine: int,
+ *     endLine: int,
+ *     ccn: int
+ * }
+ * @phpstan-type CodeUnitMethodType = array{
+ *     methodName: string,
+ *     signature: string,
+ *     visibility: string,
+ *     startLine: int,
+ *     endLine: int,
+ *     ccn: int
+ * }
+ * @phpstan-type CodeUnitClassType = array{
+ *     name: string,
+ *     namespacedName: string,
+ *     namespace: string,
+ *     startLine: int,
+ *     endLine: int,
+ *     methods: array<string, CodeUnitMethodType>
+ * }
+ * @phpstan-type CodeUnitTraitType = array{
+ *     name: string,
+ *     namespacedName: string,
+ *     namespace: string,
+ *     startLine: int,
+ *     endLine: int,
+ *     methods: array<string, CodeUnitMethodType>
+ * }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  */
 final class CodeUnitFindingVisitor extends NodeVisitorAbstract
 {
     /**
+<<<<<<< HEAD
      * @psalm-var array<string,array{name: string, namespacedName: string, namespace: string, startLine: int, endLine: int, methods: array<string,array{methodName: string, signature: string, visibility: string, startLine: int, endLine: int, ccn: int}>}>
      */
     private $classes = [];
@@ -50,6 +91,21 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
      * @psalm-var array<string,array{name: string, namespacedName: string, namespace: string, signature: string, startLine: int, endLine: int, ccn: int}>
      */
     private $functions = [];
+=======
+     * @var array<string, CodeUnitClassType>
+     */
+    private array $classes = [];
+
+    /**
+     * @var array<string, CodeUnitTraitType>
+     */
+    private array $traits = [];
+
+    /**
+     * @var array<string, CodeUnitFunctionType>
+     */
+    private array $functions = [];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function enterNode(Node $node): void
     {
@@ -85,7 +141,11 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @psalm-return array<string,array{name: string, namespacedName: string, namespace: string, startLine: int, endLine: int, methods: array<string,array{methodName: string, signature: string, visibility: string, startLine: int, endLine: int, ccn: int}>}>
+=======
+     * @return array<string, CodeUnitClassType>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function classes(): array
     {
@@ -93,7 +153,11 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @psalm-return array<string,array{name: string, namespacedName: string, namespace: string, startLine: int, endLine: int, methods: array<string,array{methodName: string, signature: string, visibility: string, startLine: int, endLine: int, ccn: int}>}>
+=======
+     * @return array<string, CodeUnitTraitType>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function traits(): array
     {
@@ -101,13 +165,18 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
     }
 
     /**
+<<<<<<< HEAD
      * @psalm-return array<string,array{name: string, namespacedName: string, namespace: string, signature: string, startLine: int, endLine: int, ccn: int}>
+=======
+     * @return array<string, CodeUnitFunctionType>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function functions(): array
     {
         return $this->functions;
     }
 
+<<<<<<< HEAD
     /**
      * @psalm-param ClassMethod|Function_ $node
      */
@@ -115,6 +184,10 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
     {
         assert($node instanceof ClassMethod || $node instanceof Function_);
 
+=======
+    private function cyclomaticComplexity(ClassMethod|Function_ $node): int
+    {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $nodes = $node->getStmts();
 
         if ($nodes === null) {
@@ -133,6 +206,7 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
         return $cyclomaticComplexityCalculatingVisitor->cyclomaticComplexity();
     }
 
+<<<<<<< HEAD
     /**
      * @psalm-param ClassMethod|Function_ $node
      */
@@ -140,6 +214,10 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
     {
         assert($node instanceof ClassMethod || $node instanceof Function_);
 
+=======
+    private function signature(ClassMethod|Function_ $node): string
+    {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $signature  = ($node->returnsByRef() ? '&' : '') . $node->name->toString() . '(';
         $parameters = [];
 
@@ -170,6 +248,7 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
         return $signature;
     }
 
+<<<<<<< HEAD
     /**
      * @psalm-param Identifier|Name|ComplexType $type
      */
@@ -177,6 +256,10 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
     {
         assert($type instanceof Identifier || $type instanceof Name || $type instanceof ComplexType);
 
+=======
+    private function type(ComplexType|Identifier|Name $type): string
+    {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         if ($type instanceof NullableType) {
             return '?' . $type->type;
         }
@@ -331,10 +414,14 @@ final class CodeUnitFindingVisitor extends NodeVisitorAbstract
         return implode('&', $types);
     }
 
+<<<<<<< HEAD
     /**
      * @psalm-param Identifier|Name $node $node
      */
     private function typeAsString(NodeAbstract $node): string
+=======
+    private function typeAsString(Identifier|Name $node): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if ($node instanceof Name) {
             return $node->toCodeString();

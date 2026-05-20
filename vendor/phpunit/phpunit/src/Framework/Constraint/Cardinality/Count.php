@@ -10,15 +10,26 @@
 namespace PHPUnit\Framework\Constraint;
 
 use function count;
+<<<<<<< HEAD
 use function is_array;
 use function iterator_count;
 use function sprintf;
 use Countable;
+=======
+use function is_countable;
+use function iterator_count;
+use function sprintf;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use EmptyIterator;
 use Generator;
 use Iterator;
 use IteratorAggregate;
 use PHPUnit\Framework\Exception;
+<<<<<<< HEAD
+=======
+use PHPUnit\Framework\GeneratorNotSupportedException;
+use SebastianBergmann\RecursionContext\Context;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use Traversable;
 
 /**
@@ -26,10 +37,14 @@ use Traversable;
  */
 class Count extends Constraint
 {
+<<<<<<< HEAD
     /**
      * @var int
      */
     private $expectedCount;
+=======
+    private readonly int $expectedCount;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(int $expected)
     {
@@ -50,7 +65,11 @@ class Count extends Constraint
      *
      * @throws Exception
      */
+<<<<<<< HEAD
     protected function matches($other): bool
+=======
+    protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->expectedCount === $this->getCountOf($other);
     }
@@ -58,9 +77,15 @@ class Count extends Constraint
     /**
      * @throws Exception
      */
+<<<<<<< HEAD
     protected function getCountOf($other): ?int
     {
         if ($other instanceof Countable || is_array($other)) {
+=======
+    protected function getCountOf(mixed $other): ?int
+    {
+        if (is_countable($other)) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             return count($other);
         }
 
@@ -69,7 +94,19 @@ class Count extends Constraint
         }
 
         if ($other instanceof Traversable) {
+<<<<<<< HEAD
             while ($other instanceof IteratorAggregate) {
+=======
+            $context = new Context;
+
+            while ($other instanceof IteratorAggregate) {
+                if ($context->contains($other) !== false) {
+                    throw new Exception('IteratorAggregate::getIterator() returned an object that was already seen');
+                }
+
+                $context->add($other);
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 try {
                     $other = $other->getIterator();
                 } catch (\Exception $e) {
@@ -84,7 +121,11 @@ class Count extends Constraint
             $iterator = $other;
 
             if ($iterator instanceof Generator) {
+<<<<<<< HEAD
                 return $this->getCountOfGenerator($iterator);
+=======
+                throw new GeneratorNotSupportedException;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             }
 
             if (!$iterator instanceof Iterator) {
@@ -111,6 +152,7 @@ class Count extends Constraint
     }
 
     /**
+<<<<<<< HEAD
      * Returns the total number of iterations from a generator.
      * This will fully exhaust the generator.
      */
@@ -124,14 +166,22 @@ class Count extends Constraint
     }
 
     /**
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      * Returns the description of the failure.
      *
      * The beginning of failure messages is "Failed asserting that" in most
      * cases. This method should return the second part of that sentence.
      *
+<<<<<<< HEAD
      * @param mixed $other evaluated value or object
      */
     protected function failureDescription($other): string
+=======
+     * @throws Exception
+     */
+    protected function failureDescription(mixed $other): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return sprintf(
             'actual size %d matches expected size %d',

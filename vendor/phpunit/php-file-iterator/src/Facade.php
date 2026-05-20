@@ -9,6 +9,7 @@
  */
 namespace SebastianBergmann\FileIterator;
 
+<<<<<<< HEAD
 use const DIRECTORY_SEPARATOR;
 use function array_unique;
 use function count;
@@ -32,11 +33,38 @@ class Facade
             $paths = [$paths];
         }
 
+=======
+use function array_unique;
+use function assert;
+use function sort;
+use SplFileInfo;
+
+/**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ */
+final class Facade
+{
+    /**
+     * @param list<non-empty-string>|non-empty-string $paths
+     * @param list<non-empty-string>|string           $suffixes
+     * @param list<non-empty-string>|string           $prefixes
+     * @param list<non-empty-string>                  $exclude
+     *
+     * @return list<non-empty-string>
+     */
+    public function getFilesAsArray(array|string $paths, array|string $suffixes = '', array|string $prefixes = '', array $exclude = []): array
+    {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $iterator = (new Factory)->getFileIterator($paths, $suffixes, $prefixes, $exclude);
 
         $files = [];
 
         foreach ($iterator as $file) {
+<<<<<<< HEAD
+=======
+            assert($file instanceof SplFileInfo);
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             $file = $file->getRealPath();
 
             if ($file) {
@@ -44,6 +72,7 @@ class Facade
             }
         }
 
+<<<<<<< HEAD
         foreach ($paths as $path) {
             if (is_file($path)) {
                 $files[] = realpath($path);
@@ -112,4 +141,12 @@ class Facade
 
         return DIRECTORY_SEPARATOR . $common;
     }
+=======
+        $files = array_unique($files);
+
+        sort($files);
+
+        return $files;
+    }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

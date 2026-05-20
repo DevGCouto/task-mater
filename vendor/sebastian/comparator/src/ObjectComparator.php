@@ -9,11 +9,16 @@
  */
 namespace SebastianBergmann\Comparator;
 
+<<<<<<< HEAD
 use function get_class;
+=======
+use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function in_array;
 use function is_object;
 use function sprintf;
 use function substr_replace;
+<<<<<<< HEAD
 
 /**
  * Compares objects for equality.
@@ -29,11 +34,19 @@ class ObjectComparator extends ArrayComparator
      * @return bool
      */
     public function accepts($expected, $actual)
+=======
+use SebastianBergmann\Exporter\Exporter;
+
+class ObjectComparator extends ArrayComparator
+{
+    public function accepts(mixed $expected, mixed $actual): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return is_object($expected) && is_object($actual);
     }
 
     /**
+<<<<<<< HEAD
      * Asserts that two values are equal.
      *
      * @param mixed $expected     First value to compare
@@ -59,6 +72,30 @@ class ObjectComparator extends ArrayComparator
                     $this->exporter->export($actual),
                     get_class($expected)
                 )
+=======
+     * @param array<mixed> $processed
+     *
+     * @throws ComparisonFailure
+     */
+    public function assertEquals(mixed $expected, mixed $actual, float $delta = 0.0, bool $canonicalize = false, bool $ignoreCase = false, array &$processed = []): void
+    {
+        assert(is_object($expected));
+        assert(is_object($actual));
+
+        if ($actual::class !== $expected::class) {
+            $exporter = new Exporter;
+
+            throw new ComparisonFailure(
+                $expected,
+                $actual,
+                $exporter->export($expected),
+                $exporter->export($actual),
+                sprintf(
+                    '%s is not instance of expected class "%s".',
+                    $exporter->export($actual),
+                    $expected::class,
+                ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -81,23 +118,34 @@ class ObjectComparator extends ArrayComparator
                     $delta,
                     $canonicalize,
                     $ignoreCase,
+<<<<<<< HEAD
                     $processed
+=======
+                    $processed,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             } catch (ComparisonFailure $e) {
                 throw new ComparisonFailure(
                     $expected,
                     $actual,
                     // replace "Array" with "MyClass object"
+<<<<<<< HEAD
                     substr_replace($e->getExpectedAsString(), get_class($expected) . ' Object', 0, 5),
                     substr_replace($e->getActualAsString(), get_class($actual) . ' Object', 0, 5),
                     false,
                     'Failed asserting that two objects are equal.'
+=======
+                    substr_replace($e->getExpectedAsString(), $expected::class . ' Object', 0, 5),
+                    substr_replace($e->getActualAsString(), $actual::class . ' Object', 0, 5),
+                    'Failed asserting that two objects are equal.',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }
     }
 
     /**
+<<<<<<< HEAD
      * Converts an object to an array containing all of its private, protected
      * and public properties.
      *
@@ -108,5 +156,12 @@ class ObjectComparator extends ArrayComparator
     protected function toArray($object)
     {
         return $this->exporter->toArray($object);
+=======
+     * @return array<mixed>
+     */
+    protected function toArray(object $object): array
+    {
+        return (new Exporter)->toArray($object);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

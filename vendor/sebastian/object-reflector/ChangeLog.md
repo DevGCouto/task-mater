@@ -2,6 +2,31 @@
 
 All notable changes to `sebastianbergmann/object-reflector` are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+<<<<<<< HEAD
+=======
+## [4.0.1] - 2024-07-03
+
+### Changed
+
+* This project now uses PHPStan instead of Psalm for static analysis
+
+## [4.0.0] - 2024-02-02
+
+### Removed
+
+* This component is no longer supported on PHP 8.1
+
+## [3.0.0] - 2023-02-03
+
+### Changed
+
+* `ObjectReflector::getAttributes()` has been renamed to `ObjectReflector::getProperties()`
+
+### Removed
+
+* This component is no longer supported on PHP 7.3, PHP 7.4 and PHP 8.0
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 ## [2.0.4] - 2020-10-26
 
 ### Fixed
@@ -46,6 +71,12 @@ All notable changes to `sebastianbergmann/object-reflector` are documented in th
 
 * Initial release
 
+<<<<<<< HEAD
+=======
+[4.0.1]: https://github.com/sebastianbergmann/object-reflector/compare/4.0.0...4.0.1
+[4.0.0]: https://github.com/sebastianbergmann/object-reflector/compare/3.0...4.0.0
+[3.0.0]: https://github.com/sebastianbergmann/object-reflector/compare/2.0.4...3.0.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 [2.0.4]: https://github.com/sebastianbergmann/object-reflector/compare/2.0.3...2.0.4
 [2.0.3]: https://github.com/sebastianbergmann/object-reflector/compare/2.0.2...2.0.3
 [2.0.2]: https://github.com/sebastianbergmann/object-reflector/compare/2.0.1...2.0.2

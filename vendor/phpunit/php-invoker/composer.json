@@ -15,22 +15,39 @@
         }
     ],
     "support": {
+<<<<<<< HEAD
         "issues": "https://github.com/sebastianbergmann/php-invoker/issues"
+=======
+        "issues": "https://github.com/sebastianbergmann/php-invoker/issues",
+        "security": "https://github.com/sebastianbergmann/php-invoker/security/policy"
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     },
     "prefer-stable": true,
     "config": {
         "platform": {
+<<<<<<< HEAD
             "php": "7.3.0"
+=======
+            "php": "8.2.0"
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         },
         "optimize-autoloader": true,
         "sort-packages": true
     },
     "require": {
+<<<<<<< HEAD
         "php": ">=7.3"
     },
     "require-dev": {
         "ext-pcntl": "*",
         "phpunit/phpunit": "^9.3"
+=======
+        "php": ">=8.2"
+    },
+    "require-dev": {
+        "ext-pcntl": "*",
+        "phpunit/phpunit": "^11.0"
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     },
     "autoload": {
         "classmap": [
@@ -47,7 +64,11 @@
     },
     "extra": {
         "branch-alias": {
+<<<<<<< HEAD
             "dev-master": "3.1-dev"
+=======
+            "dev-main": "5.0-dev"
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
     }
 }

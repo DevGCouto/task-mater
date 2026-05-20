@@ -15,12 +15,24 @@ use function implode;
 use function in_array;
 use function sort;
 
+<<<<<<< HEAD
 final class IntersectionType extends Type
 {
     /**
      * @psalm-var non-empty-list<Type>
      */
     private $types;
+=======
+/**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for this library
+ */
+final class IntersectionType extends Type
+{
+    /**
+     * @var non-empty-list<Type>
+     */
+    private array $types;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     /**
      * @throws RuntimeException
@@ -31,6 +43,11 @@ final class IntersectionType extends Type
         $this->ensureOnlyValidTypes(...$types);
         $this->ensureNoDuplicateTypes(...$types);
 
+<<<<<<< HEAD
+=======
+        assert(!empty($types));
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $this->types = $types;
     }
 
@@ -39,11 +56,23 @@ final class IntersectionType extends Type
         return $other->isObject();
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return non-empty-string
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function asString(): string
     {
         return $this->name();
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return non-empty-string
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function name(): string
     {
         $types = [];
@@ -62,16 +91,23 @@ final class IntersectionType extends Type
         return false;
     }
 
+<<<<<<< HEAD
     /**
      * @psalm-assert-if-true IntersectionType $this
      */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function isIntersection(): bool
     {
         return true;
     }
 
     /**
+<<<<<<< HEAD
      * @psalm-return non-empty-list<Type>
+=======
+     * @return non-empty-list<Type>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function types(): array
     {
@@ -85,7 +121,11 @@ final class IntersectionType extends Type
     {
         if (count($types) < 2) {
             throw new RuntimeException(
+<<<<<<< HEAD
                 'An intersection type must be composed of at least two types'
+=======
+                'An intersection type must be composed of at least two types',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
     }
@@ -98,7 +138,11 @@ final class IntersectionType extends Type
         foreach ($types as $type) {
             if (!$type->isObject()) {
                 throw new RuntimeException(
+<<<<<<< HEAD
                     'An intersection type can only be composed of interfaces and classes'
+=======
+                    'An intersection type can only be composed of interfaces and classes',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }

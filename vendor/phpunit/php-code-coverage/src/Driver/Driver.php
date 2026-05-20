@@ -11,11 +11,16 @@ namespace SebastianBergmann\CodeCoverage\Driver;
 
 use function sprintf;
 use SebastianBergmann\CodeCoverage\BranchAndPathCoverageNotSupportedException;
+<<<<<<< HEAD
 use SebastianBergmann\CodeCoverage\DeadCodeDetectionNotSupportedException;
 use SebastianBergmann\CodeCoverage\Filter;
 use SebastianBergmann\CodeCoverage\NoCodeCoverageDriverAvailableException;
 use SebastianBergmann\CodeCoverage\NoCodeCoverageDriverWithPathCoverageSupportAvailableException;
 use SebastianBergmann\CodeCoverage\RawCodeCoverageData;
+=======
+use SebastianBergmann\CodeCoverage\Data\RawCodeCoverageData;
+use SebastianBergmann\CodeCoverage\DeadCodeDetectionNotSupportedException;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
@@ -55,6 +60,7 @@ abstract class Driver
      *
      * @see http://xdebug.org/docs/code_coverage
      */
+<<<<<<< HEAD
     public const BRANCH_HIT = 1;
 
     /**
@@ -94,6 +100,11 @@ abstract class Driver
     {
         return (new Selector)->forLineAndPathCoverage($filter);
     }
+=======
+    public const BRANCH_HIT                    = 1;
+    private bool $collectBranchAndPathCoverage = false;
+    private bool $detectDeadCode               = false;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function canCollectBranchAndPathCoverage(): bool
     {
@@ -114,8 +125,13 @@ abstract class Driver
             throw new BranchAndPathCoverageNotSupportedException(
                 sprintf(
                     '%s does not support branch and path coverage',
+<<<<<<< HEAD
                     $this->nameAndVersion()
                 )
+=======
+                    $this->nameAndVersion(),
+                ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -146,8 +162,13 @@ abstract class Driver
             throw new DeadCodeDetectionNotSupportedException(
                 sprintf(
                     '%s does not support dead code detection',
+<<<<<<< HEAD
                     $this->nameAndVersion()
                 )
+=======
+                    $this->nameAndVersion(),
+                ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -159,6 +180,19 @@ abstract class Driver
         $this->detectDeadCode = false;
     }
 
+<<<<<<< HEAD
+=======
+    public function isPcov(): bool
+    {
+        return false;
+    }
+
+    public function isXdebug(): bool
+    {
+        return false;
+    }
+
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     abstract public function nameAndVersion(): string;
 
     abstract public function start(): void;

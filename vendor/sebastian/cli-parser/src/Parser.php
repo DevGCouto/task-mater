@@ -25,14 +25,21 @@ use function next;
 use function preg_replace;
 use function reset;
 use function sort;
+<<<<<<< HEAD
 use function strlen;
 use function strpos;
+=======
+use function str_ends_with;
+use function str_starts_with;
+use function strlen;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function strstr;
 use function substr;
 
 final class Parser
 {
     /**
+<<<<<<< HEAD
      * @psalm-param list<string> $argv
      * @psalm-param list<string> $longOptions
      *
@@ -40,6 +47,17 @@ final class Parser
      * @throws RequiredOptionArgumentMissingException
      * @throws OptionDoesNotAllowArgumentException
      * @throws UnknownOptionException
+=======
+     * @param list<string> $argv
+     * @param list<string> $longOptions
+     *
+     * @throws AmbiguousOptionException
+     * @throws OptionDoesNotAllowArgumentException
+     * @throws RequiredOptionArgumentMissingException
+     * @throws UnknownOptionException
+     *
+     * @return array{0: list<array{0: non-empty-string, 1: ?non-empty-string}>, 1: list<non-empty-string>}
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function parse(array $argv, string $shortOptions, ?array $longOptions = null): array
     {
@@ -47,10 +65,17 @@ final class Parser
             return [[], []];
         }
 
+<<<<<<< HEAD
         $options     = [];
         $nonOptions  = [];
 
         if ($longOptions) {
+=======
+        $options    = [];
+        $nonOptions = [];
+
+        if ($longOptions !== null) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             sort($longOptions);
         }
 
@@ -79,7 +104,11 @@ final class Parser
                 break;
             }
 
+<<<<<<< HEAD
             if ($arg[0] !== '-' || (strlen($arg) > 1 && $arg[1] === '-' && !$longOptions)) {
+=======
+            if ($arg[0] !== '-' || (strlen($arg) > 1 && $arg[1] === '-' && $longOptions === null)) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $nonOptions[] = $arg;
 
                 continue;
@@ -90,6 +119,7 @@ final class Parser
                     substr($arg, 2),
                     $longOptions,
                     $options,
+<<<<<<< HEAD
                     $argv
                 );
             } else {
@@ -100,12 +130,27 @@ final class Parser
                     $argv
                 );
             }
+=======
+                    $argv,
+                );
+
+                continue;
+            }
+
+            $this->parseShortOption(
+                substr($arg, 1),
+                $shortOptions,
+                $options,
+                $argv,
+            );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         return [$options, $nonOptions];
     }
 
     /**
+<<<<<<< HEAD
      * @throws RequiredOptionArgumentMissingException
      */
     private function parseShortOption(string $arg, string $shortOptions, array &$opts, array &$args): void
@@ -125,28 +170,65 @@ final class Parser
             if (strlen($spec) > 1 && $spec[1] === ':') {
                 if ($i + 1 < $argLength) {
                     $opts[] = [$option, substr($arg, $i + 1)];
+=======
+     * @param list<array{0: non-empty-string, 1: ?non-empty-string}> $options
+     * @param list<string>                                           $argv
+     *
+     * @throws RequiredOptionArgumentMissingException
+     */
+    private function parseShortOption(string $argument, string $shortOptions, array &$options, array &$argv): void
+    {
+        $argumentLength = strlen($argument);
+
+        for ($i = 0; $i < $argumentLength; $i++) {
+            $option         = $argument[$i];
+            $optionArgument = null;
+
+            if ($argument[$i] === ':' || ($spec = strstr($shortOptions, $option)) === false) {
+                throw new UnknownOptionException('-' . $option);
+            }
+
+            if (strlen($spec) > 1 && $spec[1] === ':') {
+                if ($i + 1 < $argumentLength) {
+                    $options[] = [$option, substr($argument, $i + 1)];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
                     break;
                 }
 
                 if (!(strlen($spec) > 2 && $spec[2] === ':')) {
+<<<<<<< HEAD
                     $optionArgument = current($args);
 
                     if (!$optionArgument) {
+=======
+                    $optionArgument = current($argv);
+
+                    if ($optionArgument === false) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                         throw new RequiredOptionArgumentMissingException('-' . $option);
                     }
 
                     assert(is_string($optionArgument));
 
+<<<<<<< HEAD
                     next($args);
                 }
             }
 
             $opts[] = [$option, $optionArgument];
+=======
+                    next($argv);
+                }
+            }
+
+            $options[] = [$option, $optionArgument];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
     }
 
     /**
+<<<<<<< HEAD
      * @psalm-param list<string> $longOptions
      *
      * @throws AmbiguousOptionException
@@ -158,6 +240,21 @@ final class Parser
     {
         $count          = count($longOptions);
         $list           = explode('=', $arg);
+=======
+     * @param list<string>                                           $longOptions
+     * @param list<array{0: non-empty-string, 1: ?non-empty-string}> $options
+     * @param list<string>                                           $argv
+     *
+     * @throws AmbiguousOptionException
+     * @throws OptionDoesNotAllowArgumentException
+     * @throws RequiredOptionArgumentMissingException
+     * @throws UnknownOptionException
+     */
+    private function parseLongOption(string $argument, array $longOptions, array &$options, array &$argv): void
+    {
+        $count          = count($longOptions);
+        $list           = explode('=', $argument);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $option         = $list[0];
         $optionArgument = null;
 
@@ -176,6 +273,7 @@ final class Parser
 
             $opt_rest = substr($longOption, $optionLength);
 
+<<<<<<< HEAD
             if ($opt_rest !== '' && $i + 1 < $count && $option[0] !== '=' && strpos($longOptions[$i + 1], $option) === 0) {
                 throw new AmbiguousOptionException('--' . $option);
             }
@@ -190,11 +288,30 @@ final class Parser
                     next($args);
                 }
             } elseif ($optionArgument) {
+=======
+            if ($opt_rest !== '' && $i + 1 < $count && $option[0] !== '=' && str_starts_with($longOptions[$i + 1], $option)) {
+                throw new AmbiguousOptionException('--' . $option);
+            }
+
+            if (str_ends_with($longOption, '=')) {
+                if (!str_ends_with($longOption, '==') && !strlen((string) $optionArgument)) {
+                    if (false === $optionArgument = current($argv)) {
+                        throw new RequiredOptionArgumentMissingException('--' . $option);
+                    }
+
+                    next($argv);
+                }
+            } elseif ($optionArgument !== null) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 throw new OptionDoesNotAllowArgumentException('--' . $option);
             }
 
             $fullOption = '--' . preg_replace('/={1,2}$/', '', $longOption);
+<<<<<<< HEAD
             $opts[]     = [$fullOption, $optionArgument];
+=======
+            $options[]  = [$fullOption, $optionArgument];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
             return;
         }

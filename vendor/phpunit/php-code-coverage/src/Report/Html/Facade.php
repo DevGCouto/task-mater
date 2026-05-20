@@ -13,6 +13,7 @@ use const DIRECTORY_SEPARATOR;
 use function copy;
 use function date;
 use function dirname;
+<<<<<<< HEAD
 use function substr;
 use SebastianBergmann\CodeCoverage\CodeCoverage;
 use SebastianBergmann\CodeCoverage\InvalidArgumentException;
@@ -53,6 +54,32 @@ final class Facade
         $this->highLowerBound = $highLowerBound;
         $this->lowUpperBound  = $lowUpperBound;
         $this->templatePath   = __DIR__ . '/Renderer/Template/';
+=======
+use function str_ends_with;
+use SebastianBergmann\CodeCoverage\CodeCoverage;
+use SebastianBergmann\CodeCoverage\FileCouldNotBeWrittenException;
+use SebastianBergmann\CodeCoverage\Node\Directory as DirectoryNode;
+use SebastianBergmann\CodeCoverage\Report\Thresholds;
+use SebastianBergmann\CodeCoverage\Util\Filesystem;
+use SebastianBergmann\Template\Exception;
+use SebastianBergmann\Template\Template;
+
+final class Facade
+{
+    private readonly string $templatePath;
+    private readonly string $generator;
+    private readonly Colors $colors;
+    private readonly Thresholds $thresholds;
+    private readonly CustomCssFile $customCssFile;
+
+    public function __construct(string $generator = '', ?Colors $colors = null, ?Thresholds $thresholds = null, ?CustomCssFile $customCssFile = null)
+    {
+        $this->generator     = $generator;
+        $this->colors        = $colors ?? Colors::default();
+        $this->thresholds    = $thresholds ?? Thresholds::default();
+        $this->customCssFile = $customCssFile ?? CustomCssFile::default();
+        $this->templatePath  = __DIR__ . '/Renderer/Template/';
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     public function process(CodeCoverage $coverage, string $target): void
@@ -65,27 +92,42 @@ final class Facade
             $this->templatePath,
             $this->generator,
             $date,
+<<<<<<< HEAD
             $this->lowUpperBound,
             $this->highLowerBound,
             $coverage->collectsBranchAndPathCoverage()
+=======
+            $this->thresholds,
+            $coverage->collectsBranchAndPathCoverage(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $directory = new Directory(
             $this->templatePath,
             $this->generator,
             $date,
+<<<<<<< HEAD
             $this->lowUpperBound,
             $this->highLowerBound,
             $coverage->collectsBranchAndPathCoverage()
+=======
+            $this->thresholds,
+            $coverage->collectsBranchAndPathCoverage(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $file = new File(
             $this->templatePath,
             $this->generator,
             $date,
+<<<<<<< HEAD
             $this->lowUpperBound,
             $this->highLowerBound,
             $coverage->collectsBranchAndPathCoverage()
+=======
+            $this->thresholds,
+            $coverage->collectsBranchAndPathCoverage(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $directory->render($report, $target . 'index.html');
@@ -109,6 +151,10 @@ final class Facade
         }
 
         $this->copyFiles($target);
+<<<<<<< HEAD
+=======
+        $this->renderCss($target);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     private function copyFiles(string $target): void
@@ -117,8 +163,12 @@ final class Facade
 
         copy($this->templatePath . 'css/bootstrap.min.css', $dir . 'bootstrap.min.css');
         copy($this->templatePath . 'css/nv.d3.min.css', $dir . 'nv.d3.min.css');
+<<<<<<< HEAD
         copy($this->templatePath . 'css/style.css', $dir . 'style.css');
         copy($this->templatePath . 'css/custom.css', $dir . 'custom.css');
+=======
+        copy($this->customCssFile->path(), $dir . 'custom.css');
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         copy($this->templatePath . 'css/octicons.css', $dir . 'octicons.css');
 
         $dir = $this->directory($target . '_icons');
@@ -126,17 +176,52 @@ final class Facade
         copy($this->templatePath . 'icons/file-directory.svg', $dir . 'file-directory.svg');
 
         $dir = $this->directory($target . '_js');
+<<<<<<< HEAD
         copy($this->templatePath . 'js/bootstrap.min.js', $dir . 'bootstrap.min.js');
         copy($this->templatePath . 'js/popper.min.js', $dir . 'popper.min.js');
+=======
+        copy($this->templatePath . 'js/bootstrap.bundle.min.js', $dir . 'bootstrap.bundle.min.js');
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         copy($this->templatePath . 'js/d3.min.js', $dir . 'd3.min.js');
         copy($this->templatePath . 'js/jquery.min.js', $dir . 'jquery.min.js');
         copy($this->templatePath . 'js/nv.d3.min.js', $dir . 'nv.d3.min.js');
         copy($this->templatePath . 'js/file.js', $dir . 'file.js');
     }
 
+<<<<<<< HEAD
     private function directory(string $directory): string
     {
         if (substr($directory, -1, 1) != DIRECTORY_SEPARATOR) {
+=======
+    private function renderCss(string $target): void
+    {
+        $template = new Template($this->templatePath . 'css/style.css', '{{', '}}');
+
+        $template->setVar(
+            [
+                'success-low'    => $this->colors->successLow(),
+                'success-medium' => $this->colors->successMedium(),
+                'success-high'   => $this->colors->successHigh(),
+                'warning'        => $this->colors->warning(),
+                'danger'         => $this->colors->danger(),
+            ],
+        );
+
+        try {
+            $template->renderTo($this->directory($target . '_css') . 'style.css');
+        } catch (Exception $e) {
+            throw new FileCouldNotBeWrittenException(
+                $e->getMessage(),
+                $e->getCode(),
+                $e,
+            );
+        }
+    }
+
+    private function directory(string $directory): string
+    {
+        if (!str_ends_with($directory, DIRECTORY_SEPARATOR)) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             $directory .= DIRECTORY_SEPARATOR;
         }
 

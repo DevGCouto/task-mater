@@ -34,7 +34,11 @@ abstract class Operator extends Constraint
     /**
      * Validates $constraint argument.
      */
+<<<<<<< HEAD
     protected function checkConstraint($constraint): Constraint
+=======
+    protected function checkConstraint(mixed $constraint): Constraint
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (!$constraint instanceof Constraint) {
             return new IsEqual($constraint);

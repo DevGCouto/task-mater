@@ -10,6 +10,7 @@
 namespace SebastianBergmann\CodeUnit;
 
 /**
+<<<<<<< HEAD
  * @psalm-immutable
  */
 final class TraitUnit extends CodeUnit
@@ -17,6 +18,12 @@ final class TraitUnit extends CodeUnit
     /**
      * @psalm-assert-if-true TraitUnit $this
      */
+=======
+ * @immutable
+ */
+final readonly class TraitUnit extends CodeUnit
+{
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function isTrait(): bool
     {
         return true;

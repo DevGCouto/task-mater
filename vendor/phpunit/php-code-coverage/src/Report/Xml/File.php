@@ -17,6 +17,7 @@ use DOMElement;
  */
 class File
 {
+<<<<<<< HEAD
     /**
      * @var DOMDocument
      */
@@ -26,6 +27,10 @@ class File
      * @var DOMElement
      */
     private $contextNode;
+=======
+    private readonly DOMDocument $dom;
+    private readonly DOMElement $contextNode;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(DOMElement $context)
     {
@@ -41,8 +46,13 @@ class File
             $totalsContainer = $this->contextNode->appendChild(
                 $this->dom->createElementNS(
                     'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
                     'totals'
                 )
+=======
+                    'totals',
+                ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -53,23 +63,37 @@ class File
     {
         $coverage = $this->contextNode->getElementsByTagNameNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
             'coverage'
+=======
+            'coverage',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         )->item(0);
 
         if (!$coverage) {
             $coverage = $this->contextNode->appendChild(
                 $this->dom->createElementNS(
                     'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
                     'coverage'
                 )
+=======
+                    'coverage',
+                ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
         $lineNode = $coverage->appendChild(
             $this->dom->createElementNS(
                 'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
                 'line'
             )
+=======
+                'line',
+            ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return new Coverage($lineNode, $line);

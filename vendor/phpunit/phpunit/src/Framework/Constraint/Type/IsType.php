@@ -21,7 +21,11 @@ use function is_object;
 use function is_scalar;
 use function is_string;
 use function sprintf;
+<<<<<<< HEAD
 use PHPUnit\Framework\Exception;
+=======
+use PHPUnit\Framework\UnknownTypeException;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
@@ -117,16 +121,28 @@ final class IsType extends Constraint
     ];
 
     /**
+<<<<<<< HEAD
      * @var string
      */
     private $type;
 
     /**
      * @throws Exception
+=======
+     * @var 'array'|'bool'|'boolean'|'callable'|'double'|'float'|'int'|'integer'|'iterable'|'null'|'numeric'|'object'|'real'|'resource (closed)'|'resource'|'scalar'|'string'
+     */
+    private readonly string $type;
+
+    /**
+     * @param 'array'|'bool'|'boolean'|'callable'|'double'|'float'|'int'|'integer'|'iterable'|'null'|'numeric'|'object'|'real'|'resource (closed)'|'resource'|'scalar'|'string' $type
+     *
+     * @throws UnknownTypeException
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function __construct(string $type)
     {
         if (!isset(self::KNOWN_TYPES[$type])) {
+<<<<<<< HEAD
             throw new Exception(
                 sprintf(
                     'Type specified for PHPUnit\Framework\Constraint\IsType <%s> ' .
@@ -134,6 +150,9 @@ final class IsType extends Constraint
                     $type,
                 ),
             );
+=======
+            throw new UnknownTypeException($type);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         $this->type = $type;
@@ -145,7 +164,11 @@ final class IsType extends Constraint
     public function toString(): string
     {
         return sprintf(
+<<<<<<< HEAD
             'is of type "%s"',
+=======
+            'is of type %s',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             $this->type,
         );
     }
@@ -153,10 +176,15 @@ final class IsType extends Constraint
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+<<<<<<< HEAD
      *
      * @param mixed $other value or object to evaluate
      */
     protected function matches($other): bool
+=======
+     */
+    protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         switch ($this->type) {
             case 'numeric':

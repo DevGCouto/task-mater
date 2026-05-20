@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 # sebastian/object-enumerator
 
 [![CI Status](https://github.com/sebastianbergmann/object-enumerator/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/object-enumerator/actions)
 [![Type Coverage](https://shepherd.dev/github/sebastianbergmann/object-enumerator/coverage.svg)](https://shepherd.dev/github/sebastianbergmann/object-enumerator)
+=======
+[![Latest Stable Version](https://poser.pugx.org/sebastian/object-enumerator/v/stable.png)](https://packagist.org/packages/sebastian/object-enumerator)
+[![CI Status](https://github.com/sebastianbergmann/object-enumerator/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/object-enumerator/actions)
+[![codecov](https://codecov.io/gh/sebastianbergmann/object-enumerator/branch/main/graph/badge.svg)](https://codecov.io/gh/sebastianbergmann/object-enumerator)
+
+# sebastian/object-enumerator
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 Traverses array structures and object graphs to enumerate all referenced objects.
 

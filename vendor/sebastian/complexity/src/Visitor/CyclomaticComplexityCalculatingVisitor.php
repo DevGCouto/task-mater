@@ -9,7 +9,10 @@
  */
 namespace SebastianBergmann\Complexity;
 
+<<<<<<< HEAD
 use function get_class;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use PhpParser\Node;
 use PhpParser\Node\Expr\BinaryOp\BooleanAnd;
 use PhpParser\Node\Expr\BinaryOp\BooleanOr;
@@ -28,6 +31,7 @@ use PhpParser\NodeVisitorAbstract;
 final class CyclomaticComplexityCalculatingVisitor extends NodeVisitorAbstract
 {
     /**
+<<<<<<< HEAD
      * @var int
      */
     private $cyclomaticComplexity = 1;
@@ -36,6 +40,15 @@ final class CyclomaticComplexityCalculatingVisitor extends NodeVisitorAbstract
     {
         /* @noinspection GetClassMissUseInspection */
         switch (get_class($node)) {
+=======
+     * @var positive-int
+     */
+    private int $cyclomaticComplexity = 1;
+
+    public function enterNode(Node $node): void
+    {
+        switch ($node::class) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             case BooleanAnd::class:
             case BooleanOr::class:
             case Case_::class:
@@ -46,12 +59,22 @@ final class CyclomaticComplexityCalculatingVisitor extends NodeVisitorAbstract
             case If_::class:
             case LogicalAnd::class:
             case LogicalOr::class:
+<<<<<<< HEAD
+=======
+            case Node\MatchArm::class:
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             case Ternary::class:
             case While_::class:
                 $this->cyclomaticComplexity++;
         }
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * @return positive-int
+     */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function cyclomaticComplexity(): int
     {
         return $this->cyclomaticComplexity;

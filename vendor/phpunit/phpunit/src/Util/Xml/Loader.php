@@ -9,6 +9,7 @@
  */
 namespace PHPUnit\Util\Xml;
 
+<<<<<<< HEAD
 use function chdir;
 use function dirname;
 use function error_reporting;
@@ -28,6 +29,27 @@ final class Loader
      * @throws Exception
      */
     public function loadFile(string $filename, bool $isHtml = false, bool $xinclude = false, bool $strict = false): DOMDocument
+=======
+use function error_reporting;
+use function file_get_contents;
+use function libxml_get_errors;
+use function libxml_use_internal_errors;
+use function sprintf;
+use function trim;
+use DOMDocument;
+
+/**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ *
+ * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ */
+final readonly class Loader
+{
+    /**
+     * @throws XmlException
+     */
+    public function loadFile(string $filename): DOMDocument
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $reporting = error_reporting(0);
         $contents  = file_get_contents($filename);
@@ -35,14 +57,21 @@ final class Loader
         error_reporting($reporting);
 
         if ($contents === false) {
+<<<<<<< HEAD
             throw new Exception(
                 sprintf(
                     'Could not read "%s".',
+=======
+            throw new XmlException(
+                sprintf(
+                    'Could not read XML from file "%s"',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     $filename,
                 ),
             );
         }
 
+<<<<<<< HEAD
         return $this->load($contents, $isHtml, $filename, $xinclude, $strict);
     }
 
@@ -59,6 +88,27 @@ final class Loader
         if ($xinclude) {
             $cwd = getcwd();
             @chdir(dirname($filename));
+=======
+        if (trim($contents) === '') {
+            throw new XmlException(
+                sprintf(
+                    'Could not parse XML from empty file "%s"',
+                    $filename,
+                ),
+            );
+        }
+
+        return $this->load($contents);
+    }
+
+    /**
+     * @throws XmlException
+     */
+    public function load(string $actual): DOMDocument
+    {
+        if ($actual === '') {
+            throw new XmlException('Could not parse XML from empty string');
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         $document                     = new DOMDocument;
@@ -67,6 +117,7 @@ final class Loader
         $internal  = libxml_use_internal_errors(true);
         $message   = '';
         $reporting = error_reporting(0);
+<<<<<<< HEAD
 
         if ($filename !== '') {
             // Required for XInclude
@@ -82,6 +133,9 @@ final class Loader
         if (!$isHtml && $xinclude) {
             $document->xinclude();
         }
+=======
+        $loaded    = $document->loadXML($actual);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
         foreach (libxml_get_errors() as $error) {
             $message .= "\n" . $error->message;
@@ -90,6 +144,7 @@ final class Loader
         libxml_use_internal_errors($internal);
         error_reporting($reporting);
 
+<<<<<<< HEAD
         if (isset($cwd)) {
             @chdir($cwd);
         }
@@ -110,6 +165,16 @@ final class Loader
             }
 
             throw new Exception($message);
+=======
+        if ($loaded === false) {
+            if ($message === '') {
+                // @codeCoverageIgnoreStart
+                $message = 'Could not load XML for unknown reason';
+                // @codeCoverageIgnoreEnd
+            }
+
+            throw new XmlException($message);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         return $document;

@@ -25,7 +25,11 @@ final class Report extends File
 
         $contextNode = $dom->getElementsByTagNameNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
             'file'
+=======
+            'file',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         )->item(0);
 
         parent::__construct($contextNode);
@@ -43,8 +47,13 @@ final class Report extends File
         $node = $this->contextNode()->appendChild(
             $this->dom()->createElementNS(
                 'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
                 'function'
             )
+=======
+                'function',
+            ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return new Method($node, $name);
@@ -64,15 +73,24 @@ final class Report extends File
     {
         $source = $this->contextNode()->getElementsByTagNameNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
             'source'
+=======
+            'source',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         )->item(0);
 
         if (!$source) {
             $source = $this->contextNode()->appendChild(
                 $this->dom()->createElementNS(
                     'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
                     'source'
                 )
+=======
+                    'source',
+                ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -90,8 +108,13 @@ final class Report extends File
         $node = $this->contextNode()->appendChild(
             $this->dom()->createElementNS(
                 'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
                 $tagName
             )
+=======
+                $tagName,
+            ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return new Unit($node, $name);

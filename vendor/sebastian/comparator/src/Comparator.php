@@ -9,6 +9,7 @@
  */
 namespace SebastianBergmann\Comparator;
 
+<<<<<<< HEAD
 use SebastianBergmann\Exporter\Exporter;
 
 /**
@@ -32,10 +33,18 @@ abstract class Comparator
     }
 
     public function setFactory(Factory $factory)/*: void*/
+=======
+abstract class Comparator
+{
+    private Factory $factory;
+
+    public function setFactory(Factory $factory): void
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $this->factory = $factory;
     }
 
+<<<<<<< HEAD
     /**
      * Returns whether the comparator can compare two values.
      *
@@ -58,4 +67,17 @@ abstract class Comparator
      * @throws ComparisonFailure
      */
     abstract public function assertEquals($expected, $actual, $delta = 0.0, $canonicalize = false, $ignoreCase = false);
+=======
+    abstract public function accepts(mixed $expected, mixed $actual): bool;
+
+    /**
+     * @throws ComparisonFailure
+     */
+    abstract public function assertEquals(mixed $expected, mixed $actual, float $delta = 0.0, bool $canonicalize = false, bool $ignoreCase = false): void;
+
+    protected function factory(): Factory
+    {
+        return $this->factory;
+    }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

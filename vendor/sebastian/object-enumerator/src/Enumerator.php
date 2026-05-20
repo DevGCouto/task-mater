@@ -10,12 +10,16 @@
 namespace SebastianBergmann\ObjectEnumerator;
 
 use function array_merge;
+<<<<<<< HEAD
 use function func_get_args;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function is_array;
 use function is_object;
 use SebastianBergmann\ObjectReflector\ObjectReflector;
 use SebastianBergmann\RecursionContext\Context;
 
+<<<<<<< HEAD
 /**
  * Traverses array structures and object graphs
  * to enumerate all referenced objects.
@@ -46,6 +50,17 @@ class Enumerator
             $processed = new Context;
         }
 
+=======
+final class Enumerator
+{
+    /**
+     * @param array<mixed>|object $variable
+     *
+     * @return list<object>
+     */
+    public function enumerate(array|object $variable, Context $processed = new Context): array
+    {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $objects = [];
 
         if ($processed->contains($variable)) {
@@ -53,14 +68,24 @@ class Enumerator
         }
 
         $array = $variable;
+<<<<<<< HEAD
         $processed->add($variable);
 
         if (is_array($variable)) {
+=======
+
+        /* @noinspection UnusedFunctionResultInspection */
+        $processed->add($variable);
+
+        if (is_array($variable)) {
+            /** @phpstan-ignore foreach.nonIterable */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             foreach ($array as $element) {
                 if (!is_array($element) && !is_object($element)) {
                     continue;
                 }
 
+<<<<<<< HEAD
                 $objects = array_merge(
                     $objects,
                     $this->enumerate($element, $processed)
@@ -81,6 +106,30 @@ class Enumerator
                     $this->enumerate($value, $processed)
                 );
             }
+=======
+                /** @noinspection SlowArrayOperationsInLoopInspection */
+                $objects = array_merge(
+                    $objects,
+                    $this->enumerate($element, $processed),
+                );
+            }
+
+            return $objects;
+        }
+
+        $objects[] = $variable;
+
+        foreach ((new ObjectReflector)->getProperties($variable) as $value) {
+            if (!is_array($value) && !is_object($value)) {
+                continue;
+            }
+
+            /** @noinspection SlowArrayOperationsInLoopInspection */
+            $objects = array_merge(
+                $objects,
+                $this->enumerate($value, $processed),
+            );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         return $objects;

@@ -14,6 +14,7 @@ use function count;
 use Countable;
 use IteratorAggregate;
 
+<<<<<<< HEAD
 final class CodeUnitCollection implements Countable, IteratorAggregate
 {
     /**
@@ -46,6 +47,36 @@ final class CodeUnitCollection implements Countable, IteratorAggregate
 
     /**
      * @psalm-return list<CodeUnit>
+=======
+/**
+ * @template-implements IteratorAggregate<int, CodeUnit>
+ *
+ * @immutable
+ */
+final readonly class CodeUnitCollection implements Countable, IteratorAggregate
+{
+    /**
+     * @var list<CodeUnit>
+     */
+    private array $codeUnits;
+
+    public static function fromList(CodeUnit ...$codeUnits): self
+    {
+        // @phpstan-ignore argument.type
+        return new self($codeUnits);
+    }
+
+    /**
+     * @param list<CodeUnit> $codeUnits
+     */
+    private function __construct(array $codeUnits)
+    {
+        $this->codeUnits = $codeUnits;
+    }
+
+    /**
+     * @return list<CodeUnit>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function asArray(): array
     {
@@ -64,11 +95,16 @@ final class CodeUnitCollection implements Countable, IteratorAggregate
 
     public function isEmpty(): bool
     {
+<<<<<<< HEAD
         return empty($this->codeUnits);
+=======
+        return $this->codeUnits === [];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     public function mergeWith(self $other): self
     {
+<<<<<<< HEAD
         return self::fromArray(
             array_merge(
                 $this->asArray(),
@@ -81,4 +117,13 @@ final class CodeUnitCollection implements Countable, IteratorAggregate
     {
         $this->codeUnits[] = $item;
     }
+=======
+        return new self(
+            array_merge(
+                $this->asArray(),
+                $other->asArray(),
+            ),
+        );
+    }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

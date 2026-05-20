@@ -18,6 +18,7 @@ use XMLWriter;
  */
 final class Coverage
 {
+<<<<<<< HEAD
     /**
      * @var XMLWriter
      */
@@ -32,6 +33,11 @@ final class Coverage
      * @var bool
      */
     private $finalized = false;
+=======
+    private readonly XMLWriter $writer;
+    private readonly DOMElement $contextNode;
+    private bool $finalized = false;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(DOMElement $context, string $line)
     {
@@ -66,7 +72,11 @@ final class Coverage
 
         $this->contextNode->parentNode->replaceChild(
             $fragment,
+<<<<<<< HEAD
             $this->contextNode
+=======
+            $this->contextNode,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $this->finalized = true;

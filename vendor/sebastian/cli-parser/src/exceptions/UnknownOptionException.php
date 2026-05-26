@@ -19,8 +19,13 @@ final class UnknownOptionException extends RuntimeException implements Exception
         parent::__construct(
             sprintf(
                 'Unknown option "%s"',
+<<<<<<< HEAD
+                $option
+            )
+=======
                 $option,
             ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 }

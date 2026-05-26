@@ -9,13 +9,23 @@
  */
 namespace SebastianBergmann\CodeCoverage\StaticAnalysis;
 
+<<<<<<< HEAD
+use function array_merge;
+use function assert;
+use function range;
+use function strpos;
+=======
 use function assert;
 use function str_contains;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use PhpParser\Node;
 use PhpParser\Node\Attribute;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
+<<<<<<< HEAD
+=======
 use PhpParser\Node\Stmt\Enum_;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use PhpParser\Node\Stmt\Function_;
 use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Trait_;
@@ -27,11 +37,27 @@ use PhpParser\NodeVisitorAbstract;
 final class IgnoredLinesFindingVisitor extends NodeVisitorAbstract
 {
     /**
+<<<<<<< HEAD
+     * @psalm-var list<int>
+     */
+    private $ignoredLines = [];
+
+    /**
+     * @var bool
+     */
+    private $useAnnotationsForIgnoringCode;
+
+    /**
+     * @var bool
+     */
+    private $ignoreDeprecated;
+=======
      * @var array<int>
      */
     private array $ignoredLines = [];
     private readonly bool $useAnnotationsForIgnoringCode;
     private readonly bool $ignoreDeprecated;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(bool $useAnnotationsForIgnoringCode, bool $ignoreDeprecated)
     {
@@ -44,7 +70,10 @@ final class IgnoredLinesFindingVisitor extends NodeVisitorAbstract
         if (!$node instanceof Class_ &&
             !$node instanceof Trait_ &&
             !$node instanceof Interface_ &&
+<<<<<<< HEAD
+=======
             !$node instanceof Enum_ &&
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             !$node instanceof ClassMethod &&
             !$node instanceof Function_ &&
             !$node instanceof Attribute) {
@@ -75,6 +104,8 @@ final class IgnoredLinesFindingVisitor extends NodeVisitorAbstract
             return;
         }
 
+<<<<<<< HEAD
+=======
         if ($node instanceof Attribute &&
             $node->name->toString() === 'PHPUnit\Framework\Attributes\CodeCoverageIgnore') {
             $attributeGroup = $node->getAttribute('parent');
@@ -87,11 +118,16 @@ final class IgnoredLinesFindingVisitor extends NodeVisitorAbstract
             return;
         }
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $this->processDocComment($node);
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-return list<int>
+=======
      * @return array<int>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function ignoredLines(): array
     {
@@ -106,6 +142,20 @@ final class IgnoredLinesFindingVisitor extends NodeVisitorAbstract
             return;
         }
 
+<<<<<<< HEAD
+        if (strpos($docComment->getText(), '@codeCoverageIgnore') !== false) {
+            $this->ignoredLines = array_merge(
+                $this->ignoredLines,
+                range($node->getStartLine(), $node->getEndLine())
+            );
+        }
+
+        if ($this->ignoreDeprecated && strpos($docComment->getText(), '@deprecated') !== false) {
+            $this->ignoredLines = array_merge(
+                $this->ignoredLines,
+                range($node->getStartLine(), $node->getEndLine())
+            );
+=======
         if (str_contains($docComment->getText(), '@codeCoverageIgnore')) {
             for ($line = $node->getStartLine(); $line <= $node->getEndLine(); $line++) {
                 $this->ignoredLines[] = $line;
@@ -116,6 +166,7 @@ final class IgnoredLinesFindingVisitor extends NodeVisitorAbstract
             for ($line = $node->getStartLine(); $line <= $node->getEndLine(); $line++) {
                 $this->ignoredLines[] = $line;
             }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
     }
 }

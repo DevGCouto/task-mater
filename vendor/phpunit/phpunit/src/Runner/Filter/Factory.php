@@ -10,6 +10,17 @@
 namespace PHPUnit\Runner\Filter;
 
 use function assert;
+<<<<<<< HEAD
+use function sprintf;
+use FilterIterator;
+use Iterator;
+use PHPUnit\Framework\TestSuite;
+use PHPUnit\Runner\Exception;
+use RecursiveFilterIterator;
+use ReflectionClass;
+
+/**
+=======
 use FilterIterator;
 use Iterator;
 use PHPUnit\Framework\Test;
@@ -18,11 +29,42 @@ use PHPUnit\Framework\TestSuite;
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  *
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
 final class Factory
 {
     /**
+<<<<<<< HEAD
+     * @psalm-var array<int,array{0: ReflectionClass, 1: array|string}>
+     */
+    private $filters = [];
+
+    /**
+     * @param array|string $args
+     *
+     * @throws Exception
+     */
+    public function addFilter(ReflectionClass $filter, $args): void
+    {
+        if (!$filter->isSubclassOf(RecursiveFilterIterator::class)) {
+            throw new Exception(
+                sprintf(
+                    'Class "%s" does not extend RecursiveFilterIterator',
+                    $filter->name,
+                ),
+            );
+        }
+
+        $this->filters[] = [$filter, $args];
+    }
+
+    public function factory(Iterator $iterator, TestSuite $suite): FilterIterator
+    {
+        foreach ($this->filters as $filter) {
+            [$class, $args] = $filter;
+            $iterator       = $class->newInstance($iterator, $args, $suite);
+=======
      * @var list<array{className: class-string<FilterIterator<int, Test, Iterator<int, Test>>>, argument: list<non-empty-string>|non-empty-string}>
      */
     private array $filters = [];
@@ -95,6 +137,7 @@ final class Factory
                 $filter['argument'],
                 $suite,
             );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         assert($iterator instanceof FilterIterator);

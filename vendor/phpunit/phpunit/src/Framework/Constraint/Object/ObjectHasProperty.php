@@ -9,6 +9,10 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
+<<<<<<< HEAD
+use function get_class;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function gettype;
 use function is_object;
 use function sprintf;
@@ -19,7 +23,14 @@ use ReflectionObject;
  */
 final class ObjectHasProperty extends Constraint
 {
+<<<<<<< HEAD
+    /**
+     * @var string
+     */
+    private $propertyName;
+=======
     private readonly string $propertyName;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(string $propertyName)
     {
@@ -43,7 +54,11 @@ final class ObjectHasProperty extends Constraint
      *
      * @param mixed $other value or object to evaluate
      */
+<<<<<<< HEAD
+    protected function matches($other): bool
+=======
     protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (!is_object($other)) {
             return false;
@@ -60,12 +75,20 @@ final class ObjectHasProperty extends Constraint
      *
      * @param mixed $other evaluated value or object
      */
+<<<<<<< HEAD
+    protected function failureDescription($other): string
+=======
     protected function failureDescription(mixed $other): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (is_object($other)) {
             return sprintf(
                 'object of class "%s" %s',
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->toString(),
             );
         }

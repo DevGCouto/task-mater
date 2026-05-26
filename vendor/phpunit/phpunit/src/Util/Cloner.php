@@ -12,6 +12,18 @@ namespace PHPUnit\Util;
 use Throwable;
 
 /**
+<<<<<<< HEAD
+ * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ */
+final class Cloner
+{
+    /**
+     * @psalm-template OriginalType
+     *
+     * @psalm-param OriginalType $original
+     *
+     * @psalm-return OriginalType
+=======
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  *
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
@@ -24,14 +36,19 @@ final readonly class Cloner
      * @param OriginalType $original
      *
      * @return OriginalType
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public static function clone(object $original): object
     {
         try {
             return clone $original;
+<<<<<<< HEAD
+        } catch (Throwable $t) {
+=======
 
             /** @phpstan-ignore catch.neverThrown */
         } catch (Throwable) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             return $original;
         }
     }

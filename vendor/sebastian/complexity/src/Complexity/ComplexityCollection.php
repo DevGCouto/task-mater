@@ -9,16 +9,30 @@
  */
 namespace SebastianBergmann\Complexity;
 
+<<<<<<< HEAD
+use function count;
+=======
 use function array_filter;
 use function array_merge;
 use function array_reverse;
 use function array_values;
 use function count;
 use function usort;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use Countable;
 use IteratorAggregate;
 
 /**
+<<<<<<< HEAD
+ * @psalm-immutable
+ */
+final class ComplexityCollection implements Countable, IteratorAggregate
+{
+    /**
+     * @psalm-var list<Complexity>
+     */
+    private $items = [];
+=======
  * @template-implements IteratorAggregate<int, Complexity>
  *
  * @psalm-immutable
@@ -29,6 +43,7 @@ final readonly class ComplexityCollection implements Countable, IteratorAggregat
      * @var list<Complexity>
      */
     private array $items;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public static function fromList(Complexity ...$items): self
     {
@@ -36,7 +51,11 @@ final readonly class ComplexityCollection implements Countable, IteratorAggregat
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-param list<Complexity> $items
+=======
      * @param list<Complexity> $items
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function __construct(array $items)
     {
@@ -44,7 +63,11 @@ final readonly class ComplexityCollection implements Countable, IteratorAggregat
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-return list<Complexity>
+=======
      * @return list<Complexity>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function asArray(): array
     {
@@ -56,9 +79,12 @@ final readonly class ComplexityCollection implements Countable, IteratorAggregat
         return new ComplexityCollectionIterator($this);
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return non-negative-int
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function count(): int
     {
         return count($this->items);
@@ -69,9 +95,12 @@ final readonly class ComplexityCollection implements Countable, IteratorAggregat
         return empty($this->items);
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return non-negative-int
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function cyclomaticComplexity(): int
     {
         $cyclomaticComplexity = 0;
@@ -82,6 +111,8 @@ final readonly class ComplexityCollection implements Countable, IteratorAggregat
 
         return $cyclomaticComplexity;
     }
+<<<<<<< HEAD
+=======
 
     public function isFunction(): self
     {
@@ -131,4 +162,5 @@ final readonly class ComplexityCollection implements Countable, IteratorAggregat
 
         return new self(array_reverse($items));
     }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

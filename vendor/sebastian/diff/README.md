@@ -1,8 +1,15 @@
+<<<<<<< HEAD
+# sebastian/diff
+
+[![CI Status](https://github.com/sebastianbergmann/diff/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/diff/actions)
+[![Type Coverage](https://shepherd.dev/github/sebastianbergmann/diff/coverage.svg)](https://shepherd.dev/github/sebastianbergmann/diff)
+=======
 [![Latest Stable Version](https://poser.pugx.org/sebastian/diff/v/stable.png)](https://packagist.org/packages/sebastian/diff)
 [![CI Status](https://github.com/sebastianbergmann/diff/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/diff/actions)
 [![codecov](https://codecov.io/gh/sebastianbergmann/diff/branch/main/graph/badge.svg)](https://codecov.io/gh/sebastianbergmann/diff)
 
 # sebastian/diff
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 Diff implementation for PHP, factored out of PHPUnit into a stand-alone component.
 
@@ -79,9 +86,15 @@ $builder = new StrictUnifiedDiffOutputBuilder([
     'collapseRanges'      => true, // ranges of length one are rendered with the trailing `,1`
     'commonLineThreshold' => 6,    // number of same lines before ending a new hunk and creating a new one (if needed)
     'contextLines'        => 3,    // like `diff:  -u, -U NUM, --unified[=NUM]`, for patch/git apply compatibility best to keep at least @ 3
+<<<<<<< HEAD
+    'fromFile'            => null,
+    'fromFileDate'        => null,
+    'toFile'              => null,
+=======
     'fromFile'            => '',
     'fromFileDate'        => null,
     'toFile'              => '',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     'toFileDate'          => null,
 ]);
 
@@ -201,5 +214,8 @@ The code above yields the output below:
                     )
             )
     )
+<<<<<<< HEAD
+=======
 
 Note: If the chunk size is 0 lines, i.e., `getStartRange()` or `getEndRange()` return 0, the number of line returned by `getStart()` or `getEnd()` is one lower than one would expect. It is the line number after which the chunk should be inserted or deleted; in all other cases, it gives the first line number of the replaced range of lines.
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123

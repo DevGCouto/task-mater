@@ -9,11 +9,22 @@
  */
 namespace SebastianBergmann\Type;
 
+<<<<<<< HEAD
+=======
 use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function count;
 use function implode;
 use function sort;
 
+<<<<<<< HEAD
+final class UnionType extends Type
+{
+    /**
+     * @psalm-var non-empty-list<Type>
+     */
+    private $types;
+=======
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for this library
  */
@@ -23,6 +34,7 @@ final class UnionType extends Type
      * @var non-empty-list<Type>
      */
     private array $types;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     /**
      * @throws RuntimeException
@@ -32,8 +44,11 @@ final class UnionType extends Type
         $this->ensureMinimumOfTwoTypes(...$types);
         $this->ensureOnlyValidTypes(...$types);
 
+<<<<<<< HEAD
+=======
         assert(!empty($types));
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $this->types = $types;
     }
 
@@ -48,17 +63,23 @@ final class UnionType extends Type
         return false;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return non-empty-string
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function asString(): string
     {
         return $this->name();
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return non-empty-string
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function name(): string
     {
         $types = [];
@@ -89,6 +110,12 @@ final class UnionType extends Type
         return false;
     }
 
+<<<<<<< HEAD
+    /**
+     * @psalm-assert-if-true UnionType $this
+     */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function isUnion(): bool
     {
         return true;
@@ -106,7 +133,11 @@ final class UnionType extends Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-return non-empty-list<Type>
+=======
      * @return non-empty-list<Type>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function types(): array
     {
@@ -120,7 +151,11 @@ final class UnionType extends Type
     {
         if (count($types) < 2) {
             throw new RuntimeException(
+<<<<<<< HEAD
+                'A union type must be composed of at least two types'
+=======
                 'A union type must be composed of at least two types',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
     }
@@ -133,13 +168,21 @@ final class UnionType extends Type
         foreach ($types as $type) {
             if ($type instanceof UnknownType) {
                 throw new RuntimeException(
+<<<<<<< HEAD
+                    'A union type must not be composed of an unknown type'
+=======
                     'A union type must not be composed of an unknown type',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
 
             if ($type instanceof VoidType) {
                 throw new RuntimeException(
+<<<<<<< HEAD
+                    'A union type must not be composed of a void type'
+=======
                     'A union type must not be composed of a void type',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }

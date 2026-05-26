@@ -10,12 +10,29 @@
 namespace SebastianBergmann\Type;
 
 use function array_pop;
+<<<<<<< HEAD
+=======
 use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function explode;
 use function implode;
 use function substr;
 use ReflectionClass;
 
+<<<<<<< HEAD
+final class TypeName
+{
+    /**
+     * @var ?string
+     */
+    private $namespaceName;
+
+    /**
+     * @var string
+     */
+    private $simpleName;
+
+=======
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for this library
  */
@@ -31,6 +48,7 @@ final readonly class TypeName
     /**
      * @param class-string $fullClassName
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public static function fromQualifiedName(string $fullClassName): self
     {
         if ($fullClassName[0] === '\\') {
@@ -42,6 +60,19 @@ final readonly class TypeName
         $simpleName    = array_pop($classNameParts);
         $namespaceName = implode('\\', $classNameParts);
 
+<<<<<<< HEAD
+        return new self($namespaceName, $simpleName);
+    }
+
+    public static function fromReflection(ReflectionClass $type): self
+    {
+        return new self(
+            $type->getNamespaceName(),
+            $type->getShortName()
+        );
+    }
+
+=======
         assert($simpleName !== '');
 
         return new self($namespaceName, $simpleName);
@@ -65,6 +96,7 @@ final readonly class TypeName
     /**
      * @param non-empty-string $simpleName
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function __construct(?string $namespaceName, string $simpleName)
     {
         if ($namespaceName === '') {
@@ -80,17 +112,23 @@ final readonly class TypeName
         return $this->namespaceName;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return non-empty-string
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function simpleName(): string
     {
         return $this->simpleName;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return non-empty-string
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function qualifiedName(): string
     {
         return $this->namespaceName === null

@@ -9,8 +9,11 @@
  */
 namespace SebastianBergmann\CodeCoverage\StaticAnalysis;
 
+<<<<<<< HEAD
+=======
 use const T_COMMENT;
 use const T_DOC_COMMENT;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function array_merge;
 use function array_unique;
 use function assert;
@@ -33,6 +36,8 @@ use SebastianBergmann\LinesOfCode\LineCountingVisitor;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
+<<<<<<< HEAD
+=======
  *
  * @phpstan-import-type CodeUnitFunctionType from \SebastianBergmann\CodeCoverage\StaticAnalysis\CodeUnitFindingVisitor
  * @phpstan-import-type CodeUnitMethodType from \SebastianBergmann\CodeCoverage\StaticAnalysis\CodeUnitFindingVisitor
@@ -40,10 +45,51 @@ use SebastianBergmann\LinesOfCode\LineCountingVisitor;
  * @phpstan-import-type CodeUnitTraitType from \SebastianBergmann\CodeCoverage\StaticAnalysis\CodeUnitFindingVisitor
  * @phpstan-import-type LinesOfCodeType from \SebastianBergmann\CodeCoverage\StaticAnalysis\FileAnalyser
  * @phpstan-import-type LinesType from \SebastianBergmann\CodeCoverage\StaticAnalysis\FileAnalyser
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  */
 final class ParsingFileAnalyser implements FileAnalyser
 {
     /**
+<<<<<<< HEAD
+     * @var array
+     */
+    private $classes = [];
+
+    /**
+     * @var array
+     */
+    private $traits = [];
+
+    /**
+     * @var array
+     */
+    private $functions = [];
+
+    /**
+     * @var array<string,array{linesOfCode: int, commentLinesOfCode: int, nonCommentLinesOfCode: int}>
+     */
+    private $linesOfCode = [];
+
+    /**
+     * @var array
+     */
+    private $ignoredLines = [];
+
+    /**
+     * @var array
+     */
+    private $executableLines = [];
+
+    /**
+     * @var bool
+     */
+    private $useAnnotationsForIgnoringCode;
+
+    /**
+     * @var bool
+     */
+    private $ignoreDeprecatedCode;
+=======
      * @var array<string, array<string, CodeUnitClassType>>
      */
     private array $classes = [];
@@ -74,6 +120,7 @@ final class ParsingFileAnalyser implements FileAnalyser
     private array $executableLines = [];
     private readonly bool $useAnnotationsForIgnoringCode;
     private readonly bool $ignoreDeprecatedCode;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(bool $useAnnotationsForIgnoringCode, bool $ignoreDeprecatedCode)
     {
@@ -81,9 +128,12 @@ final class ParsingFileAnalyser implements FileAnalyser
         $this->ignoreDeprecatedCode          = $ignoreDeprecatedCode;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, CodeUnitClassType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function classesIn(string $filename): array
     {
         $this->analyse($filename);
@@ -91,9 +141,12 @@ final class ParsingFileAnalyser implements FileAnalyser
         return $this->classes[$filename];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, CodeUnitTraitType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function traitsIn(string $filename): array
     {
         $this->analyse($filename);
@@ -101,9 +154,12 @@ final class ParsingFileAnalyser implements FileAnalyser
         return $this->traits[$filename];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, CodeUnitFunctionType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function functionsIn(string $filename): array
     {
         $this->analyse($filename);
@@ -112,7 +168,11 @@ final class ParsingFileAnalyser implements FileAnalyser
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-return array{linesOfCode: int, commentLinesOfCode: int, nonCommentLinesOfCode: int}
+=======
      * @return LinesOfCodeType
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function linesOfCodeFor(string $filename): array
     {
@@ -121,9 +181,12 @@ final class ParsingFileAnalyser implements FileAnalyser
         return $this->linesOfCode[$filename];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return LinesType
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function executableLinesIn(string $filename): array
     {
         $this->analyse($filename);
@@ -131,9 +194,12 @@ final class ParsingFileAnalyser implements FileAnalyser
         return $this->executableLines[$filename];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return LinesType
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function ignoredLinesFor(string $filename): array
     {
         $this->analyse($filename);
@@ -157,8 +223,11 @@ final class ParsingFileAnalyser implements FileAnalyser
             $linesOfCode = 1;
         }
 
+<<<<<<< HEAD
+=======
         assert($linesOfCode > 0);
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $parser = (new ParserFactory)->createForHostVersion();
 
         try {
@@ -187,10 +256,17 @@ final class ParsingFileAnalyser implements FileAnalyser
                 sprintf(
                     'Cannot parse %s: %s',
                     $filename,
+<<<<<<< HEAD
+                    $error->getMessage()
+                ),
+                $error->getCode(),
+                $error
+=======
                     $error->getMessage(),
                 ),
                 $error->getCode(),
                 $error,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
         // @codeCoverageIgnoreEnd
@@ -206,8 +282,13 @@ final class ParsingFileAnalyser implements FileAnalyser
         $this->ignoredLines[$filename] = array_unique(
             array_merge(
                 $this->ignoredLines[$filename],
+<<<<<<< HEAD
+                $ignoredLinesFindingVisitor->ignoredLines()
+            )
+=======
                 $ignoredLinesFindingVisitor->ignoredLines(),
             ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         sort($this->ignoredLines[$filename]);
@@ -259,7 +340,11 @@ final class ParsingFileAnalyser implements FileAnalyser
 
                 $this->ignoredLines[$filename] = array_merge(
                     $this->ignoredLines[$filename],
+<<<<<<< HEAD
+                    range($start, $token[2])
+=======
                     range($start, $token[2]),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }

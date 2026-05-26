@@ -19,7 +19,12 @@ use TheSeer\Tokenizer\XMLSerializer;
  */
 final class Source
 {
+<<<<<<< HEAD
+    /** @var DOMElement */
+    private $context;
+=======
     private readonly DOMElement $context;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(DOMElement $context)
     {
@@ -35,7 +40,11 @@ final class Source
 
         $context->parentNode->replaceChild(
             $context->ownerDocument->importNode($srcDom->documentElement, true),
+<<<<<<< HEAD
+            $context
+=======
             $context,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 }

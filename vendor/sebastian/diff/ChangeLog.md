@@ -2,6 +2,9 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+<<<<<<< HEAD
+## [4.0.6] - 2024-03-02
+=======
 ## [6.0.2] - 2024-07-03
 
 ### Changed
@@ -9,11 +12,15 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 * This project now uses PHPStan instead of Psalm for static analysis
 
 ## [6.0.1] - 2024-03-02
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 ### Changed
 
 * Do not use implicitly nullable parameters
 
+<<<<<<< HEAD
+## [4.0.5] - 2023-05-07
+=======
 ## [6.0.0] - 2024-02-02
 
 ### Removed
@@ -56,10 +63,14 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 * [#119](https://github.com/sebastianbergmann/diff/pull/119): Improve performance of `TimeEfficientLongestCommonSubsequenceCalculator`
 
 ## [5.0.2] - 2023-05-01
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 ### Changed
 
 * [#118](https://github.com/sebastianbergmann/diff/pull/118): Improve performance of `MemoryEfficientLongestCommonSubsequenceCalculator`
+<<<<<<< HEAD
+* [#119](https://github.com/sebastianbergmann/diff/pull/119): Improve performance of `TimeEfficientLongestCommonSubsequenceCalculator`
+=======
 
 ## [5.0.1] - 2023-03-23
 
@@ -76,6 +87,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 ### Removed
 
 * Removed support for PHP 7.3, PHP 7.4, and PHP 8.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 ## [4.0.4] - 2020-10-26
 
@@ -151,6 +163,10 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * This component is no longer supported on PHP 5.6
 
+<<<<<<< HEAD
+[4.0.6]: https://github.com/sebastianbergmann/diff/compare/4.0.5...4.0.6
+[4.0.5]: https://github.com/sebastianbergmann/diff/compare/4.0.4...4.0.5
+=======
 [6.0.2]: https://github.com/sebastianbergmann/diff/compare/6.0.1...6.0.2
 [6.0.1]: https://github.com/sebastianbergmann/diff/compare/6.0.0...6.0.1
 [6.0.0]: https://github.com/sebastianbergmann/diff/compare/5.1...6.0.0
@@ -160,6 +176,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 [5.0.2]: https://github.com/sebastianbergmann/diff/compare/5.0.1...5.0.2
 [5.0.1]: https://github.com/sebastianbergmann/diff/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/sebastianbergmann/diff/compare/4.0.4...5.0.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 [4.0.4]: https://github.com/sebastianbergmann/diff/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/sebastianbergmann/diff/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/sebastianbergmann/diff/compare/4.0.1...4.0.2

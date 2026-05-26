@@ -10,6 +10,18 @@
 namespace PHPUnit\Util;
 
 use const DIRECTORY_SEPARATOR;
+<<<<<<< HEAD
+use function array_keys;
+use function array_map;
+use function array_values;
+use function count;
+use function explode;
+use function implode;
+use function min;
+use function preg_replace;
+use function preg_replace_callback;
+use function sprintf;
+=======
 use const PHP_EOL;
 use function array_map;
 use function array_walk;
@@ -23,12 +35,16 @@ use function preg_replace_callback;
 use function preg_split;
 use function sprintf;
 use function str_pad;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function strtr;
 use function trim;
 
 /**
+<<<<<<< HEAD
+=======
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  *
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
 final class Color
@@ -54,7 +70,11 @@ final class Color
     /**
      * @var array<string,string>
      */
+<<<<<<< HEAD
+    private static $ansiCodes = [
+=======
     private static array $ansiCodes = [
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         'reset'      => '0',
         'bold'       => '1',
         'dim'        => '2',
@@ -91,7 +111,11 @@ final class Color
 
         foreach ($codes as $code) {
             if (isset(self::$ansiCodes[$code])) {
+<<<<<<< HEAD
+                $styles[] = self::$ansiCodes[$code] ?? '';
+=======
                 $styles[] = self::$ansiCodes[$code];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             }
         }
 
@@ -102,6 +126,19 @@ final class Color
         return self::optimizeColor(sprintf("\x1b[%sm", implode(';', $styles)) . $buffer . "\x1b[0m");
     }
 
+<<<<<<< HEAD
+    public static function colorizePath(string $path, ?string $prevPath = null, bool $colorizeFilename = false): string
+    {
+        if ($prevPath === null) {
+            $prevPath = '';
+        }
+
+        $path     = explode(DIRECTORY_SEPARATOR, $path);
+        $prevPath = explode(DIRECTORY_SEPARATOR, $prevPath);
+
+        for ($i = 0; $i < min(count($path), count($prevPath)); $i++) {
+            if ($path[$i] == $prevPath[$i]) {
+=======
     public static function colorizeTextBox(string $color, string $buffer, ?int $columns = null): string
     {
         $lines       = preg_split('/\r\n|\r|\n/', $buffer);
@@ -130,6 +167,7 @@ final class Color
 
         for ($i = 0; $i < min(count($path), count($previousPath)); $i++) {
             if ($path[$i] === $previousPath[$i]) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $path[$i] = self::dim($path[$i]);
             }
         }
@@ -137,8 +175,16 @@ final class Color
         if ($colorizeFilename) {
             $last        = count($path) - 1;
             $path[$last] = preg_replace_callback(
+<<<<<<< HEAD
+                '/([\-_\.]+|phpt$)/',
+                static function ($matches)
+                {
+                    return self::dim($matches[0]);
+                },
+=======
                 '/([\-_.]+|phpt$)/',
                 static fn ($matches) => self::dim($matches[0]),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $path[$last],
             );
         }
@@ -159,15 +205,31 @@ final class Color
     {
         $replaceMap = $visualizeEOL ? self::WHITESPACE_EOL_MAP : self::WHITESPACE_MAP;
 
+<<<<<<< HEAD
+        return preg_replace_callback('/\s+/', static function ($matches) use ($replaceMap)
+        {
+            return self::dim(strtr($matches[0], $replaceMap));
+        }, $buffer);
+=======
         return preg_replace_callback(
             '/\s+/',
             static fn ($matches) => self::dim(strtr($matches[0], $replaceMap)),
             $buffer,
         );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     private static function optimizeColor(string $buffer): string
     {
+<<<<<<< HEAD
+        $patterns = [
+            "/\e\\[22m\e\\[2m/"                   => '',
+            "/\e\\[([^m]*)m\e\\[([1-9][0-9;]*)m/" => "\e[$1;$2m",
+            "/(\e\\[[^m]*m)+(\e\\[0m)/"           => '$2',
+        ];
+
+        return preg_replace(array_keys($patterns), array_values($patterns), $buffer);
+=======
         return preg_replace(
             [
                 "/\e\\[22m\e\\[2m/",
@@ -181,5 +243,6 @@ final class Color
             ],
             $buffer,
         );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

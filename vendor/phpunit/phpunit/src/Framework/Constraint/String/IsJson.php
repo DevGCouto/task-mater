@@ -9,6 +9,12 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
+<<<<<<< HEAD
+use function json_decode;
+use function json_last_error;
+use function sprintf;
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
+=======
 use const JSON_ERROR_CTRL_CHAR;
 use const JSON_ERROR_DEPTH;
 use const JSON_ERROR_NONE;
@@ -19,6 +25,7 @@ use function is_string;
 use function json_decode;
 use function json_last_error;
 use function sprintf;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
@@ -36,10 +43,19 @@ final class IsJson extends Constraint
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+<<<<<<< HEAD
+     *
+     * @param mixed $other value or object to evaluate
+     */
+    protected function matches($other): bool
+    {
+        if ($other === '') {
+=======
      */
     protected function matches(mixed $other): bool
     {
         if (!is_string($other) || $other === '') {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             return false;
         }
 
@@ -57,6 +73,15 @@ final class IsJson extends Constraint
      *
      * The beginning of failure messages is "Failed asserting that" in most
      * cases. This method should return the second part of that sentence.
+<<<<<<< HEAD
+     *
+     * @param mixed $other evaluated value or object
+     *
+     * @throws InvalidArgumentException
+     */
+    protected function failureDescription($other): string
+    {
+=======
      */
     protected function failureDescription(mixed $other): string
     {
@@ -64,10 +89,24 @@ final class IsJson extends Constraint
             return $this->valueToTypeStringFragment($other) . 'is valid JSON';
         }
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         if ($other === '') {
             return 'an empty string is valid JSON';
         }
 
+<<<<<<< HEAD
+        json_decode($other);
+        $error = (string) JsonMatchesErrorMessageProvider::determineJsonError(
+            (string) json_last_error(),
+        );
+
+        return sprintf(
+            '%s is valid JSON (%s)',
+            $this->exporter()->shortenedExport($other),
+            $error,
+        );
+    }
+=======
         return sprintf(
             'a string is valid JSON (%s)',
             $this->determineJsonError($other),
@@ -88,4 +127,5 @@ final class IsJson extends Constraint
             default                   => 'Unknown error',
         };
     }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

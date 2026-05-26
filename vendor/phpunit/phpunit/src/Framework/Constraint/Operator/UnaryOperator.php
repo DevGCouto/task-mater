@@ -10,15 +10,31 @@
 namespace PHPUnit\Framework\Constraint;
 
 use function count;
+<<<<<<< HEAD
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
 abstract class UnaryOperator extends Operator
 {
+<<<<<<< HEAD
+    /**
+     * @var Constraint
+     */
+    private $constraint;
+
+    /**
+     * @param Constraint|mixed $constraint
+     */
+    public function __construct($constraint)
+=======
     private readonly Constraint $constraint;
 
     public function __construct(mixed $constraint)
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $this->constraint = $this->checkConstraint($constraint);
     }
@@ -70,8 +86,17 @@ abstract class UnaryOperator extends Operator
      *
      * The beginning of failure messages is "Failed asserting that" in most
      * cases. This method should return the second part of that sentence.
+<<<<<<< HEAD
+     *
+     * @param mixed $other evaluated value or object
+     *
+     * @throws InvalidArgumentException
+     */
+    protected function failureDescription($other): string
+=======
      */
     protected function failureDescription(mixed $other): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $reduced = $this->reduce();
 
@@ -102,6 +127,11 @@ abstract class UnaryOperator extends Operator
      * The method may be overwritten in a subclass to apply default
      * transformation in case the operand constraint does not provide its own
      * custom strings via toStringInContext() or failureDescriptionInContext().
+<<<<<<< HEAD
+     *
+     * @param string $string the string to be transformed
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     protected function transformString(string $string): string
     {

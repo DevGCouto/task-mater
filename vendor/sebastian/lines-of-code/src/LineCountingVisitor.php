@@ -11,7 +11,10 @@ namespace SebastianBergmann\LinesOfCode;
 
 use function array_merge;
 use function array_unique;
+<<<<<<< HEAD
+=======
 use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function count;
 use PhpParser\Comment;
 use PhpParser\Node;
@@ -21,23 +24,38 @@ use PhpParser\NodeVisitorAbstract;
 final class LineCountingVisitor extends NodeVisitorAbstract
 {
     /**
+<<<<<<< HEAD
+     * @var int
+     */
+    private $linesOfCode;
+=======
      * @var non-negative-int
      */
     private readonly int $linesOfCode;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     /**
      * @var Comment[]
      */
+<<<<<<< HEAD
+    private $comments = [];
+=======
     private array $comments = [];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     /**
      * @var int[]
      */
+<<<<<<< HEAD
+    private $linesWithStatements = [];
+
+=======
     private array $linesWithStatements = [];
 
     /**
      * @param non-negative-int $linesOfCode
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function __construct(int $linesOfCode)
     {
         $this->linesOfCode = $linesOfCode;
@@ -62,6 +80,13 @@ final class LineCountingVisitor extends NodeVisitorAbstract
             $commentLinesOfCode += ($comment->getEndLine() - $comment->getStartLine() + 1);
         }
 
+<<<<<<< HEAD
+        return new LinesOfCode(
+            $this->linesOfCode,
+            $commentLinesOfCode,
+            $this->linesOfCode - $commentLinesOfCode,
+            count(array_unique($this->linesWithStatements))
+=======
         $nonCommentLinesOfCode = $this->linesOfCode - $commentLinesOfCode;
         $logicalLinesOfCode    = count(array_unique($this->linesWithStatements));
 
@@ -73,6 +98,7 @@ final class LineCountingVisitor extends NodeVisitorAbstract
             $commentLinesOfCode,
             $nonCommentLinesOfCode,
             $logicalLinesOfCode,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 

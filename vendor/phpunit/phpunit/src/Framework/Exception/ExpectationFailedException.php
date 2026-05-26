@@ -19,11 +19,22 @@ use SebastianBergmann\Comparator\ComparisonFailure;
  * SebastianBergmann\Comparator\ComparisonFailure which is used to
  * generate diff output of the failed expectations.
  *
+<<<<<<< HEAD
+ * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ */
+final class ExpectationFailedException extends AssertionFailedError
+{
+    /**
+     * @var ComparisonFailure
+     */
+    protected $comparisonFailure;
+=======
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
 final class ExpectationFailedException extends AssertionFailedError
 {
     protected ?ComparisonFailure $comparisonFailure = null;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(string $message, ?ComparisonFailure $comparisonFailure = null, ?Exception $previous = null)
     {

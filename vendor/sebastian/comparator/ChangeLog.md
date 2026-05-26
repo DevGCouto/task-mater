@@ -2,18 +2,28 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+<<<<<<< HEAD
+## [4.0.10] - 2026-01-24
+=======
 ## [6.3.3] - 2026-01-24
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 ### Changed
 
 * [#134](https://github.com/sebastianbergmann/comparator/issues/134): Suppress warning introduced in PHP 8.5
 
+<<<<<<< HEAD
+## [4.0.9] - 2025-08-10
+=======
 ## [6.3.2] - 2025-08-10
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 ### Changed
 
 * Do not use `SplObjectStorage` methods that will be deprecated in PHP 8.5
 
+<<<<<<< HEAD
+=======
 ## [6.3.1] - 2025-03-07
 
 ### Fixed
@@ -108,6 +118,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 * Removed `Comparator::$exporter`
 * Removed support for PHP 7.3, PHP 7.4, and PHP 8.0
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 ## [4.0.8] - 2022-09-14
 
 ### Fixed
@@ -162,6 +173,21 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * Removed support for PHP 7.1 and PHP 7.2
 
+<<<<<<< HEAD
+## [3.0.7] - 2026-01-24
+
+### Changed
+
+* [#134](https://github.com/sebastianbergmann/comparator/issues/134): Suppress warning introduced in PHP 8.5
+
+## [3.0.6] - 2025-08-10
+
+### Changed
+
+* Do not use `SplObjectStorage` methods that will be deprecated in PHP 8.5
+
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 ## [3.0.5] - 2022-09-14
 
 ### Fixed
@@ -228,6 +254,8 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 * Added `SebastianBergmann\Comparator\Factory::reset()` to unregister all non-default comparators
 * Added support for `phpunit/phpunit-mock-objects` version `^5.0`
 
+<<<<<<< HEAD
+=======
 [6.3.3]: https://github.com/sebastianbergmann/comparator/compare/6.3.2...6.3.3
 [6.3.2]: https://github.com/sebastianbergmann/comparator/compare/6.3.1...6.3.2
 [6.3.1]: https://github.com/sebastianbergmann/comparator/compare/6.3.0...6.3.1
@@ -245,6 +273,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 [5.0.2]: https://github.com/sebastianbergmann/comparator/compare/5.0.1...5.0.2
 [5.0.1]: https://github.com/sebastianbergmann/comparator/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/sebastianbergmann/comparator/compare/4.0...5.0.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 [4.0.10]: https://github.com/sebastianbergmann/comparator/compare/4.0.9...4.0.10
 [4.0.9]: https://github.com/sebastianbergmann/comparator/compare/4.0.8...4.0.9
 [4.0.8]: https://github.com/sebastianbergmann/comparator/compare/4.0.7...4.0.8

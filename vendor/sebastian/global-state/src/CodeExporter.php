@@ -16,6 +16,12 @@ use function serialize;
 use function sprintf;
 use function var_export;
 
+<<<<<<< HEAD
+/**
+ * Exports parts of a Snapshot as PHP code.
+ */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 final class CodeExporter
 {
     public function constants(Snapshot $snapshot): string
@@ -27,7 +33,11 @@ final class CodeExporter
                 'if (!defined(\'%s\')) define(\'%s\', %s);' . "\n",
                 $name,
                 $name,
+<<<<<<< HEAD
+                $this->exportVariable($value)
+=======
                 $this->exportVariable($value),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -53,7 +63,11 @@ EOT;
             $result .= sprintf(
                 '$GLOBALS[%s] = %s;' . PHP_EOL,
                 $this->exportVariable($name),
+<<<<<<< HEAD
+                $this->exportVariable($value)
+=======
                 $this->exportVariable($value),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -68,14 +82,22 @@ EOT;
             $result .= sprintf(
                 '@ini_set(%s, %s);' . "\n",
                 $this->exportVariable($key),
+<<<<<<< HEAD
+                $this->exportVariable($value)
+=======
                 $this->exportVariable($value),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
         return $result;
     }
 
+<<<<<<< HEAD
+    private function exportVariable($variable): string
+=======
     private function exportVariable(mixed $variable): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (is_scalar($variable) || null === $variable ||
             (is_array($variable) && $this->arrayOnlyContainsScalars($variable))) {
@@ -85,9 +107,12 @@ EOT;
         return 'unserialize(' . var_export(serialize($variable), true) . ')';
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @param array<mixed> $array
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function arrayOnlyContainsScalars(array $array): bool
     {
         $result = true;

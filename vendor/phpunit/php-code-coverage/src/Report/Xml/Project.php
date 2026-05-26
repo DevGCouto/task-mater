@@ -31,15 +31,24 @@ final class Project extends Node
     {
         $buildNode = $this->dom()->getElementsByTagNameNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+            'build'
+=======
             'build',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         )->item(0);
 
         if (!$buildNode) {
             $buildNode = $this->dom()->documentElement->appendChild(
                 $this->dom()->createElementNS(
                     'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+                    'build'
+                )
+=======
                     'build',
                 ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -50,15 +59,24 @@ final class Project extends Node
     {
         $testsNode = $this->contextNode()->getElementsByTagNameNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+            'tests'
+=======
             'tests',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         )->item(0);
 
         if (!$testsNode) {
             $testsNode = $this->contextNode()->appendChild(
                 $this->dom()->createElementNS(
                     'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+                    'tests'
+                )
+=======
                     'tests',
                 ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -78,8 +96,13 @@ final class Project extends Node
         $this->setContextNode(
             $dom->getElementsByTagNameNS(
                 'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+                'project'
+            )->item(0)
+=======
                 'project',
             )->item(0),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 

@@ -28,8 +28,15 @@ final class IsReadable extends Constraint
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+<<<<<<< HEAD
+     *
+     * @param mixed $other value or object to evaluate
+     */
+    protected function matches($other): bool
+=======
      */
     protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return is_readable($other);
     }
@@ -39,8 +46,15 @@ final class IsReadable extends Constraint
      *
      * The beginning of failure messages is "Failed asserting that" in most
      * cases. This method should return the second part of that sentence.
+<<<<<<< HEAD
+     *
+     * @param mixed $other evaluated value or object
+     */
+    protected function failureDescription($other): string
+=======
      */
     protected function failureDescription(mixed $other): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return sprintf(
             '"%s" is readable',

@@ -14,7 +14,10 @@ use function count;
 use function preg_match;
 use function preg_quote;
 use function preg_replace;
+<<<<<<< HEAD
+=======
 use PHPUnit\Framework\ExpectationFailedException;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
@@ -56,7 +59,14 @@ final class LogicalNot extends UnaryOperator
         }
 
         $positives = array_map(
+<<<<<<< HEAD
+            static function (string $s)
+            {
+                return '/\\b' . preg_quote($s, '/') . '/';
+            },
+=======
             static fn (string $s) => '/\\b' . preg_quote($s, '/') . '/',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             $positives,
         );
 
@@ -105,9 +115,15 @@ final class LogicalNot extends UnaryOperator
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
      *
+<<<<<<< HEAD
+     * @param mixed $other value or object to evaluate
+     */
+    protected function matches($other): bool
+=======
      * @throws ExpectationFailedException
      */
     protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return !$this->constraint()->evaluate($other, '', true);
     }

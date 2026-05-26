@@ -15,6 +15,8 @@ use function range;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
+<<<<<<< HEAD
+=======
  *
  * @phpstan-import-type CodeUnitFunctionType from \SebastianBergmann\CodeCoverage\StaticAnalysis\CodeUnitFindingVisitor
  * @phpstan-import-type CodeUnitMethodType from \SebastianBergmann\CodeCoverage\StaticAnalysis\CodeUnitFindingVisitor
@@ -89,10 +91,119 @@ use function range;
  *     crap: int|string,
  *     link: string
  * }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  */
 final class File extends AbstractNode
 {
     /**
+<<<<<<< HEAD
+     * @var array
+     */
+    private $lineCoverageData;
+
+    /**
+     * @var array
+     */
+    private $functionCoverageData;
+
+    /**
+     * @var array
+     */
+    private $testData;
+
+    /**
+     * @var int
+     */
+    private $numExecutableLines = 0;
+
+    /**
+     * @var int
+     */
+    private $numExecutedLines = 0;
+
+    /**
+     * @var int
+     */
+    private $numExecutableBranches = 0;
+
+    /**
+     * @var int
+     */
+    private $numExecutedBranches = 0;
+
+    /**
+     * @var int
+     */
+    private $numExecutablePaths = 0;
+
+    /**
+     * @var int
+     */
+    private $numExecutedPaths = 0;
+
+    /**
+     * @var array
+     */
+    private $classes = [];
+
+    /**
+     * @var array
+     */
+    private $traits = [];
+
+    /**
+     * @var array
+     */
+    private $functions = [];
+
+    /**
+     * @psalm-var array{linesOfCode: int, commentLinesOfCode: int, nonCommentLinesOfCode: int}
+     */
+    private $linesOfCode;
+
+    /**
+     * @var int
+     */
+    private $numClasses;
+
+    /**
+     * @var int
+     */
+    private $numTestedClasses = 0;
+
+    /**
+     * @var int
+     */
+    private $numTraits;
+
+    /**
+     * @var int
+     */
+    private $numTestedTraits = 0;
+
+    /**
+     * @var int
+     */
+    private $numMethods;
+
+    /**
+     * @var int
+     */
+    private $numTestedMethods;
+
+    /**
+     * @var int
+     */
+    private $numTestedFunctions;
+
+    /**
+     * @var array
+     */
+    private $codeUnitsByLine = [];
+
+    /**
+     * @psalm-param array{linesOfCode: int, commentLinesOfCode: int, nonCommentLinesOfCode: int} $linesOfCode
+=======
      * @var array<int, ?list<non-empty-string>>
      */
     private array $lineCoverageData;
@@ -143,6 +254,7 @@ final class File extends AbstractNode
      * @param array<string, CodeUnitTraitType>    $traits
      * @param array<string, CodeUnitFunctionType> $functions
      * @param LinesOfCodeType                     $linesOfCode
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function __construct(string $name, AbstractNode $parent, array $lineCoverageData, array $functionCoverageData, array $testData, array $classes, array $traits, array $functions, array $linesOfCode)
     {
@@ -161,9 +273,12 @@ final class File extends AbstractNode
         return 1;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<int, ?list<non-empty-string>>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function lineCoverageData(): array
     {
         return $this->lineCoverageData;
@@ -179,30 +294,45 @@ final class File extends AbstractNode
         return $this->testData;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, ProcessedClassType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function classes(): array
     {
         return $this->classes;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, ProcessedTraitType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function traits(): array
     {
         return $this->traits;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, ProcessedFunctionType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function functions(): array
     {
         return $this->functions;
     }
 
+<<<<<<< HEAD
+    /**
+     * @psalm-return array{linesOfCode: int, commentLinesOfCode: int, nonCommentLinesOfCode: int}
+     */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function linesOfCode(): array
     {
         return $this->linesOfCode;
@@ -359,11 +489,14 @@ final class File extends AbstractNode
         return $this->numTestedFunctions;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @param array<string, CodeUnitClassType>    $classes
      * @param array<string, CodeUnitTraitType>    $traits
      * @param array<string, CodeUnitFunctionType> $functions
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function calculateStatistics(array $classes, array $traits, array $functions): void
     {
         foreach (range(1, $this->linesOfCode['linesOfCode']) as $lineNumber) {
@@ -466,9 +599,12 @@ final class File extends AbstractNode
         }
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @param array<string, CodeUnitClassType> $classes
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function processClasses(array $classes): void
     {
         $link = $this->id() . '.html#';
@@ -496,6 +632,16 @@ final class File extends AbstractNode
                 $this->classes[$className]['methods'][$methodName] = $methodData;
 
                 $this->classes[$className]['executableBranches'] += $methodData['executableBranches'];
+<<<<<<< HEAD
+                $this->classes[$className]['executedBranches'] += $methodData['executedBranches'];
+                $this->classes[$className]['executablePaths'] += $methodData['executablePaths'];
+                $this->classes[$className]['executedPaths'] += $methodData['executedPaths'];
+
+                $this->numExecutableBranches += $methodData['executableBranches'];
+                $this->numExecutedBranches += $methodData['executedBranches'];
+                $this->numExecutablePaths += $methodData['executablePaths'];
+                $this->numExecutedPaths += $methodData['executedPaths'];
+=======
                 $this->classes[$className]['executedBranches']   += $methodData['executedBranches'];
                 $this->classes[$className]['executablePaths']    += $methodData['executablePaths'];
                 $this->classes[$className]['executedPaths']      += $methodData['executedPaths'];
@@ -504,6 +650,7 @@ final class File extends AbstractNode
                 $this->numExecutedBranches   += $methodData['executedBranches'];
                 $this->numExecutablePaths    += $methodData['executablePaths'];
                 $this->numExecutedPaths      += $methodData['executedPaths'];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
                 foreach (range($method['startLine'], $method['endLine']) as $lineNumber) {
                     $this->codeUnitsByLine[$lineNumber] = [
@@ -515,9 +662,12 @@ final class File extends AbstractNode
         }
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @param array<string, CodeUnitTraitType> $traits
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function processTraits(array $traits): void
     {
         $link = $this->id() . '.html#';
@@ -545,6 +695,16 @@ final class File extends AbstractNode
                 $this->traits[$traitName]['methods'][$methodName] = $methodData;
 
                 $this->traits[$traitName]['executableBranches'] += $methodData['executableBranches'];
+<<<<<<< HEAD
+                $this->traits[$traitName]['executedBranches'] += $methodData['executedBranches'];
+                $this->traits[$traitName]['executablePaths'] += $methodData['executablePaths'];
+                $this->traits[$traitName]['executedPaths'] += $methodData['executedPaths'];
+
+                $this->numExecutableBranches += $methodData['executableBranches'];
+                $this->numExecutedBranches += $methodData['executedBranches'];
+                $this->numExecutablePaths += $methodData['executablePaths'];
+                $this->numExecutedPaths += $methodData['executedPaths'];
+=======
                 $this->traits[$traitName]['executedBranches']   += $methodData['executedBranches'];
                 $this->traits[$traitName]['executablePaths']    += $methodData['executablePaths'];
                 $this->traits[$traitName]['executedPaths']      += $methodData['executedPaths'];
@@ -553,6 +713,7 @@ final class File extends AbstractNode
                 $this->numExecutedBranches   += $methodData['executedBranches'];
                 $this->numExecutablePaths    += $methodData['executablePaths'];
                 $this->numExecutedPaths      += $methodData['executedPaths'];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
                 foreach (range($method['startLine'], $method['endLine']) as $lineNumber) {
                     $this->codeUnitsByLine[$lineNumber] = [
@@ -564,9 +725,12 @@ final class File extends AbstractNode
         }
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @param array<string, CodeUnitFunctionType> $functions
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function processFunctions(array $functions): void
     {
         $link = $this->id() . '.html#';
@@ -596,7 +760,11 @@ final class File extends AbstractNode
 
             if (isset($this->functionCoverageData[$functionName]['branches'])) {
                 $this->functions[$functionName]['executableBranches'] = count(
+<<<<<<< HEAD
+                    $this->functionCoverageData[$functionName]['branches']
+=======
                     $this->functionCoverageData[$functionName]['branches'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
 
                 $this->functions[$functionName]['executedBranches'] = count(
@@ -605,14 +773,23 @@ final class File extends AbstractNode
                         static function (array $branch)
                         {
                             return (bool) $branch['hit'];
+<<<<<<< HEAD
+                        }
+                    )
+=======
                         },
                     ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
 
             if (isset($this->functionCoverageData[$functionName]['paths'])) {
                 $this->functions[$functionName]['executablePaths'] = count(
+<<<<<<< HEAD
+                    $this->functionCoverageData[$functionName]['paths']
+=======
                     $this->functionCoverageData[$functionName]['paths'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
 
                 $this->functions[$functionName]['executedPaths'] = count(
@@ -621,12 +798,25 @@ final class File extends AbstractNode
                         static function (array $path)
                         {
                             return (bool) $path['hit'];
+<<<<<<< HEAD
+                        }
+                    )
+=======
                         },
                     ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
 
             $this->numExecutableBranches += $this->functions[$functionName]['executableBranches'];
+<<<<<<< HEAD
+            $this->numExecutedBranches += $this->functions[$functionName]['executedBranches'];
+            $this->numExecutablePaths += $this->functions[$functionName]['executablePaths'];
+            $this->numExecutedPaths += $this->functions[$functionName]['executedPaths'];
+        }
+    }
+
+=======
             $this->numExecutedBranches   += $this->functions[$functionName]['executedBranches'];
             $this->numExecutablePaths    += $this->functions[$functionName]['executablePaths'];
             $this->numExecutedPaths      += $this->functions[$functionName]['executedPaths'];
@@ -638,6 +828,7 @@ final class File extends AbstractNode
      *
      * @return ProcessedMethodType
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function newMethod(string $className, string $methodName, array $method, string $link): array
     {
         $methodData = [
@@ -662,7 +853,11 @@ final class File extends AbstractNode
 
         if (isset($this->functionCoverageData[$key]['branches'])) {
             $methodData['executableBranches'] = count(
+<<<<<<< HEAD
+                $this->functionCoverageData[$key]['branches']
+=======
                 $this->functionCoverageData[$key]['branches'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $methodData['executedBranches'] = count(
@@ -671,14 +866,23 @@ final class File extends AbstractNode
                     static function (array $branch)
                     {
                         return (bool) $branch['hit'];
+<<<<<<< HEAD
+                    }
+                )
+=======
                     },
                 ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
         if (isset($this->functionCoverageData[$key]['paths'])) {
             $methodData['executablePaths'] = count(
+<<<<<<< HEAD
+                $this->functionCoverageData[$key]['paths']
+=======
                 $this->functionCoverageData[$key]['paths'],
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $methodData['executedPaths'] = count(
@@ -687,8 +891,13 @@ final class File extends AbstractNode
                     static function (array $path)
                     {
                         return (bool) $path['hit'];
+<<<<<<< HEAD
+                    }
+                )
+=======
                     },
                 ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 

@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 :root {
  --phpunit-breadcrumbs: var(--bs-gray-200);
  --phpunit-success-bar: #28a745;
@@ -10,29 +12,40 @@
  --phpunit-danger-bar: #dc3545;
 }
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 body {
  font-family: sans-serif;
  font-size: 1em;
  font-kerning: normal;
+<<<<<<< HEAD
+ font-variant-ligatures: common-ligatures;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  text-rendering: optimizeLegibility;
  padding-top: 10px;
 }
 
+<<<<<<< HEAD
+=======
 nav .breadcrumb {
   border-radius: var(--bs-border-radius);
   background-color: var(--phpunit-breadcrumbs);
   padding: .75rem 1rem;
 }
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 .popover {
  max-width: none;
 }
 
+<<<<<<< HEAD
+=======
 .popover-body {
  max-height: 90vh;
  overflow-y: auto;
 }
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 .octicon {
  margin-right:.25em;
  vertical-align: baseline;
@@ -61,6 +74,30 @@ nav .breadcrumb {
  border: 0 !important;
 }
 
+<<<<<<< HEAD
+.table tbody tr.covered-by-large-tests, li.covered-by-large-tests, tr.success, td.success, li.success, span.success {
+ background-color: #dff0d8;
+}
+
+.table tbody tr.covered-by-medium-tests, li.covered-by-medium-tests {
+ background-color: #c3e3b5;
+}
+
+.table tbody tr.covered-by-small-tests, li.covered-by-small-tests {
+ background-color: #99cb84;
+}
+
+.table tbody tr.danger, .table tbody td.danger, li.danger, span.danger {
+ background-color: #f2dede;
+}
+
+.table tbody tr.warning, .table tbody td.warning, li.warning, span.warning {
+ background-color: #fcf8e3;
+}
+
+.table tbody td.info {
+ background-color: #d9edf7;
+=======
 .table tbody tr.covered-by-large-tests, .table tbody tr.covered-by-large-tests td, li.covered-by-large-tests, tr.success, tr.success td, td.success, li.success, span.success {
  background-color: var(--phpunit-success-low);
 }
@@ -83,6 +120,7 @@ nav .breadcrumb {
 
 .table tbody td.info {
  background-color: rgb(from var(--bs-info) r g b / 0.25);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }
 
 td.big {
@@ -94,11 +132,30 @@ td.small {
 }
 
 td.codeLine {
+<<<<<<< HEAD
+ font-family: "Source Code Pro", "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+=======
  font-family: "Source Code Pro", var(--bs-font-monospace);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  white-space: pre-wrap;
 }
 
 td span.comment {
+<<<<<<< HEAD
+ color: #888a85;
+}
+
+td span.default {
+ color: #2e3436;
+}
+
+td span.html {
+ color: #888a85;
+}
+
+td span.keyword {
+ color: #2e3436;
+=======
  color: var(--bs-secondary-color);
 }
 
@@ -112,11 +169,16 @@ td span.html {
 
 td span.keyword {
  color: var(--bs-body-color);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  font-weight: bold;
 }
 
 pre span.string {
+<<<<<<< HEAD
+ color: #2e3436;
+=======
  color: var(--bs-body-color);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }
 
 span.success, span.warning, span.danger {
@@ -134,10 +196,17 @@ span.success, span.warning, span.danger {
 }
 
 svg text {
+<<<<<<< HEAD
+ font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+ font-size: 11px;
+ color: #666;
+ fill: #666;
+=======
  font-family: var(--bs-font-sans-serif);
  font-size: 11px;
  color: var(--bs-gray);
  fill: var(--bs-gray);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }
 
 .scrollbox {
@@ -147,6 +216,12 @@ svg text {
 }
 
 table + .structure-heading {
+<<<<<<< HEAD
+ border-top: 1px solid lightgrey;
+ padding-top: 0.5em;
+}
+
+=======
  border-top: 1px solid var(--bs-gray-200);
  padding-top: 0.5em;
 }
@@ -160,6 +235,7 @@ table#code td:first-of-type a {
   text-decoration: none;
 }
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 .legend {
  font-weight: bold;
  margin-right: 2px;
@@ -169,6 +245,26 @@ table#code td:first-of-type a {
 }
 
 .covered-by-small-tests {
+<<<<<<< HEAD
+ background-color: #99cb84;
+}
+
+.covered-by-medium-tests {
+ background-color: #c3e3b5;
+}
+
+.covered-by-large-tests {
+ background-color: #dff0d8;
+}
+
+.not-covered {
+ background-color: #f2dede;
+}
+
+.not-coverable {
+ background-color: #fcf8e3;
+}
+=======
  background-color: var(--phpunit-success-high);
 }
 
@@ -199,3 +295,4 @@ table#code td:first-of-type a {
 .progress-bar.bg-danger {
  background-color: var(--phpunit-danger-bar) !important;
 }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123

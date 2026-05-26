@@ -9,7 +9,10 @@
  */
 namespace SebastianBergmann\CodeCoverage\StaticAnalysis;
 
+<<<<<<< HEAD
+=======
 use const DIRECTORY_SEPARATOR;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function file_get_contents;
 use function file_put_contents;
 use function implode;
@@ -18,6 +21,44 @@ use function md5;
 use function serialize;
 use function unserialize;
 use SebastianBergmann\CodeCoverage\Util\Filesystem;
+<<<<<<< HEAD
+use SebastianBergmann\FileIterator\Facade as FileIteratorFacade;
+
+/**
+ * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
+ */
+final class CachingFileAnalyser implements FileAnalyser
+{
+    /**
+     * @var ?string
+     */
+    private static $cacheVersion;
+
+    /**
+     * @var string
+     */
+    private $directory;
+
+    /**
+     * @var FileAnalyser
+     */
+    private $analyser;
+
+    /**
+     * @var bool
+     */
+    private $useAnnotationsForIgnoringCode;
+
+    /**
+     * @var bool
+     */
+    private $ignoreDeprecatedCode;
+
+    /**
+     * @var array
+     */
+    private $cache = [];
+=======
 use SebastianBergmann\CodeCoverage\Version;
 
 /**
@@ -37,6 +78,7 @@ final class CachingFileAnalyser implements FileAnalyser
     private readonly bool $useAnnotationsForIgnoringCode;
     private readonly bool $ignoreDeprecatedCode;
     private array $cache = [];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(string $directory, FileAnalyser $analyser, bool $useAnnotationsForIgnoringCode, bool $ignoreDeprecatedCode)
     {
@@ -48,9 +90,12 @@ final class CachingFileAnalyser implements FileAnalyser
         $this->ignoreDeprecatedCode          = $ignoreDeprecatedCode;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, CodeUnitClassType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function classesIn(string $filename): array
     {
         if (!isset($this->cache[$filename])) {
@@ -60,9 +105,12 @@ final class CachingFileAnalyser implements FileAnalyser
         return $this->cache[$filename]['classesIn'];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, CodeUnitTraitType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function traitsIn(string $filename): array
     {
         if (!isset($this->cache[$filename])) {
@@ -72,9 +120,12 @@ final class CachingFileAnalyser implements FileAnalyser
         return $this->cache[$filename]['traitsIn'];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return array<string, CodeUnitFunctionType>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function functionsIn(string $filename): array
     {
         if (!isset($this->cache[$filename])) {
@@ -85,7 +136,11 @@ final class CachingFileAnalyser implements FileAnalyser
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-return array{linesOfCode: int, commentLinesOfCode: int, nonCommentLinesOfCode: int}
+=======
      * @return LinesOfCodeType
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function linesOfCodeFor(string $filename): array
     {
@@ -96,9 +151,12 @@ final class CachingFileAnalyser implements FileAnalyser
         return $this->cache[$filename]['linesOfCodeFor'];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return LinesType
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function executableLinesIn(string $filename): array
     {
         if (!isset($this->cache[$filename])) {
@@ -108,9 +166,12 @@ final class CachingFileAnalyser implements FileAnalyser
         return $this->cache[$filename]['executableLinesIn'];
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return LinesType
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function ignoredLinesFor(string $filename): array
     {
         if (!isset($this->cache[$filename])) {
@@ -142,7 +203,14 @@ final class CachingFileAnalyser implements FileAnalyser
         $this->write($filename, $this->cache[$filename]);
     }
 
+<<<<<<< HEAD
+    /**
+     * @return mixed
+     */
+    private function read(string $filename)
+=======
     private function read(string $filename): array|false
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $cacheFile = $this->cacheFile($filename);
 
@@ -152,6 +220,20 @@ final class CachingFileAnalyser implements FileAnalyser
 
         return unserialize(
             file_get_contents($cacheFile),
+<<<<<<< HEAD
+            ['allowed_classes' => false]
+        );
+    }
+
+    /**
+     * @param mixed $data
+     */
+    private function write(string $filename, $data): void
+    {
+        file_put_contents(
+            $this->cacheFile($filename),
+            serialize($data)
+=======
             ['allowed_classes' => false],
         );
     }
@@ -161,6 +243,7 @@ final class CachingFileAnalyser implements FileAnalyser
         file_put_contents(
             $this->cacheFile($filename),
             serialize($data),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 
@@ -172,13 +255,42 @@ final class CachingFileAnalyser implements FileAnalyser
                 [
                     $filename,
                     file_get_contents($filename),
+<<<<<<< HEAD
+                    self::cacheVersion(),
+                    $this->useAnnotationsForIgnoringCode,
+                    $this->ignoreDeprecatedCode,
+                ]
+            )
+=======
                     Version::id(),
                     $this->useAnnotationsForIgnoringCode,
                     $this->ignoreDeprecatedCode,
                 ],
             ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return $this->directory . DIRECTORY_SEPARATOR . $cacheKey;
     }
+<<<<<<< HEAD
+
+    private static function cacheVersion(): string
+    {
+        if (self::$cacheVersion !== null) {
+            return self::$cacheVersion;
+        }
+
+        $buffer = [];
+
+        foreach ((new FileIteratorFacade)->getFilesAsArray(__DIR__, '.php') as $file) {
+            $buffer[] = $file;
+            $buffer[] = file_get_contents($file);
+        }
+
+        self::$cacheVersion = md5(implode("\0", $buffer));
+
+        return self::$cacheVersion;
+    }
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

@@ -12,33 +12,65 @@ namespace PHPUnit\Framework\Constraint;
 use function array_key_exists;
 use function is_array;
 use ArrayAccess;
+<<<<<<< HEAD
+use SebastianBergmann\RecursionContext\InvalidArgumentException;
+=======
 use PHPUnit\Util\Exporter;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
 final class ArrayHasKey extends Constraint
 {
+<<<<<<< HEAD
+    /**
+     * @var int|string
+     */
+    private $key;
+
+    /**
+     * @param int|string $key
+     */
+    public function __construct($key)
+=======
     private readonly mixed $key;
 
     public function __construct(mixed $key)
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $this->key = $key;
     }
 
     /**
      * Returns a string representation of the constraint.
+<<<<<<< HEAD
+     *
+     * @throws InvalidArgumentException
+     */
+    public function toString(): string
+    {
+        return 'has the key ' . $this->exporter()->export($this->key);
+=======
      */
     public function toString(): string
     {
         return 'has the key ' . Exporter::export($this->key);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+<<<<<<< HEAD
+     *
+     * @param mixed $other value or object to evaluate
+     */
+    protected function matches($other): bool
+=======
      */
     protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (is_array($other)) {
             return array_key_exists($this->key, $other);
@@ -56,8 +88,17 @@ final class ArrayHasKey extends Constraint
      *
      * The beginning of failure messages is "Failed asserting that" in most
      * cases. This method should return the second part of that sentence.
+<<<<<<< HEAD
+     *
+     * @param mixed $other evaluated value or object
+     *
+     * @throws InvalidArgumentException
+     */
+    protected function failureDescription($other): string
+=======
      */
     protected function failureDescription(mixed $other): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return 'an array ' . $this->toString();
     }

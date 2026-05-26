@@ -17,6 +17,19 @@ use function function_exists;
 use function is_array;
 use function is_object;
 use function is_string;
+<<<<<<< HEAD
+use Closure;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionObject;
+
+final class CallableType extends Type
+{
+    /**
+     * @var bool
+     */
+    private $allowsNull;
+=======
 use function str_contains;
 use Closure;
 use ReflectionClass;
@@ -28,12 +41,19 @@ use ReflectionObject;
 final class CallableType extends Type
 {
     private bool $allowsNull;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(bool $nullable)
     {
         $this->allowsNull = $nullable;
     }
 
+<<<<<<< HEAD
+    /**
+     * @throws RuntimeException
+     */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function isAssignable(Type $other): bool
     {
         if ($this->allowsNull && $other instanceof NullType) {
@@ -71,9 +91,12 @@ final class CallableType extends Type
         return false;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return 'callable'
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function name(): string
     {
         return 'callable';
@@ -84,6 +107,12 @@ final class CallableType extends Type
         return $this->allowsNull;
     }
 
+<<<<<<< HEAD
+    /**
+     * @psalm-assert-if-true CallableType $this
+     */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function isCallable(): bool
     {
         return true;
@@ -91,6 +120,36 @@ final class CallableType extends Type
 
     private function isClosure(ObjectType $type): bool
     {
+<<<<<<< HEAD
+        return !$type->className()->isNamespaced() && $type->className()->simpleName() === Closure::class;
+    }
+
+    /**
+     * @throws RuntimeException
+     */
+    private function hasInvokeMethod(ObjectType $type): bool
+    {
+        $className = $type->className()->qualifiedName();
+        assert(class_exists($className));
+
+        try {
+            $class = new ReflectionClass($className);
+            // @codeCoverageIgnoreStart
+        } catch (ReflectionException $e) {
+            throw new RuntimeException(
+                $e->getMessage(),
+                (int) $e->getCode(),
+                $e
+            );
+            // @codeCoverageIgnoreEnd
+        }
+
+        if ($class->hasMethod('__invoke')) {
+            return true;
+        }
+
+        return false;
+=======
         return $type->className()->qualifiedName() === Closure::class;
     }
 
@@ -101,6 +160,7 @@ final class CallableType extends Type
         assert(class_exists($className));
 
         return (new ReflectionClass($className))->hasMethod('__invoke');
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     private function isFunction(SimpleType $type): bool
@@ -142,7 +202,11 @@ final class CallableType extends Type
         }
 
         if (is_string($type->value())) {
+<<<<<<< HEAD
+            if (strpos($type->value(), '::') === false) {
+=======
             if (!str_contains($type->value(), '::')) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 return false;
             }
 
@@ -165,6 +229,30 @@ final class CallableType extends Type
             [$className, $methodName] = $type->value();
         }
 
+<<<<<<< HEAD
+        assert(isset($className) && is_string($className) && class_exists($className));
+        assert(isset($methodName) && is_string($methodName));
+
+        try {
+            $class = new ReflectionClass($className);
+
+            if ($class->hasMethod($methodName)) {
+                $method = $class->getMethod($methodName);
+
+                return $method->isPublic() && $method->isStatic();
+            }
+            // @codeCoverageIgnoreStart
+        } catch (ReflectionException $e) {
+            throw new RuntimeException(
+                $e->getMessage(),
+                (int) $e->getCode(),
+                $e
+            );
+            // @codeCoverageIgnoreEnd
+        }
+
+        return false;
+=======
         if (!class_exists($className)) {
             return false;
         }
@@ -178,5 +266,6 @@ final class CallableType extends Type
         $method = $class->getMethod($methodName);
 
         return $method->isPublic() && $method->isStatic();
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

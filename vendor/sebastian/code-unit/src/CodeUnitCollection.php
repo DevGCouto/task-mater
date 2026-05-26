@@ -14,6 +14,40 @@ use function count;
 use Countable;
 use IteratorAggregate;
 
+<<<<<<< HEAD
+final class CodeUnitCollection implements Countable, IteratorAggregate
+{
+    /**
+     * @psalm-var list<CodeUnit>
+     */
+    private $codeUnits = [];
+
+    /**
+     * @psalm-param list<CodeUnit> $items
+     */
+    public static function fromArray(array $items): self
+    {
+        $collection = new self;
+
+        foreach ($items as $item) {
+            $collection->add($item);
+        }
+
+        return $collection;
+    }
+
+    public static function fromList(CodeUnit ...$items): self
+    {
+        return self::fromArray($items);
+    }
+
+    private function __construct()
+    {
+    }
+
+    /**
+     * @psalm-return list<CodeUnit>
+=======
 /**
  * @template-implements IteratorAggregate<int, CodeUnit>
  *
@@ -42,6 +76,7 @@ final readonly class CodeUnitCollection implements Countable, IteratorAggregate
 
     /**
      * @return list<CodeUnit>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function asArray(): array
     {
@@ -60,11 +95,29 @@ final readonly class CodeUnitCollection implements Countable, IteratorAggregate
 
     public function isEmpty(): bool
     {
+<<<<<<< HEAD
+        return empty($this->codeUnits);
+=======
         return $this->codeUnits === [];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     public function mergeWith(self $other): self
     {
+<<<<<<< HEAD
+        return self::fromArray(
+            array_merge(
+                $this->asArray(),
+                $other->asArray()
+            )
+        );
+    }
+
+    private function add(CodeUnit $item): void
+    {
+        $this->codeUnits[] = $item;
+    }
+=======
         return new self(
             array_merge(
                 $this->asArray(),
@@ -72,4 +125,5 @@ final readonly class CodeUnitCollection implements Countable, IteratorAggregate
             ),
         );
     }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

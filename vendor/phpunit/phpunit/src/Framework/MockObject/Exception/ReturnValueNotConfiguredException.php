@@ -12,8 +12,11 @@ namespace PHPUnit\Framework\MockObject;
 use function sprintf;
 
 /**
+<<<<<<< HEAD
+=======
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  *
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
 final class ReturnValueNotConfiguredException extends \PHPUnit\Framework\Exception implements Exception
@@ -22,9 +25,15 @@ final class ReturnValueNotConfiguredException extends \PHPUnit\Framework\Excepti
     {
         parent::__construct(
             sprintf(
+<<<<<<< HEAD
+                'Return value inference disabled and no expectation set up for %s::%s()',
+                $invocation->getClassName(),
+                $invocation->getMethodName(),
+=======
                 'No return value is configured for %s::%s() and return value generation is disabled',
                 $invocation->className(),
                 $invocation->methodName(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             ),
         );
     }

@@ -9,6 +9,20 @@
  */
 namespace PHPUnit\Runner;
 
+<<<<<<< HEAD
+use ReflectionClass;
+
+/**
+ * @deprecated see https://github.com/sebastianbergmann/phpunit/issues/4039
+ *
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ */
+interface TestSuiteLoader
+{
+    public function load(string $suiteClassFile): ReflectionClass;
+
+    public function reload(ReflectionClass $aClass): ReflectionClass;
+=======
 use function array_diff;
 use function basename;
 use function get_declared_classes;
@@ -139,4 +153,5 @@ final class TestSuiteLoader
 
         return $loadedClasses;
     }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

@@ -9,17 +9,37 @@
  */
 namespace SebastianBergmann\FileIterator;
 
+<<<<<<< HEAD
+=======
 use const DIRECTORY_SEPARATOR;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use const GLOB_ONLYDIR;
 use function array_filter;
 use function array_map;
 use function array_merge;
+<<<<<<< HEAD
+=======
 use function array_unique;
 use function array_values;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function glob;
 use function is_dir;
 use function is_string;
 use function realpath;
+<<<<<<< HEAD
+use AppendIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+
+class Factory
+{
+    /**
+     * @param array|string $paths
+     * @param array|string $suffixes
+     * @param array|string $prefixes
+     */
+    public function getFileIterator($paths, $suffixes = '', $prefixes = '', array $exclude = []): AppendIterator
+=======
 use function sort;
 use function str_ends_with;
 use function stripos;
@@ -43,13 +63,19 @@ final class Factory
      * @phpstan-ignore missingType.generics
      */
     public function getFileIterator(array|string $paths, array|string $suffixes = '', array|string $prefixes = '', array $exclude = []): AppendIterator
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (is_string($paths)) {
             $paths = [$paths];
         }
 
+<<<<<<< HEAD
+        $paths   = $this->getPathsAfterResolvingWildcards($paths);
+        $exclude = $this->getPathsAfterResolvingWildcards($exclude);
+=======
         $paths   = $this->resolveWildcards($paths);
         $exclude = $this->resolveWildcards($exclude);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
         if (is_string($prefixes)) {
             if ($prefixes !== '') {
@@ -75,6 +101,14 @@ final class Factory
                     new Iterator(
                         $path,
                         new RecursiveIteratorIterator(
+<<<<<<< HEAD
+                            new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::FOLLOW_SYMLINKS | RecursiveDirectoryIterator::SKIP_DOTS)
+                        ),
+                        $suffixes,
+                        $prefixes,
+                        $exclude
+                    )
+=======
                             new ExcludeIterator(
                                 new RecursiveDirectoryIterator($path, FilesystemIterator::FOLLOW_SYMLINKS | FilesystemIterator::SKIP_DOTS),
                                 $exclude,
@@ -83,6 +117,7 @@ final class Factory
                         $suffixes,
                         $prefixes,
                     ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }
@@ -90,16 +125,30 @@ final class Factory
         return $iterator;
     }
 
+<<<<<<< HEAD
+    protected function getPathsAfterResolvingWildcards(array $paths): array
+=======
     /**
      * @param list<non-empty-string> $paths
      *
      * @return list<non-empty-string>
      */
     private function resolveWildcards(array $paths): array
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $_paths = [[]];
 
         foreach ($paths as $path) {
+<<<<<<< HEAD
+            if ($locals = glob($path, GLOB_ONLYDIR)) {
+                $_paths[] = array_map('\realpath', $locals);
+            } else {
+                $_paths[] = [realpath($path)];
+            }
+        }
+
+        return array_filter(array_merge(...$_paths));
+=======
             $pathEndsWithDirectorySeparator = str_ends_with($path, '/') || str_ends_with($path, DIRECTORY_SEPARATOR);
 
             if ($locals = $this->globstar($path)) {
@@ -175,5 +224,6 @@ final class Factory
         // @codeCoverageIgnoreStart
         return [];
         // @codeCoverageIgnoreEnd
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

@@ -12,6 +12,29 @@ namespace PHPUnit\Framework\MockObject;
 use SebastianBergmann\Type\Type;
 
 /**
+<<<<<<< HEAD
+ * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ */
+final class ConfigurableMethod
+{
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var Type
+     */
+    private $returnType;
+
+    public function __construct(string $name, Type $returnType)
+    {
+        $this->name       = $name;
+        $this->returnType = $returnType;
+    }
+
+    public function getName(): string
+=======
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  *
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
@@ -51,10 +74,23 @@ final readonly class ConfigurableMethod
      * @return non-empty-string
      */
     public function name(): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->name;
     }
 
+<<<<<<< HEAD
+    public function mayReturn($value): bool
+    {
+        if ($value === null && $this->returnType->allowsNull()) {
+            return true;
+        }
+
+        return $this->returnType->isAssignable(Type::fromValue($value, false));
+    }
+
+    public function getReturnTypeDeclaration(): string
+=======
     /**
      * @return array<int, mixed>
      */
@@ -77,6 +113,7 @@ final readonly class ConfigurableMethod
     }
 
     public function returnTypeDeclaration(): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->returnType->asString();
     }

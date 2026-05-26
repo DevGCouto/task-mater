@@ -9,6 +9,12 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
+<<<<<<< HEAD
+use function mb_stripos;
+use function mb_strtolower;
+use function sprintf;
+use function strpos;
+=======
 use function is_string;
 use function mb_detect_encoding;
 use function mb_stripos;
@@ -18,12 +24,29 @@ use function str_contains;
 use function strlen;
 use function strtr;
 use PHPUnit\Util\Exporter;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
  */
 final class StringContains extends Constraint
 {
+<<<<<<< HEAD
+    /**
+     * @var string
+     */
+    private $string;
+
+    /**
+     * @var bool
+     */
+    private $ignoreCase;
+
+    public function __construct(string $string, bool $ignoreCase = false)
+    {
+        $this->string     = $string;
+        $this->ignoreCase = $ignoreCase;
+=======
     private readonly string $needle;
     private readonly bool $ignoreCase;
     private readonly bool $ignoreLineEndings;
@@ -37,6 +60,7 @@ final class StringContains extends Constraint
         $this->needle            = $needle;
         $this->ignoreCase        = $ignoreCase;
         $this->ignoreLineEndings = $ignoreLineEndings;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     /**
@@ -44,6 +68,49 @@ final class StringContains extends Constraint
      */
     public function toString(): string
     {
+<<<<<<< HEAD
+        if ($this->ignoreCase) {
+            $string = mb_strtolower($this->string, 'UTF-8');
+        } else {
+            $string = $this->string;
+        }
+
+        return sprintf(
+            'contains "%s"',
+            $string,
+        );
+    }
+
+    /**
+     * Evaluates the constraint for parameter $other. Returns true if the
+     * constraint is met, false otherwise.
+     *
+     * @param mixed $other value or object to evaluate
+     */
+    protected function matches($other): bool
+    {
+        if ('' === $this->string) {
+            return true;
+        }
+
+        if ($this->ignoreCase) {
+            /*
+             * We must use the multi byte safe version so we can accurately compare non latin upper characters with
+             * their lowercase equivalents.
+             */
+            return mb_stripos($other, $this->string, 0, 'UTF-8') !== false;
+        }
+
+        /*
+         * Use the non multi byte safe functions to see if the string is contained in $other.
+         *
+         * This function is very fast and we don't care about the character position in the string.
+         *
+         * Additionally, we want this method to be binary safe so we can check if some binary data is in other binary
+         * data.
+         */
+        return strpos($other, $this->string) !== false;
+=======
         $needle = $this->needle;
 
         if ($this->ignoreCase) {
@@ -156,5 +223,6 @@ final class StringContains extends Constraint
                 "\r"   => "\n",
             ],
         );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

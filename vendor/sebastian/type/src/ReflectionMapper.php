@@ -9,6 +9,30 @@
  */
 namespace SebastianBergmann\Type;
 
+<<<<<<< HEAD
+use function assert;
+use ReflectionFunctionAbstract;
+use ReflectionIntersectionType;
+use ReflectionMethod;
+use ReflectionNamedType;
+use ReflectionType;
+use ReflectionUnionType;
+
+final class ReflectionMapper
+{
+    /**
+     * @psalm-return list<Parameter>
+     */
+    public function fromParameterTypes(ReflectionFunctionAbstract $functionOrMethod): array
+    {
+        $parameters = [];
+
+        foreach ($functionOrMethod->getParameters() as $parameter) {
+            $name = $parameter->getName();
+
+            assert($name !== '');
+
+=======
 use function array_filter;
 use function assert;
 use ReflectionFunction;
@@ -34,6 +58,7 @@ final class ReflectionMapper
         foreach ($reflector->getParameters() as $parameter) {
             $name = $parameter->getName();
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             if (!$parameter->hasType()) {
                 $parameters[] = new Parameter($name, new UnknownType);
 
@@ -45,7 +70,11 @@ final class ReflectionMapper
             if ($type instanceof ReflectionNamedType) {
                 $parameters[] = new Parameter(
                     $name,
+<<<<<<< HEAD
+                    $this->mapNamedType($type, $functionOrMethod)
+=======
                     $this->mapNamedType($type, $reflector),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
 
                 continue;
@@ -54,7 +83,11 @@ final class ReflectionMapper
             if ($type instanceof ReflectionUnionType) {
                 $parameters[] = new Parameter(
                     $name,
+<<<<<<< HEAD
+                    $this->mapUnionType($type, $functionOrMethod)
+=======
                     $this->mapUnionType($type, $reflector),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
 
                 continue;
@@ -63,7 +96,11 @@ final class ReflectionMapper
             if ($type instanceof ReflectionIntersectionType) {
                 $parameters[] = new Parameter(
                     $name,
+<<<<<<< HEAD
+                    $this->mapIntersectionType($type, $functionOrMethod)
+=======
                     $this->mapIntersectionType($type, $reflector),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
             }
         }
@@ -71,6 +108,15 @@ final class ReflectionMapper
         return $parameters;
     }
 
+<<<<<<< HEAD
+    public function fromReturnType(ReflectionFunctionAbstract $functionOrMethod): Type
+    {
+        if (!$this->hasReturnType($functionOrMethod)) {
+            return new UnknownType;
+        }
+
+        $returnType = $this->returnType($functionOrMethod);
+=======
     public function fromReturnType(ReflectionFunction|ReflectionMethod $reflector): Type
     {
         if (!$this->hasReturnType($reflector)) {
@@ -78,10 +124,49 @@ final class ReflectionMapper
         }
 
         $returnType = $this->returnType($reflector);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
         assert($returnType instanceof ReflectionNamedType || $returnType instanceof ReflectionUnionType || $returnType instanceof ReflectionIntersectionType);
 
         if ($returnType instanceof ReflectionNamedType) {
+<<<<<<< HEAD
+            return $this->mapNamedType($returnType, $functionOrMethod);
+        }
+
+        if ($returnType instanceof ReflectionUnionType) {
+            return $this->mapUnionType($returnType, $functionOrMethod);
+        }
+
+        if ($returnType instanceof ReflectionIntersectionType) {
+            return $this->mapIntersectionType($returnType, $functionOrMethod);
+        }
+    }
+
+    private function mapNamedType(ReflectionNamedType $type, ReflectionFunctionAbstract $functionOrMethod): Type
+    {
+        if ($functionOrMethod instanceof ReflectionMethod && $type->getName() === 'self') {
+            return ObjectType::fromName(
+                $functionOrMethod->getDeclaringClass()->getName(),
+                $type->allowsNull()
+            );
+        }
+
+        if ($functionOrMethod instanceof ReflectionMethod && $type->getName() === 'static') {
+            return new StaticType(
+                TypeName::fromReflection($functionOrMethod->getDeclaringClass()),
+                $type->allowsNull()
+            );
+        }
+
+        if ($type->getName() === 'mixed') {
+            return new MixedType;
+        }
+
+        if ($functionOrMethod instanceof ReflectionMethod && $type->getName() === 'parent') {
+            return ObjectType::fromName(
+                $functionOrMethod->getDeclaringClass()->getParentClass()->getName(),
+                $type->allowsNull()
+=======
             return $this->mapNamedType($returnType, $reflector);
         }
 
@@ -146,10 +231,27 @@ final class ReflectionMapper
             return ObjectType::fromName(
                 $parentClass->getName(),
                 $type->allowsNull(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
         return Type::fromName(
+<<<<<<< HEAD
+            $type->getName(),
+            $type->allowsNull()
+        );
+    }
+
+    private function mapUnionType(ReflectionUnionType $type, ReflectionFunctionAbstract $functionOrMethod): Type
+    {
+        $types = [];
+
+        foreach ($type->getTypes() as $_type) {
+            assert($_type instanceof ReflectionNamedType || $_type instanceof ReflectionIntersectionType);
+
+            if ($_type instanceof ReflectionNamedType) {
+                $types[] = $this->mapNamedType($_type, $functionOrMethod);
+=======
             $typeName,
             $type->allowsNull(),
         );
@@ -172,10 +274,14 @@ final class ReflectionMapper
                 }
 
                 $types[] = $namedType;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
                 continue;
             }
 
+<<<<<<< HEAD
+            $types[] = $this->mapIntersectionType($_type, $functionOrMethod);
+=======
             $types[] = $this->mapIntersectionType($_type, $reflector);
         }
 
@@ -191,24 +297,59 @@ final class ReflectionMapper
                     return true;
                 },
             );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         return new UnionType(...$types);
     }
 
+<<<<<<< HEAD
+    private function mapIntersectionType(ReflectionIntersectionType $type, ReflectionFunctionAbstract $functionOrMethod): Type
+=======
     private function mapIntersectionType(ReflectionIntersectionType $type, ReflectionFunction|ReflectionMethod|ReflectionProperty $reflector): Type
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $types = [];
 
         foreach ($type->getTypes() as $_type) {
             assert($_type instanceof ReflectionNamedType);
 
+<<<<<<< HEAD
+            $types[] = $this->mapNamedType($_type, $functionOrMethod);
+=======
             $types[] = $this->mapNamedType($_type, $reflector);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         return new IntersectionType(...$types);
     }
 
+<<<<<<< HEAD
+    private function hasReturnType(ReflectionFunctionAbstract $functionOrMethod): bool
+    {
+        if ($functionOrMethod->hasReturnType()) {
+            return true;
+        }
+
+        if (!method_exists($functionOrMethod, 'hasTentativeReturnType')) {
+            return false;
+        }
+
+        return $functionOrMethod->hasTentativeReturnType();
+    }
+
+    private function returnType(ReflectionFunctionAbstract $functionOrMethod): ?ReflectionType
+    {
+        if ($functionOrMethod->hasReturnType()) {
+            return $functionOrMethod->getReturnType();
+        }
+
+        if (!method_exists($functionOrMethod, 'getTentativeReturnType')) {
+            return null;
+        }
+
+        return $functionOrMethod->getTentativeReturnType();
+=======
     private function hasReturnType(ReflectionFunction|ReflectionMethod $reflector): bool
     {
         if ($reflector->hasReturnType()) {
@@ -225,5 +366,6 @@ final class ReflectionMapper
         }
 
         return $reflector->getTentativeReturnType();
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

@@ -2,7 +2,11 @@
     "name": "sebastian/environment",
     "description": "Provides functionality to handle HHVM/PHP environments",
     "keywords": ["environment","hhvm","xdebug"],
+<<<<<<< HEAD
+    "homepage": "http://www.github.com/sebastianbergmann/environment",
+=======
     "homepage": "https://github.com/sebastianbergmann/environment",
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -10,6 +14,11 @@
             "email": "sebastian@phpunit.de"
         }
     ],
+<<<<<<< HEAD
+    "config": {
+        "platform": {
+            "php": "7.3.0"
+=======
     "support": {
         "issues": "https://github.com/sebastianbergmann/environment/issues",
         "security": "https://github.com/sebastianbergmann/environment/security/policy"
@@ -17,16 +26,24 @@
     "config": {
         "platform": {
             "php": "8.2.0"
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         },
         "optimize-autoloader": true,
         "sort-packages": true
     },
     "prefer-stable": true,
     "require": {
+<<<<<<< HEAD
+        "php": ">=7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.3"
+=======
         "php": ">=8.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.3"
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     },
     "suggest": {
         "ext-posix": "*"
@@ -38,7 +55,11 @@
     },
     "extra": {
         "branch-alias": {
+<<<<<<< HEAD
+            "dev-master": "5.1-dev"
+=======
             "dev-main": "7.2-dev"
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
     }
 }

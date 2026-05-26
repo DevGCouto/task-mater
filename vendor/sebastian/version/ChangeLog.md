@@ -2,6 +2,8 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+<<<<<<< HEAD
+=======
 ## [5.0.2] - 2024-10-09
 
 ### Changed
@@ -36,6 +38,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * This component is no longer supported on PHP 7.3, PHP 7.4, and PHP 8.0
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 ## [3.0.2] - 2020-09-28
 
 ### Changed
@@ -54,11 +57,14 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * This component is no longer supported on PHP 7.1 and PHP 7.2
 
+<<<<<<< HEAD
+=======
 [5.0.2]: https://github.com/sebastianbergmann/version/compare/5.0.1...5.0.2
 [5.0.1]: https://github.com/sebastianbergmann/version/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/sebastianbergmann/version/compare/4.0...5.0.0
 [4.0.1]: https://github.com/sebastianbergmann/version/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/sebastianbergmann/version/compare/3.0.2...4.0.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 [3.0.2]: https://github.com/sebastianbergmann/version/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/sebastianbergmann/version/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/sebastianbergmann/version/compare/2.0.1...3.0.0

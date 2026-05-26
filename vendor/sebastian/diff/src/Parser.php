@@ -10,7 +10,10 @@
 namespace SebastianBergmann\Diff;
 
 use function array_pop;
+<<<<<<< HEAD
+=======
 use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function count;
 use function max;
 use function preg_match;
@@ -37,7 +40,11 @@ final class Parser
         $diff      = null;
         $collected = [];
 
+<<<<<<< HEAD
+        for ($i = 0; $i < $lineCount; ++$i) {
+=======
         for ($i = 0; $i < $lineCount; $i++) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             if (preg_match('#^---\h+"?(?P<file>[^\\v\\t"]+)#', $lines[$i], $fromMatch) &&
                 preg_match('#^\\+\\+\\+\\h+"?(?P<file>[^\\v\\t"]+)#', $lines[$i + 1], $toMatch)) {
                 if ($diff !== null) {
@@ -47,6 +54,13 @@ final class Parser
                     $collected = [];
                 }
 
+<<<<<<< HEAD
+                $diff = new Diff($fromMatch['file'], $toMatch['file']);
+
+                ++$i;
+            } else {
+                if (preg_match('/^(?:diff --git |index [\da-f\.]+|[+-]{3} [ab])/', $lines[$i])) {
+=======
                 assert(!empty($fromMatch['file']));
                 assert(!empty($toMatch['file']));
 
@@ -55,6 +69,7 @@ final class Parser
                 $i++;
             } else {
                 if (preg_match('/^(?:diff --git |index [\da-f.]+|[+-]{3} [ab])/', $lines[$i])) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     continue;
                 }
 
@@ -78,12 +93,21 @@ final class Parser
         $diffLines = [];
 
         foreach ($lines as $line) {
+<<<<<<< HEAD
+            if (preg_match('/^@@\s+-(?P<start>\d+)(?:,\s*(?P<startrange>\d+))?\s+\+(?P<end>\d+)(?:,\s*(?P<endrange>\d+))?\s+@@/', $line, $match)) {
+                $chunk = new Chunk(
+                    (int) $match['start'],
+                    isset($match['startrange']) ? max(1, (int) $match['startrange']) : 1,
+                    (int) $match['end'],
+                    isset($match['endrange']) ? max(1, (int) $match['endrange']) : 1
+=======
             if (preg_match('/^@@\s+-(?P<start>\d+)(?:,\s*(?P<startrange>\d+))?\s+\+(?P<end>\d+)(?:,\s*(?P<endrange>\d+))?\s+@@/', $line, $match, PREG_UNMATCHED_AS_NULL)) {
                 $chunk = new Chunk(
                     (int) $match['start'],
                     isset($match['startrange']) ? max(0, (int) $match['startrange']) : 1,
                     (int) $match['end'],
                     isset($match['endrange']) ? max(0, (int) $match['endrange']) : 1,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 );
 
                 $chunks[]  = $chunk;
@@ -103,7 +127,13 @@ final class Parser
 
                 $diffLines[] = new Line($type, $match['line']);
 
+<<<<<<< HEAD
+                if (null !== $chunk) {
+                    $chunk->setLines($diffLines);
+                }
+=======
                 $chunk?->setLines($diffLines);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             }
         }
 

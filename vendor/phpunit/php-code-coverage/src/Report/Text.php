@@ -47,6 +47,38 @@ final class Text
      * @var string
      */
     private const COLOR_RESET = "\x1b[0m";
+<<<<<<< HEAD
+
+    /**
+     * @var string
+     */
+    private const COLOR_EOL = "\x1b[2K";
+
+    /**
+     * @var int
+     */
+    private $lowUpperBound;
+
+    /**
+     * @var int
+     */
+    private $highLowerBound;
+
+    /**
+     * @var bool
+     */
+    private $showUncoveredFiles;
+
+    /**
+     * @var bool
+     */
+    private $showOnlySummary;
+
+    public function __construct(int $lowUpperBound = 50, int $highLowerBound = 90, bool $showUncoveredFiles = false, bool $showOnlySummary = false)
+    {
+        $this->lowUpperBound      = $lowUpperBound;
+        $this->highLowerBound     = $highLowerBound;
+=======
     private readonly Thresholds $thresholds;
     private readonly bool $showUncoveredFiles;
     private readonly bool $showOnlySummary;
@@ -54,6 +86,7 @@ final class Text
     public function __construct(Thresholds $thresholds, bool $showUncoveredFiles = false, bool $showOnlySummary = false)
     {
         $this->thresholds         = $thresholds;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $this->showUncoveredFiles = $showUncoveredFiles;
         $this->showOnlySummary    = $showOnlySummary;
     }
@@ -73,46 +106,81 @@ final class Text
             'branches' => '',
             'paths'    => '',
             'reset'    => '',
+<<<<<<< HEAD
+            'eol'      => '',
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         ];
 
         if ($showColors) {
             $colors['classes'] = $this->coverageColor(
                 $report->numberOfTestedClassesAndTraits(),
+<<<<<<< HEAD
+                $report->numberOfClassesAndTraits()
+=======
                 $report->numberOfClassesAndTraits(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $colors['methods'] = $this->coverageColor(
                 $report->numberOfTestedMethods(),
+<<<<<<< HEAD
+                $report->numberOfMethods()
+=======
                 $report->numberOfMethods(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $colors['lines'] = $this->coverageColor(
                 $report->numberOfExecutedLines(),
+<<<<<<< HEAD
+                $report->numberOfExecutableLines()
+=======
                 $report->numberOfExecutableLines(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $colors['branches'] = $this->coverageColor(
                 $report->numberOfExecutedBranches(),
+<<<<<<< HEAD
+                $report->numberOfExecutableBranches()
+=======
                 $report->numberOfExecutableBranches(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $colors['paths'] = $this->coverageColor(
                 $report->numberOfExecutedPaths(),
+<<<<<<< HEAD
+                $report->numberOfExecutablePaths()
+=======
                 $report->numberOfExecutablePaths(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $colors['reset']  = self::COLOR_RESET;
             $colors['header'] = self::COLOR_HEADER;
+<<<<<<< HEAD
+            $colors['eol']    = self::COLOR_EOL;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         $classes = sprintf(
             '  Classes: %6s (%d/%d)',
             Percentage::fromFractionAndTotal(
                 $report->numberOfTestedClassesAndTraits(),
+<<<<<<< HEAD
+                $report->numberOfClassesAndTraits()
+            )->asString(),
+            $report->numberOfTestedClassesAndTraits(),
+            $report->numberOfClassesAndTraits()
+=======
                 $report->numberOfClassesAndTraits(),
             )->asString(),
             $report->numberOfTestedClassesAndTraits(),
             $report->numberOfClassesAndTraits(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $methods = sprintf(
@@ -122,7 +190,11 @@ final class Text
                 $report->numberOfMethods(),
             )->asString(),
             $report->numberOfTestedMethods(),
+<<<<<<< HEAD
+            $report->numberOfMethods()
+=======
             $report->numberOfMethods(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $paths    = '';
@@ -136,7 +208,11 @@ final class Text
                     $report->numberOfExecutablePaths(),
                 )->asString(),
                 $report->numberOfExecutedPaths(),
+<<<<<<< HEAD
+                $report->numberOfExecutablePaths()
+=======
                 $report->numberOfExecutablePaths(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             $branches = sprintf(
@@ -146,7 +222,11 @@ final class Text
                     $report->numberOfExecutableBranches(),
                 )->asString(),
                 $report->numberOfExecutedBranches(),
+<<<<<<< HEAD
+                $report->numberOfExecutableBranches()
+=======
                 $report->numberOfExecutableBranches(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
@@ -157,7 +237,11 @@ final class Text
                 $report->numberOfExecutableLines(),
             )->asString(),
             $report->numberOfExecutedLines(),
+<<<<<<< HEAD
+            $report->numberOfExecutableLines()
+=======
             $report->numberOfExecutableLines(),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         $padding = max(array_map('strlen', [$classes, $methods, $lines]));
@@ -215,12 +299,21 @@ final class Text
                     }
 
                     $classMethods++;
+<<<<<<< HEAD
+                    $classExecutableLines += $method['executableLines'];
+                    $classExecutedLines += $method['executedLines'];
+                    $classExecutableBranches += $method['executableBranches'];
+                    $classExecutedBranches += $method['executedBranches'];
+                    $classExecutablePaths += $method['executablePaths'];
+                    $classExecutedPaths += $method['executedPaths'];
+=======
                     $classExecutableLines    += $method['executableLines'];
                     $classExecutedLines      += $method['executedLines'];
                     $classExecutableBranches += $method['executableBranches'];
                     $classExecutedBranches   += $method['executedBranches'];
                     $classExecutablePaths    += $method['executablePaths'];
                     $classExecutedPaths      += $method['executedPaths'];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
                     if ($method['coverage'] == 100) {
                         $coveredMethods++;
@@ -278,6 +371,16 @@ final class Text
     {
         $coverage = Percentage::fromFractionAndTotal(
             $numberOfCoveredElements,
+<<<<<<< HEAD
+            $totalNumberOfElements
+        );
+
+        if ($coverage->asFloat() >= $this->highLowerBound) {
+            return self::COLOR_GREEN;
+        }
+
+        if ($coverage->asFloat() > $this->lowUpperBound) {
+=======
             $totalNumberOfElements,
         );
 
@@ -286,6 +389,7 @@ final class Text
         }
 
         if ($coverage->asFloat() > $this->thresholds->lowUpperBound()) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             return self::COLOR_YELLOW;
         }
 
@@ -298,12 +402,26 @@ final class Text
 
         return Percentage::fromFractionAndTotal(
             $numberOfCoveredElements,
+<<<<<<< HEAD
+            $totalNumberOfElements
+=======
             $totalNumberOfElements,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         )->asFixedWidthString() .
             ' (' . sprintf($format, $numberOfCoveredElements) . '/' .
         sprintf($format, $totalNumberOfElements) . ')';
     }
 
+<<<<<<< HEAD
+    /**
+     * @param false|string $string
+     */
+    private function format(string $color, int $padding, $string): string
+    {
+        $reset = $color ? self::COLOR_RESET : '';
+
+        return $color . str_pad((string) $string, $padding) . $reset . PHP_EOL;
+=======
     private function format(string $color, int $padding, false|string $string): string
     {
         if ($color === '') {
@@ -311,5 +429,6 @@ final class Text
         }
 
         return $color . str_pad((string) $string, $padding) . self::COLOR_RESET . PHP_EOL;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

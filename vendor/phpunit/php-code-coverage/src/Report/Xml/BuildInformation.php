@@ -9,11 +9,18 @@
  */
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+<<<<<<< HEAD
+use function constant;
+use function phpversion;
+use DateTimeImmutable;
+use DOMElement;
+=======
 use function assert;
 use function phpversion;
 use DateTimeImmutable;
 use DOMElement;
 use SebastianBergmann\CodeCoverage\CodeCoverage;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use SebastianBergmann\Environment\Runtime;
 
 /**
@@ -21,14 +28,25 @@ use SebastianBergmann\Environment\Runtime;
  */
 final class BuildInformation
 {
+<<<<<<< HEAD
+    /**
+     * @var DOMElement
+     */
+    private $contextNode;
+=======
     private readonly DOMElement $contextNode;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(DOMElement $contextNode)
     {
         $this->contextNode = $contextNode;
     }
 
+<<<<<<< HEAD
+    public function setRuntimeInformation(Runtime $runtime): void
+=======
     public function setRuntimeInformation(Runtime $runtime, CodeCoverage $coverage): void
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $runtimeNode = $this->nodeByName('runtime');
 
@@ -38,12 +56,28 @@ final class BuildInformation
 
         $driverNode = $this->nodeByName('driver');
 
+<<<<<<< HEAD
+        if ($runtime->hasPHPDBGCodeCoverage()) {
+            $driverNode->setAttribute('name', 'phpdbg');
+            $driverNode->setAttribute('version', constant('PHPDBG_VERSION'));
+        }
+
+        if ($runtime->hasXdebug()) {
+            $driverNode->setAttribute('name', 'xdebug');
+            $driverNode->setAttribute('version', phpversion('xdebug'));
+        }
+
+        if ($runtime->hasPCOV()) {
+            $driverNode->setAttribute('name', 'pcov');
+            $driverNode->setAttribute('version', phpversion('pcov'));
+=======
         if ($coverage->driverIsPcov()) {
             $driverNode->setAttribute('name', 'pcov');
             $driverNode->setAttribute('version', phpversion('pcov'));
         } elseif ($coverage->driverIsXdebug()) {
             $driverNode->setAttribute('name', 'xdebug');
             $driverNode->setAttribute('version', phpversion('xdebug'));
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
     }
 
@@ -62,13 +96,24 @@ final class BuildInformation
     {
         $node = $this->contextNode->getElementsByTagNameNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+            $name
+=======
             $name,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         )->item(0);
 
         if (!$node) {
             $node = $this->contextNode->appendChild(
                 $this->contextNode->ownerDocument->createElementNS(
                     'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+                    $name
+                )
+            );
+        }
+
+=======
                     $name,
                 ),
             );
@@ -76,6 +121,7 @@ final class BuildInformation
 
         assert($node instanceof DOMElement);
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         return $node;
     }
 }

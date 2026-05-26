@@ -2,6 +2,8 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+<<<<<<< HEAD
+=======
 ## [3.0.3] - 2025-03-19
 
 ### Fixed
@@ -38,6 +40,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 * `SebastianBergmann\CodeUnit\Mapper::stringToCodeUnits()` no longer supports `ClassName<*>`
 * This component is no longer supported on PHP 7.3, PHP 7.4, and PHP 8.0
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 ## [1.0.8] - 2020-10-26
 
 ### Fixed
@@ -90,11 +93,14 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * Initial release
 
+<<<<<<< HEAD
+=======
 [3.0.3]: https://github.com/sebastianbergmann/code-unit/compare/3.0.2...3.0.3
 [3.0.2]: https://github.com/sebastianbergmann/code-unit/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/sebastianbergmann/code-unit/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/sebastianbergmann/code-unit/compare/2.0...3.0.0
 [2.0.0]: https://github.com/sebastianbergmann/code-unit/compare/1.0.8...2.0.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 [1.0.8]: https://github.com/sebastianbergmann/code-unit/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/sebastianbergmann/code-unit/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/sebastianbergmann/code-unit/compare/1.0.5...1.0.6

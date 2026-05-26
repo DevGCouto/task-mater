@@ -1,8 +1,15 @@
+<<<<<<< HEAD
+# sebastian/exporter
+
+[![CI Status](https://github.com/sebastianbergmann/exporter/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/exporter/actions)
+[![Type Coverage](https://shepherd.dev/github/sebastianbergmann/exporter/coverage.svg)](https://shepherd.dev/github/sebastianbergmann/exporter)
+=======
 [![Latest Stable Version](https://poser.pugx.org/sebastian/exporter/v)](https://packagist.org/packages/sebastian/exporter)
 [![CI Status](https://github.com/sebastianbergmann/exporter/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/exporter/actions)
 [![codecov](https://codecov.io/gh/sebastianbergmann/exporter/branch/main/graph/badge.svg)](https://codecov.io/gh/sebastianbergmann/exporter)
 
 # sebastian/exporter
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 This component provides the functionality to export PHP variables for visualization.
 

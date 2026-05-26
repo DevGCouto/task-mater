@@ -2,6 +2,9 @@
 
 All notable changes in `sebastianbergmann/environment` are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+<<<<<<< HEAD
+## [5.1.5] - 2023-02-03
+=======
 ## [7.2.1] - 2025-05-21
 
 ### Fixed
@@ -61,6 +64,7 @@ All notable changes in `sebastianbergmann/environment` are documented in this fi
 * This component is no longer supported on PHP 7.3, PHP 7.4, and PHP 8.0
 
 ## [5.1.5] - 2022-MM-DD
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 ### Fixed
 
@@ -215,6 +219,8 @@ All notable changes in `sebastianbergmann/environment` are documented in this fi
 
 * This component is no longer supported on PHP 5.6
 
+<<<<<<< HEAD
+=======
 [7.2.1]: https://github.com/sebastianbergmann/environment/compare/7.2.0...7.2.1
 [7.2.0]: https://github.com/sebastianbergmann/environment/compare/7.1.0...7.2.0
 [7.1.0]: https://github.com/sebastianbergmann/environment/compare/7.0.0...7.1.0
@@ -223,6 +229,7 @@ All notable changes in `sebastianbergmann/environment` are documented in this fi
 [6.1.0]: https://github.com/sebastianbergmann/environment/compare/6.0.1...6.1.0
 [6.0.1]: https://github.com/sebastianbergmann/environment/compare/6.0.0...6.0.1
 [6.0.0]: https://github.com/sebastianbergmann/environment/compare/5.1.5...6.0.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 [5.1.5]: https://github.com/sebastianbergmann/environment/compare/5.1.4...5.1.5
 [5.1.4]: https://github.com/sebastianbergmann/environment/compare/5.1.3...5.1.4
 [5.1.3]: https://github.com/sebastianbergmann/environment/compare/5.1.2...5.1.3

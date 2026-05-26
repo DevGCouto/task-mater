@@ -9,12 +9,21 @@
  */
 namespace SebastianBergmann\CodeCoverage;
 
+<<<<<<< HEAD
+=======
 use function rtrim;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use RuntimeException;
 
 final class UnintentionallyCoveredCodeException extends RuntimeException implements Exception
 {
     /**
+<<<<<<< HEAD
+     * @var array
+     */
+    private $unintentionallyCoveredUnits;
+
+=======
      * @var list<string>
      */
     private readonly array $unintentionallyCoveredUnits;
@@ -22,6 +31,7 @@ final class UnintentionallyCoveredCodeException extends RuntimeException impleme
     /**
      * @param list<string> $unintentionallyCoveredUnits
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function __construct(array $unintentionallyCoveredUnits)
     {
         $this->unintentionallyCoveredUnits = $unintentionallyCoveredUnits;
@@ -29,9 +39,12 @@ final class UnintentionallyCoveredCodeException extends RuntimeException impleme
         parent::__construct($this->toString());
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return list<string>
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function getUnintentionallyCoveredUnits(): array
     {
         return $this->unintentionallyCoveredUnits;
@@ -45,6 +58,10 @@ final class UnintentionallyCoveredCodeException extends RuntimeException impleme
             $message .= '- ' . $unit . "\n";
         }
 
+<<<<<<< HEAD
+        return $message;
+=======
         return rtrim($message);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 }

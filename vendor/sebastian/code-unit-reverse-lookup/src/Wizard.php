@@ -11,12 +11,50 @@ namespace SebastianBergmann\CodeUnitReverseLookup;
 
 use function array_merge;
 use function assert;
+<<<<<<< HEAD
+=======
 use function class_exists;
 use function function_exists;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function get_declared_classes;
 use function get_declared_traits;
 use function get_defined_functions;
 use function is_array;
+<<<<<<< HEAD
+use function range;
+use ReflectionClass;
+use ReflectionFunction;
+use ReflectionFunctionAbstract;
+use ReflectionMethod;
+
+/**
+ * @since Class available since Release 1.0.0
+ */
+class Wizard
+{
+    /**
+     * @var array
+     */
+    private $lookupTable = [];
+
+    /**
+     * @var array
+     */
+    private $processedClasses = [];
+
+    /**
+     * @var array
+     */
+    private $processedFunctions = [];
+
+    /**
+     * @param string $filename
+     * @param int    $lineNumber
+     *
+     * @return string
+     */
+    public function lookup($filename, $lineNumber)
+=======
 use function is_int;
 use function is_string;
 use function range;
@@ -43,6 +81,7 @@ final class Wizard
     private array $processedFunctions = [];
 
     public function lookup(string $filename, int $lineNumber): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (!isset($this->lookupTable[$filename][$lineNumber])) {
             $this->updateLookupTable();
@@ -66,16 +105,29 @@ final class Wizard
         $classes = get_declared_classes();
         $traits  = get_declared_traits();
 
+<<<<<<< HEAD
+        assert(is_array($classes));
+        assert(is_array($traits));
+
+        foreach (array_merge($classes, $traits) as $classOrTrait) {
+=======
         assert(is_array($traits));
 
         foreach (array_merge($classes, $traits) as $classOrTrait) {
             assert(class_exists($classOrTrait) || trait_exists($classOrTrait));
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             if (isset($this->processedClasses[$classOrTrait])) {
                 continue;
             }
 
+<<<<<<< HEAD
+            $reflector = new ReflectionClass($classOrTrait);
+
+            foreach ($reflector->getMethods() as $method) {
+=======
             foreach ((new ReflectionClass($classOrTrait))->getMethods() as $method) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->processFunctionOrMethod($method);
             }
 
@@ -86,8 +138,11 @@ final class Wizard
     private function processFunctions(): void
     {
         foreach (get_defined_functions()['user'] as $function) {
+<<<<<<< HEAD
+=======
             assert(function_exists($function));
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             if (isset($this->processedFunctions[$function])) {
                 continue;
             }
@@ -98,7 +153,11 @@ final class Wizard
         }
     }
 
+<<<<<<< HEAD
+    private function processFunctionOrMethod(ReflectionFunctionAbstract $functionOrMethod): void
+=======
     private function processFunctionOrMethod(ReflectionFunction|ReflectionMethod $functionOrMethod): void
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if ($functionOrMethod->isInternal()) {
             return;
@@ -110,6 +169,14 @@ final class Wizard
             $name = $functionOrMethod->getDeclaringClass()->getName() . '::' . $name;
         }
 
+<<<<<<< HEAD
+        if (!isset($this->lookupTable[$functionOrMethod->getFileName()])) {
+            $this->lookupTable[$functionOrMethod->getFileName()] = [];
+        }
+
+        foreach (range($functionOrMethod->getStartLine(), $functionOrMethod->getEndLine()) as $line) {
+            $this->lookupTable[$functionOrMethod->getFileName()][$line] = $name;
+=======
         $fileName = $functionOrMethod->getFileName();
 
         assert(is_string($fileName));
@@ -127,6 +194,7 @@ final class Wizard
 
         foreach (range($startLine, $endLine) as $line) {
             $this->lookupTable[$fileName][$line] = $name;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
     }
 }

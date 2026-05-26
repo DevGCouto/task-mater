@@ -9,7 +9,10 @@
  */
 namespace SebastianBergmann\CodeCoverage\Report\Xml;
 
+<<<<<<< HEAD
+=======
 use function assert;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use DOMElement;
 
 /**
@@ -17,7 +20,14 @@ use DOMElement;
  */
 final class Unit
 {
+<<<<<<< HEAD
+    /**
+     * @var DOMElement
+     */
+    private $contextNode;
+=======
     private readonly DOMElement $contextNode;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(DOMElement $context, string $name)
     {
@@ -42,13 +52,24 @@ final class Unit
     {
         $node = $this->contextNode->getElementsByTagNameNS(
             'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+            'namespace'
+=======
             'namespace',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         )->item(0);
 
         if (!$node) {
             $node = $this->contextNode->appendChild(
                 $this->contextNode->ownerDocument->createElementNS(
                     'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+                    'namespace'
+                )
+            );
+        }
+
+=======
                     'namespace',
                 ),
             );
@@ -56,6 +77,7 @@ final class Unit
 
         assert($node instanceof DOMElement);
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $node->setAttribute('name', $namespace);
     }
 
@@ -64,8 +86,13 @@ final class Unit
         $node = $this->contextNode->appendChild(
             $this->contextNode->ownerDocument->createElementNS(
                 'https://schema.phpunit.de/coverage/1.0',
+<<<<<<< HEAD
+                'method'
+            )
+=======
                 'method',
             ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
 
         return new Method($node, $name);

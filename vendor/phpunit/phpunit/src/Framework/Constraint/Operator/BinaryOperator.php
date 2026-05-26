@@ -10,6 +10,10 @@
 namespace PHPUnit\Framework\Constraint;
 
 use function array_map;
+<<<<<<< HEAD
+use function array_values;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function count;
 
 /**
@@ -18,6 +22,30 @@ use function count;
 abstract class BinaryOperator extends Operator
 {
     /**
+<<<<<<< HEAD
+     * @var Constraint[]
+     */
+    private $constraints = [];
+
+    public static function fromConstraints(Constraint ...$constraints): self
+    {
+        $constraint = new static;
+
+        $constraint->constraints = $constraints;
+
+        return $constraint;
+    }
+
+    /**
+     * @param mixed[] $constraints
+     */
+    public function setConstraints(array $constraints): void
+    {
+        $this->constraints = array_map(function ($constraint): Constraint
+        {
+            return $this->checkConstraint($constraint);
+        }, array_values($constraints));
+=======
      * @var list<Constraint>
      */
     private readonly array $constraints;
@@ -28,6 +56,7 @@ abstract class BinaryOperator extends Operator
             fn ($constraint): Constraint => $this->checkConstraint($constraint),
             $constraints,
         );
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     /**
@@ -75,7 +104,11 @@ abstract class BinaryOperator extends Operator
     }
 
     /**
+<<<<<<< HEAD
+     * Returns the nested constraints.
+=======
      * @return list<Constraint>
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     final protected function constraints(): array
     {
@@ -108,6 +141,12 @@ abstract class BinaryOperator extends Operator
 
     /**
      * Returns string representation of given operand in context of this operator.
+<<<<<<< HEAD
+     *
+     * @param Constraint $constraint operand constraint
+     * @param int        $position   position of $constraint in this expression
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function constraintToString(Constraint $constraint, int $position): string
     {

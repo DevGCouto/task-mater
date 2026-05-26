@@ -9,6 +9,17 @@
  */
 namespace SebastianBergmann\Type;
 
+<<<<<<< HEAD
+use const PHP_VERSION;
+use function get_class;
+use function gettype;
+use function strtolower;
+use function version_compare;
+
+abstract class Type
+{
+    public static function fromValue($value, bool $allowsNull): self
+=======
 use function gettype;
 use function is_object;
 use function strtolower;
@@ -19,6 +30,7 @@ use function strtolower;
 abstract class Type
 {
     public static function fromValue(mixed $value, bool $allowsNull): self
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if ($allowsNull === false) {
             if ($value === true) {
@@ -32,8 +44,13 @@ abstract class Type
 
         $typeName = gettype($value);
 
+<<<<<<< HEAD
+        if ($typeName === 'object') {
+            return new ObjectType(TypeName::fromQualifiedName(get_class($value)), $allowsNull);
+=======
         if (is_object($value)) {
             return new ObjectType(TypeName::fromQualifiedName($value::class), $allowsNull);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         $type = self::fromName($typeName, $allowsNull);
@@ -45,6 +62,55 @@ abstract class Type
         return $type;
     }
 
+<<<<<<< HEAD
+    public static function fromName(string $typeName, bool $allowsNull): self
+    {
+        if (version_compare(PHP_VERSION, '8.1.0-dev', '>=') && strtolower($typeName) === 'never') {
+            return new NeverType;
+        }
+
+        switch (strtolower($typeName)) {
+            case 'callable':
+                return new CallableType($allowsNull);
+
+            case 'true':
+                return new TrueType;
+
+            case 'false':
+                return new FalseType;
+
+            case 'iterable':
+                return new IterableType($allowsNull);
+
+            case 'null':
+                return new NullType;
+
+            case 'object':
+                return new GenericObjectType($allowsNull);
+
+            case 'unknown type':
+                return new UnknownType;
+
+            case 'void':
+                return new VoidType;
+
+            case 'array':
+            case 'bool':
+            case 'boolean':
+            case 'double':
+            case 'float':
+            case 'int':
+            case 'integer':
+            case 'real':
+            case 'resource':
+            case 'resource (closed)':
+            case 'string':
+                return new SimpleType($typeName, $allowsNull);
+
+            default:
+                return new ObjectType(TypeName::fromQualifiedName($typeName), $allowsNull);
+        }
+=======
     /**
      * @param non-empty-string $typeName
      */
@@ -65,6 +131,7 @@ abstract class Type
             /** @phpstan-ignore argument.type */
             default => new ObjectType(TypeName::fromQualifiedName($typeName), $allowsNull),
         };
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     public function asString(): string
@@ -73,7 +140,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true CallableType $this
+=======
      * @phpstan-assert-if-true CallableType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isCallable(): bool
     {
@@ -81,7 +152,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true TrueType $this
+=======
      * @phpstan-assert-if-true TrueType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isTrue(): bool
     {
@@ -89,7 +164,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true FalseType $this
+=======
      * @phpstan-assert-if-true FalseType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isFalse(): bool
     {
@@ -97,7 +176,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true GenericObjectType $this
+=======
      * @phpstan-assert-if-true GenericObjectType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isGenericObject(): bool
     {
@@ -105,7 +188,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true IntersectionType $this
+=======
      * @phpstan-assert-if-true IntersectionType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isIntersection(): bool
     {
@@ -113,7 +200,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true IterableType $this
+=======
      * @phpstan-assert-if-true IterableType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isIterable(): bool
     {
@@ -121,7 +212,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true MixedType $this
+=======
      * @phpstan-assert-if-true MixedType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isMixed(): bool
     {
@@ -129,7 +224,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true NeverType $this
+=======
      * @phpstan-assert-if-true NeverType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isNever(): bool
     {
@@ -137,7 +236,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true NullType $this
+=======
      * @phpstan-assert-if-true NullType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isNull(): bool
     {
@@ -145,7 +248,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true ObjectType $this
+=======
      * @phpstan-assert-if-true ObjectType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isObject(): bool
     {
@@ -153,7 +260,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true SimpleType $this
+=======
      * @phpstan-assert-if-true SimpleType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isSimple(): bool
     {
@@ -161,7 +272,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true StaticType $this
+=======
      * @phpstan-assert-if-true StaticType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isStatic(): bool
     {
@@ -169,7 +284,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true UnionType $this
+=======
      * @phpstan-assert-if-true UnionType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isUnion(): bool
     {
@@ -177,7 +296,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true UnknownType $this
+=======
      * @phpstan-assert-if-true UnknownType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isUnknown(): bool
     {
@@ -185,7 +308,11 @@ abstract class Type
     }
 
     /**
+<<<<<<< HEAD
+     * @psalm-assert-if-true VoidType $this
+=======
      * @phpstan-assert-if-true VoidType $this
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     public function isVoid(): bool
     {
@@ -194,9 +321,12 @@ abstract class Type
 
     abstract public function isAssignable(self $other): bool;
 
+<<<<<<< HEAD
+=======
     /**
      * @return non-empty-string
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     abstract public function name(): string;
 
     abstract public function allowsNull(): bool;

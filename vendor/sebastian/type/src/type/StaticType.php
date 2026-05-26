@@ -9,6 +9,19 @@
  */
 namespace SebastianBergmann\Type;
 
+<<<<<<< HEAD
+final class StaticType extends Type
+{
+    /**
+     * @var TypeName
+     */
+    private $className;
+
+    /**
+     * @var bool
+     */
+    private $allowsNull;
+=======
 use function is_subclass_of;
 use function strcasecmp;
 
@@ -19,6 +32,7 @@ final class StaticType extends Type
 {
     private TypeName $className;
     private bool $allowsNull;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(TypeName $className, bool $allowsNull)
     {
@@ -47,9 +61,12 @@ final class StaticType extends Type
         return false;
     }
 
+<<<<<<< HEAD
+=======
     /**
      * @return 'static'
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function name(): string
     {
         return 'static';
@@ -60,6 +77,12 @@ final class StaticType extends Type
         return $this->allowsNull;
     }
 
+<<<<<<< HEAD
+    /**
+     * @psalm-assert-if-true StaticType $this
+     */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function isStatic(): bool
     {
         return true;

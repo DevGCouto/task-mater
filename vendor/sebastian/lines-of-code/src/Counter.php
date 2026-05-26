@@ -9,8 +9,11 @@
  */
 namespace SebastianBergmann\LinesOfCode;
 
+<<<<<<< HEAD
+=======
 use function assert;
 use function file_get_contents;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function substr_count;
 use PhpParser\Error;
 use PhpParser\Node;
@@ -24,11 +27,15 @@ final class Counter
      */
     public function countInSourceFile(string $sourceFile): LinesOfCode
     {
+<<<<<<< HEAD
+        return $this->countInSourceString(file_get_contents($sourceFile));
+=======
         $source = file_get_contents($sourceFile);
 
         assert($source !== false);
 
         return $this->countInSourceString($source);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     }
 
     /**
@@ -53,16 +60,25 @@ final class Counter
         } catch (Error $error) {
             throw new RuntimeException(
                 $error->getMessage(),
+<<<<<<< HEAD
+                (int) $error->getCode(),
+                $error
+=======
                 $error->getCode(),
                 $error,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
         // @codeCoverageIgnoreEnd
     }
 
     /**
+<<<<<<< HEAD
+     * @param Node[] $nodes
+=======
      * @param non-negative-int $linesOfCode
      * @param Node[]           $nodes
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      *
      * @throws RuntimeException
      */
@@ -80,8 +96,13 @@ final class Counter
         } catch (Error $error) {
             throw new RuntimeException(
                 $error->getMessage(),
+<<<<<<< HEAD
+                (int) $error->getCode(),
+                $error
+=======
                 $error->getCode(),
                 $error,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
         // @codeCoverageIgnoreEnd

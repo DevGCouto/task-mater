@@ -13,13 +13,49 @@ use function array_diff;
 use function array_key_exists;
 use function array_keys;
 use function array_merge;
+<<<<<<< HEAD
+use function function_exists;
+use function get_defined_functions;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function in_array;
 use function is_array;
 use ReflectionClass;
 use ReflectionProperty;
 
+<<<<<<< HEAD
+/**
+ * Restorer of snapshots of global state.
+ */
+class Restorer
+{
+    /**
+     * Deletes function definitions that are not defined in a snapshot.
+     *
+     * @throws RuntimeException when the uopz_delete() function is not available
+     *
+     * @see https://github.com/krakjoe/uopz
+     */
+    public function restoreFunctions(Snapshot $snapshot): void
+    {
+        if (!function_exists('uopz_delete')) {
+            throw new RuntimeException('The uopz_delete() function is required for this operation');
+        }
+
+        $functions = get_defined_functions();
+
+        foreach (array_diff($functions['user'], $snapshot->functions()) as $function) {
+            uopz_delete($function);
+        }
+    }
+
+    /**
+     * Restores all global and super-global variables from a snapshot.
+     */
+=======
 final class Restorer
 {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function restoreGlobalVariables(Snapshot $snapshot): void
     {
         $superGlobalArrays = $snapshot->superGlobalArrays();
@@ -33,7 +69,11 @@ final class Restorer
         foreach (array_keys($GLOBALS) as $key) {
             if ($key !== 'GLOBALS' &&
                 !in_array($key, $superGlobalArrays, true) &&
+<<<<<<< HEAD
+                !$snapshot->excludeList()->isGlobalVariableExcluded($key)) {
+=======
                 !$snapshot->excludeList()->isGlobalVariableExcluded((string) $key)) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 if (array_key_exists($key, $globalVariables)) {
                     $GLOBALS[$key] = $globalVariables[$key];
                 } else {
@@ -43,16 +83,34 @@ final class Restorer
         }
     }
 
+<<<<<<< HEAD
+    /**
+     * Restores all static attributes in user-defined classes from this snapshot.
+     */
+    public function restoreStaticAttributes(Snapshot $snapshot): void
+=======
     public function restoreStaticProperties(Snapshot $snapshot): void
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         $current    = new Snapshot($snapshot->excludeList(), false, false, false, false, true, false, false, false, false);
         $newClasses = array_diff($current->classes(), $snapshot->classes());
 
         unset($current);
 
+<<<<<<< HEAD
+        foreach ($snapshot->staticAttributes() as $className => $staticAttributes) {
+            foreach ($staticAttributes as $name => $value) {
+                $reflector = new ReflectionProperty($className, $name);
+
+                if (version_compare(PHP_VERSION, '8.1.0', '<')) {
+                    $reflector->setAccessible(true);
+                }
+
+=======
         foreach ($snapshot->staticProperties() as $className => $staticProperties) {
             foreach ($staticProperties as $name => $value) {
                 $reflector = new ReflectionProperty($className, $name);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $reflector->setValue(null, $value);
             }
         }
@@ -61,6 +119,16 @@ final class Restorer
             $class    = new ReflectionClass($className);
             $defaults = $class->getDefaultProperties();
 
+<<<<<<< HEAD
+            foreach ($class->getProperties() as $attribute) {
+                if (!$attribute->isStatic()) {
+                    continue;
+                }
+
+                $name = $attribute->getName();
+
+                if ($snapshot->excludeList()->isStaticAttributeExcluded($className, $name)) {
+=======
             foreach ($class->getProperties() as $property) {
                 if (!$property->isStatic()) {
                     continue;
@@ -69,6 +137,7 @@ final class Restorer
                 $name = $property->getName();
 
                 if ($snapshot->excludeList()->isStaticPropertyExcluded($className, $name)) {
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     continue;
                 }
 
@@ -76,15 +145,39 @@ final class Restorer
                     continue;
                 }
 
+<<<<<<< HEAD
+                if (version_compare(PHP_VERSION, '8.1.0', '<')) {
+                    $attribute->setAccessible(true);
+                }
+
+                $attribute->setValue(null, $defaults[$name]);
+=======
                 $property->setValue(null, $defaults[$name]);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             }
         }
     }
 
+<<<<<<< HEAD
+    /**
+     * Restores a super-global variable array from this snapshot.
+     */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     private function restoreSuperGlobalArray(Snapshot $snapshot, string $superGlobalArray): void
     {
         $superGlobalVariables = $snapshot->superGlobalVariables();
 
+<<<<<<< HEAD
+        if (isset($GLOBALS[$superGlobalArray]) &&
+            is_array($GLOBALS[$superGlobalArray]) &&
+            isset($superGlobalVariables[$superGlobalArray])) {
+            $keys = array_keys(
+                array_merge(
+                    $GLOBALS[$superGlobalArray],
+                    $superGlobalVariables[$superGlobalArray]
+                )
+=======
         if (isset($GLOBALS[$superGlobalArray], $superGlobalVariables[$superGlobalArray]) &&
             is_array($GLOBALS[$superGlobalArray])) {
             $keys = array_keys(
@@ -92,6 +185,7 @@ final class Restorer
                     $GLOBALS[$superGlobalArray],
                     $superGlobalVariables[$superGlobalArray],
                 ),
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
 
             foreach ($keys as $key) {

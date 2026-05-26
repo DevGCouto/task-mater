@@ -27,8 +27,15 @@ final class IsNan extends Constraint
     /**
      * Evaluates the constraint for parameter $other. Returns true if the
      * constraint is met, false otherwise.
+<<<<<<< HEAD
+     *
+     * @param mixed $other value or object to evaluate
+     */
+    protected function matches($other): bool
+=======
      */
     protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return is_nan($other);
     }

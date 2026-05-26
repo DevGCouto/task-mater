@@ -1,8 +1,16 @@
+<<<<<<< HEAD
+# sebastian/environment
+
+[![Latest Stable Version](https://img.shields.io/packagist/v/sebastian/environment.svg?style=flat-square)](https://packagist.org/packages/sebastian/environment)
+[![CI Status](https://github.com/sebastianbergmann/environment/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/environment/actions)
+[![Type Coverage](https://shepherd.dev/github/sebastianbergmann/environment/coverage.svg)](https://shepherd.dev/github/sebastianbergmann/environment)
+=======
 [![Latest Stable Version](https://poser.pugx.org/sebastian/environment/v)](https://packagist.org/packages/sebastian/environment)
 [![CI Status](https://github.com/sebastianbergmann/environment/workflows/CI/badge.svg)](https://github.com/sebastianbergmann/environment/actions)
 [![codecov](https://codecov.io/gh/sebastianbergmann/environment/branch/main/graph/badge.svg)](https://codecov.io/gh/sebastianbergmann/environment)
 
 # sebastian/environment
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 This component provides functionality that helps writing PHP code that has runtime-specific (PHP / HHVM) execution paths.
 

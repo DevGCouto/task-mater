@@ -10,6 +10,22 @@
 namespace PHPUnit\Util;
 
 use function in_array;
+<<<<<<< HEAD
+use function sprintf;
+
+/**
+ * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ *
+ * @psalm-immutable
+ */
+final class VersionComparisonOperator
+{
+    /**
+     * @psalm-var '<'|'lt'|'<='|'le'|'>'|'gt'|'>='|'ge'|'=='|'='|'eq'|'!='|'<>'|'ne'
+     */
+    private $operator;
+
+=======
 
 /**
  * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
@@ -28,6 +44,7 @@ final readonly class VersionComparisonOperator
      *
      * @throws InvalidVersionOperatorException
      */
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     public function __construct(string $operator)
     {
         $this->ensureOperatorIsValid($operator);
@@ -44,14 +61,29 @@ final readonly class VersionComparisonOperator
     }
 
     /**
+<<<<<<< HEAD
+     * @throws Exception
+     *
+     * @psalm-assert '<'|'lt'|'<='|'le'|'>'|'gt'|'>='|'ge'|'=='|'='|'eq'|'!='|'<>'|'ne' $operator
+=======
      * @param '!='|'<'|'<='|'<>'|'='|'=='|'>'|'>='|'eq'|'ge'|'gt'|'le'|'lt'|'ne' $operator
      *
      * @throws InvalidVersionOperatorException
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      */
     private function ensureOperatorIsValid(string $operator): void
     {
         if (!in_array($operator, ['<', 'lt', '<=', 'le', '>', 'gt', '>=', 'ge', '==', '=', 'eq', '!=', '<>', 'ne'], true)) {
+<<<<<<< HEAD
+            throw new Exception(
+                sprintf(
+                    '"%s" is not a valid version_compare() operator',
+                    $operator,
+                ),
+            );
+=======
             throw new InvalidVersionOperatorException($operator);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
     }
 }

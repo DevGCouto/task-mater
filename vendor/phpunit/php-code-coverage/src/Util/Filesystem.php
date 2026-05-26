@@ -9,6 +9,11 @@
  */
 namespace SebastianBergmann\CodeCoverage\Util;
 
+<<<<<<< HEAD
+use function is_dir;
+use function mkdir;
+use function sprintf;
+=======
 use function dirname;
 use function file_put_contents;
 use function is_dir;
@@ -16,6 +21,7 @@ use function mkdir;
 use function sprintf;
 use function str_contains;
 use SebastianBergmann\CodeCoverage\Driver\WriteOperationFailedException;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
@@ -27,12 +33,23 @@ final class Filesystem
      */
     public static function createDirectory(string $directory): void
     {
+<<<<<<< HEAD
+        $success = !(!is_dir($directory) && !@mkdir($directory, 0777, true) && !is_dir($directory));
+=======
         $success = !(!is_dir($directory) && !@mkdir($directory, 0o777, true) && !is_dir($directory));
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
         if (!$success) {
             throw new DirectoryCouldNotBeCreatedException(
                 sprintf(
                     'Directory "%s" could not be created',
+<<<<<<< HEAD
+                    $directory
+                )
+            );
+        }
+    }
+=======
                     $directory,
                 ),
             );
@@ -54,4 +71,5 @@ final class Filesystem
             throw new WriteOperationFailedException($target);
         }
     }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

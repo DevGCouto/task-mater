@@ -24,11 +24,19 @@ if (!version_compare(PHP_VERSION, PHP_VERSION, '=')) {
     die(1);
 }
 
+<<<<<<< HEAD
+if (version_compare('7.3.0', PHP_VERSION, '>')) {
+    fwrite(
+        STDERR,
+        sprintf(
+            'This version of PHPUnit requires PHP >= 7.3.' . PHP_EOL .
+=======
 if (version_compare('8.2.0', PHP_VERSION, '>')) {
     fwrite(
         STDERR,
         sprintf(
             'This version of PHPUnit requires PHP >= 8.2.' . PHP_EOL .
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             'You are using PHP %s (%s).' . PHP_EOL,
             PHP_VERSION,
             PHP_BINARY
@@ -38,6 +46,34 @@ if (version_compare('8.2.0', PHP_VERSION, '>')) {
     die(1);
 }
 
+<<<<<<< HEAD
+$requiredExtensions = ['dom', 'json', 'libxml', 'mbstring', 'tokenizer', 'xml', 'xmlwriter'];
+
+$unavailableExtensions = array_filter(
+    $requiredExtensions,
+    static function ($extension) {
+        return !extension_loaded($extension);
+    }
+);
+
+if ([] !== $unavailableExtensions) {
+    fwrite(
+        STDERR,
+        sprintf(
+            'PHPUnit requires the "%s" extensions, but the "%s" %s not available.' . PHP_EOL,
+            implode('", "', $requiredExtensions),
+            implode('", "', $unavailableExtensions),
+            count($unavailableExtensions) === 1 ? 'extension is' : 'extensions are'
+        )
+    );
+
+    die(1);
+}
+
+unset($requiredExtensions, $unavailableExtensions);
+
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 if (!ini_get('date.timezone')) {
     ini_set('date.timezone', 'UTC');
 }
@@ -69,6 +105,19 @@ if (!defined('PHPUNIT_COMPOSER_INSTALL')) {
     die(1);
 }
 
+<<<<<<< HEAD
+$options = getopt('', array('prepend:'));
+
+if (isset($options['prepend'])) {
+    require $options['prepend'];
+}
+
+unset($options);
+
+require PHPUNIT_COMPOSER_INSTALL;
+
+PHPUnit\TextUI\Command::main();
+=======
 require PHPUNIT_COMPOSER_INSTALL;
 
 $requiredExtensions = ['dom', 'json', 'libxml', 'mbstring', 'tokenizer', 'xml', 'xmlwriter'];
@@ -102,3 +151,4 @@ if ([] !== $unavailableExtensions) {
 unset($requiredExtensions, $unavailableExtensions);
 
 exit((new PHPUnit\TextUI\Application)->run($_SERVER['argv']));
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123

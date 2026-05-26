@@ -10,19 +10,38 @@
 namespace SebastianBergmann\CodeCoverage\Report;
 
 use function date;
+<<<<<<< HEAD
+use function dirname;
+use function file_put_contents;
 use function htmlspecialchars;
 use function is_string;
 use function round;
+use function strpos;
+=======
+use function htmlspecialchars;
+use function is_string;
+use function round;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use DOMDocument;
 use SebastianBergmann\CodeCoverage\CodeCoverage;
 use SebastianBergmann\CodeCoverage\Driver\WriteOperationFailedException;
 use SebastianBergmann\CodeCoverage\Node\File;
 use SebastianBergmann\CodeCoverage\Util\Filesystem;
+<<<<<<< HEAD
+
+final class Crap4j
+{
+    /**
+     * @var int
+     */
+    private $threshold;
+=======
 use SebastianBergmann\CodeCoverage\Util\Xml;
 
 final class Crap4j
 {
     private readonly int $threshold;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(int $threshold = 30)
     {
@@ -30,14 +49,22 @@ final class Crap4j
     }
 
     /**
+<<<<<<< HEAD
+=======
      * @param null|non-empty-string $target
      * @param null|non-empty-string $name
      *
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
      * @throws WriteOperationFailedException
      */
     public function process(CodeCoverage $coverage, ?string $target = null, ?string $name = null): string
     {
+<<<<<<< HEAD
+        $document               = new DOMDocument('1.0', 'UTF-8');
+        $document->formatOutput = true;
+=======
         $document = new DOMDocument('1.0', 'UTF-8');
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
         $root = $document->createElement('crap_result');
         $document->appendChild($root);
@@ -73,7 +100,11 @@ final class Crap4j
                 foreach ($class['methods'] as $methodName => $method) {
                     $crapLoad = $this->crapLoad((float) $method['crap'], $method['ccn'], $method['coverage']);
 
+<<<<<<< HEAD
+                    $fullCrap += $method['crap'];
+=======
                     $fullCrap     += $method['crap'];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                     $fullCrapLoad += $crapLoad;
                     $fullMethodCount++;
 
@@ -119,10 +150,23 @@ final class Crap4j
         $root->appendChild($stats);
         $root->appendChild($methodsNode);
 
+<<<<<<< HEAD
+        $buffer = $document->saveXML();
+
+        if ($target !== null) {
+            if (!strpos($target, '://') !== false) {
+                Filesystem::createDirectory(dirname($target));
+            }
+
+            if (@file_put_contents($target, $buffer) === false) {
+                throw new WriteOperationFailedException($target);
+            }
+=======
         $buffer = Xml::asString($document);
 
         if ($target !== null) {
             Filesystem::write($target, $buffer);
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         return $buffer;

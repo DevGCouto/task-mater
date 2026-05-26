@@ -9,6 +9,10 @@
  */
 namespace PHPUnit\Framework\Constraint;
 
+<<<<<<< HEAD
+use function get_class;
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use function is_object;
 use PHPUnit\Framework\ActualValueIsNotAnObjectException;
 use PHPUnit\Framework\ComparisonMethodDoesNotAcceptParameterTypeException;
@@ -24,8 +28,20 @@ use ReflectionObject;
  */
 final class ObjectEquals extends Constraint
 {
+<<<<<<< HEAD
+    /**
+     * @var object
+     */
+    private $expected;
+
+    /**
+     * @var string
+     */
+    private $method;
+=======
     private readonly object $expected;
     private readonly string $method;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(object $object, string $method = 'equals')
     {
@@ -46,7 +62,11 @@ final class ObjectEquals extends Constraint
      * @throws ComparisonMethodDoesNotDeclareParameterTypeException
      * @throws ComparisonMethodDoesNotExistException
      */
+<<<<<<< HEAD
+    protected function matches($other): bool
+=======
     protected function matches(mixed $other): bool
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         if (!is_object($other)) {
             throw new ActualValueIsNotAnObjectException;
@@ -56,16 +76,28 @@ final class ObjectEquals extends Constraint
 
         if (!$object->hasMethod($this->method)) {
             throw new ComparisonMethodDoesNotExistException(
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->method,
             );
         }
 
+<<<<<<< HEAD
+        /** @noinspection PhpUnhandledExceptionInspection */
+=======
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         $method = $object->getMethod($this->method);
 
         if (!$method->hasReturnType()) {
             throw new ComparisonMethodDoesNotDeclareBoolReturnTypeException(
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->method,
             );
         }
@@ -74,28 +106,44 @@ final class ObjectEquals extends Constraint
 
         if (!$returnType instanceof ReflectionNamedType) {
             throw new ComparisonMethodDoesNotDeclareBoolReturnTypeException(
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->method,
             );
         }
 
         if ($returnType->allowsNull()) {
             throw new ComparisonMethodDoesNotDeclareBoolReturnTypeException(
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->method,
             );
         }
 
         if ($returnType->getName() !== 'bool') {
             throw new ComparisonMethodDoesNotDeclareBoolReturnTypeException(
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->method,
             );
         }
 
         if ($method->getNumberOfParameters() !== 1 || $method->getNumberOfRequiredParameters() !== 1) {
             throw new ComparisonMethodDoesNotDeclareExactlyOneParameterException(
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->method,
             );
         }
@@ -104,7 +152,11 @@ final class ObjectEquals extends Constraint
 
         if (!$parameter->hasType()) {
             throw new ComparisonMethodDoesNotDeclareParameterTypeException(
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->method,
             );
         }
@@ -113,7 +165,11 @@ final class ObjectEquals extends Constraint
 
         if (!$type instanceof ReflectionNamedType) {
             throw new ComparisonMethodDoesNotDeclareParameterTypeException(
+<<<<<<< HEAD
+                get_class($other),
+=======
                 $other::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
                 $this->method,
             );
         }
@@ -121,21 +177,35 @@ final class ObjectEquals extends Constraint
         $typeName = $type->getName();
 
         if ($typeName === 'self') {
+<<<<<<< HEAD
+            $typeName = get_class($other);
+=======
             $typeName = $other::class;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         }
 
         if (!$this->expected instanceof $typeName) {
             throw new ComparisonMethodDoesNotAcceptParameterTypeException(
+<<<<<<< HEAD
+                get_class($other),
+                $this->method,
+                get_class($this->expected),
+=======
                 $other::class,
                 $this->method,
                 $this->expected::class,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 
         return $other->{$this->method}($this->expected);
     }
 
+<<<<<<< HEAD
+    protected function failureDescription($other): string
+=======
     protected function failureDescription(mixed $other): string
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
     {
         return $this->toString();
     }

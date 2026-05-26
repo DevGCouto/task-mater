@@ -9,13 +9,18 @@
  */
 namespace SebastianBergmann\Invoker;
 
+<<<<<<< HEAD
+=======
 use function extension_loaded;
 use function function_exists;
 use function implode;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 use RuntimeException;
 
 final class ProcessControlExtensionNotLoadedException extends RuntimeException implements Exception
 {
+<<<<<<< HEAD
+=======
     public function __construct()
     {
         $message = [];
@@ -38,4 +43,5 @@ final class ProcessControlExtensionNotLoadedException extends RuntimeException i
 
         parent::__construct(implode(PHP_EOL, $message));
     }
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 }

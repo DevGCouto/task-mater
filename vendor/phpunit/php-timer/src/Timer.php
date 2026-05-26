@@ -15,9 +15,15 @@ use function hrtime;
 final class Timer
 {
     /**
+<<<<<<< HEAD
+     * @psalm-var list<float>
+     */
+    private $startTimes = [];
+=======
      * @var list<float>
      */
     private array $startTimes = [];
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function start(): void
     {
@@ -31,7 +37,11 @@ final class Timer
     {
         if (empty($this->startTimes)) {
             throw new NoActiveTimerException(
+<<<<<<< HEAD
+                'Timer::start() has to be called before Timer::stop()'
+=======
                 'Timer::start() has to be called before Timer::stop()',
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
             );
         }
 

@@ -16,8 +16,20 @@ use function sprintf;
  */
 final class CrapIndex
 {
+<<<<<<< HEAD
+    /**
+     * @var int
+     */
+    private $cyclomaticComplexity;
+
+    /**
+     * @var float
+     */
+    private $codeCoverage;
+=======
     private readonly int $cyclomaticComplexity;
     private readonly float $codeCoverage;
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 
     public function __construct(int $cyclomaticComplexity, float $codeCoverage)
     {
@@ -37,7 +49,11 @@ final class CrapIndex
 
         return sprintf(
             '%01.2F',
+<<<<<<< HEAD
+            $this->cyclomaticComplexity ** 2 * (1 - $this->codeCoverage / 100) ** 3 + $this->cyclomaticComplexity
+=======
             $this->cyclomaticComplexity ** 2 * (1 - $this->codeCoverage / 100) ** 3 + $this->cyclomaticComplexity,
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
         );
     }
 }

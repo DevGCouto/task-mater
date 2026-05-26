@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+<<<<<<< HEAD
+=======
 ## [5.1.1] - 2026-02-02
 
 ### Fixed
@@ -52,6 +54,7 @@ All notable changes to this project will be documented in this file. This projec
 * The `SebastianBergmann\FileIterator\Factory` and `SebastianBergmann\FileIterator\Iterator` classes are now marked `@internal`
 * This component is no longer supported on PHP 7.3, PHP 7.4 and PHP 8.0
 
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 ## [3.0.6] - 2021-12-02
 
 ### Changed
@@ -174,6 +177,8 @@ No changes
 
 * [#23](https://github.com/sebastianbergmann/php-file-iterator/pull/23): Added support for wildcards (glob) in exclude
 
+<<<<<<< HEAD
+=======
 [5.1.1]: https://github.com/sebastianbergmann/php-file-iterator/compare/5.1.0...5.1.1
 [5.1.0]: https://github.com/sebastianbergmann/php-file-iterator/compare/5.0.1...5.1.0
 [5.0.1]: https://github.com/sebastianbergmann/php-file-iterator/compare/5.0.0...5.0.1
@@ -182,6 +187,7 @@ No changes
 [4.0.2]: https://github.com/sebastianbergmann/php-file-iterator/compare/4.0.1...4.0.2
 [4.0.1]: https://github.com/sebastianbergmann/php-file-iterator/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/sebastianbergmann/php-file-iterator/compare/3.0.6...4.0.0
+>>>>>>> f6994d1d1fa872cc6e72ef83b9b29a9296af2123
 [3.0.6]: https://github.com/sebastianbergmann/php-file-iterator/compare/3.0.5...3.0.6
 [3.0.5]: https://github.com/sebastianbergmann/php-file-iterator/compare/3.0.4...3.0.5
 [3.0.4]: https://github.com/sebastianbergmann/php-file-iterator/compare/3.0.3...3.0.4

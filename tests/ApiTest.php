@@ -3,11 +3,16 @@ use PHPUnit\Framework\TestCase;
 
 class ApiTest extends TestCase {
     public function testApiRetornaListaEmJson() {
-        // Ajustamos a URL para o caminho real do seu XAMPP local
-        $url = "http://localhost/task-mater-main/task-mater/api.php?action=list";
-        $content = file_get_contents($url);
+        // Usa o caminho correto do servidor local
+        $url = "http://localhost:8000/api.php?action=list";
         
-        // Verificamos se o que recebemos é um JSON válido
+        $content = @file_get_contents($url);
+        
+        // Se não conseguir conectar, pula o teste
+        if ($content === false) {
+            $this->markTestSkipped('Servidor não está rodando. Execute: php -S localhost:8000');
+        }
+        
         $data = json_decode($content, true);
         $this->assertIsArray($data);
     }

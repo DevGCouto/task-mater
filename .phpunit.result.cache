@@ -1,1 +1,1 @@
-{"version":1,"defects":{"TaskPresenterTest::testIndexFormataTitulosParaMaiusculo":4},"times":{"TaskPresenterTest::testIndexFormataTitulosParaMaiusculo":0.001}}
+{"version":1,"defects":{"TaskPresenterTest::testIndexFormataTitulosParaMaiusculo":4,"ApiTest::testApiRetornaListaEmJson":4},"times":{"TaskPresenterTest::testIndexFormataTitulosParaMaiusculo":0.001,"TaskViewModelTest::testFormataTituloParaMaiusculo":0.001,"ApiTest::testApiRetornaListaEmJson":0.002}}
